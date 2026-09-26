@@ -1,0 +1,58 @@
+[
+  {
+    "product_name": "Test wireless earbuds",
+    "price": 59000,
+    "shipping_fee": 3000,
+    "currency": "KRW",
+    "category": "Digital audio",
+    "seller": "Test shopping mall",
+    "platform": "shopping_mall",
+    "product_url": "https://example.com/products/test-earbuds",
+    "image_url": "https://example.com/images/test-earbuds.jpg",
+    "condition": "new",
+    "region": null,
+    "data_source": "test_fixture"
+  },
+  {
+    "product_name": "Test used laptop",
+    "price": 420000,
+    "shipping_fee": 0,
+    "currency": "KRW",
+    "category": "Laptop",
+    "seller": "Test individual seller",
+    "platform": "secondhand",
+    "product_url": "https://example.com/used/test-laptop",
+    "image_url": "https://example.com/images/test-laptop.jpg",
+    "condition": "used",
+    "region": "Seoul",
+    "data_source": "test_fixture"
+  },
+  {
+    "product_name": "Test Instagram group-buy sunscreen",
+    "price": 19900,
+    "shipping_fee": 2500,
+    "currency": "KRW",
+    "category": "Beauty",
+    "seller": "Test group-buy account",
+    "platform": "group_buy",
+    "product_url": "https://example.com/group-buy/test-sunscreen",
+    "image_url": "https://example.com/images/test-sunscreen.jpg",
+    "condition": "new",
+    "region": null,
+    "data_source": "test_fixture"
+  },
+  {
+    "product_name": "Test YouTube Shopping mug",
+    "price": 15000,
+    "shipping_fee": 3000,
+    "currency": "KRW",
+    "category": "Creator goods",
+    "seller": "Test creator store",
+    "platform": "youtube_shopping",
+    "product_url": "https://example.com/youtube-shopping/test-mug",
+    "image_url": "https://example.com/images/test-mug.jpg",
+    "condition": "new",
+    "region": null,
+    "data_source": "test_fixture"
+  }
+]
