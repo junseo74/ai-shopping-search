@@ -2,26 +2,36 @@
   <body>
     <section class="products">
       <article class="product-card">
-        <a class="product-link" href="/products/fixture-keyboard">Fixture keyboard</a>
-        <span class="price">39,900 won</span>
-        <span class="seller">Fixture Seller A</span>
-        <img class="image" src="/images/fixture-keyboard.jpg" />
-        <span class="shipping">Free shipping</span>
-        <span class="specs">Tenkeyless, wired, brown switch</span>
+        <a data-fixture-field="url" href="/products/fixture-runner-1">
+          <span data-fixture-field="name">Fixture Runner 1</span>
+        </a>
+        <span data-fixture-field="price">129,000 won</span>
+        <img class="product-card__hero-image" src="/images/fixture-runner-1.jpg" />
       </article>
       <article class="product-card">
-        <a class="product-link" href="https://example.com/products/fixture-monitor">Fixture monitor</a>
-        <span class="price">129000</span>
-        <span class="seller">Fixture Seller B</span>
+        <a data-fixture-field="url" href="https://example.com/products/fixture-runner-2">
+          <span data-fixture-field="name">Fixture Runner 2</span>
+        </a>
+        <span data-fixture-field="price">89,500</span>
+        <img class="product-card__hero-image" src="https://cdn.example.com/fixture-runner-2.jpg" />
       </article>
       <article class="product-card">
-        <a class="product-link" href="/products/fixture-keyboard">Fixture keyboard duplicate</a>
-        <span class="price">39900</span>
-        <span class="seller">Fixture Seller A</span>
+        <a data-fixture-field="url" href="/products/fixture-runner-1">
+          <span data-fixture-field="name">Fixture Runner 1 duplicate</span>
+        </a>
+        <span data-fixture-field="price">129000</span>
+        <img class="product-card__hero-image" src="/images/fixture-runner-1-duplicate.jpg" />
       </article>
       <article class="product-card">
-        <a class="product-link" href="/products/no-seller">Fixture no seller</a>
-        <span class="price">1000</span>
+        <a data-fixture-field="url" href="/products/missing-price">
+          <span data-fixture-field="name">Fixture Missing Price</span>
+        </a>
+        <img class="product-card__hero-image" src="/images/missing-price.jpg" />
+      </article>
+      <article class="product-card">
+        <a data-fixture-field="url" href="/products/missing-name"></a>
+        <span data-fixture-field="price">55,000</span>
+        <img class="product-card__hero-image" src="/images/missing-name.jpg" />
       </article>
     </section>
   </body>
