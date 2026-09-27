@@ -15,11 +15,14 @@ documentation are not implemented as working collectors.
 - `elevenst`: Official 11st Open API product search collector. It requires
   `ELEVENST_API_KEY`. Without that key the collector fails explicitly and does
   not return synthetic products.
-- `approved_html`: HTML parser/collector for product pages where the operator
-  has explicitly permitted automated collection. It requires
-  `APPROVED_HTML_PRODUCT_URLS`; each URL is checked against robots.txt before
-  fetching. No domestic marketplace is preconfigured because public pages alone
-  are not treated as permission.
+- `approved_html`: HTML parser/collector for product listing pages where the
+  operator has explicitly permitted automated collection and reuse. It requires
+  `APPROVED_HTML_LIST_URLS` plus a selector config file referenced by
+  `APPROVED_HTML_SELECTOR_CONFIG` or the default
+  `backend/collectors/approved_html_selectors.yml`. Each listing URL is matched
+  to an explicitly approved config entry and checked against robots.txt before
+  fetching. No domestic marketplace is preconfigured because public pages or
+  robots.txt allowance alone are not treated as permission.
 
 ## Plausible official/API paths
 

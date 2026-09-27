@@ -1,0 +1,9 @@
+sites: []
+
+# Add entries only after confirming explicit automated collection and reuse
+# permission for the exact merchant/listing pages you plan to collect.
+# Required site fields: name, domains, permission.approved, permission note or
+# reference, selectors.product_card, selectors.product_name, selectors.price,
+# selectors.product_url.
+# Optional selector fields: image_url, shipping_fee, seller, detail_description.
+# Optional attribute fields: product_url, image_url.

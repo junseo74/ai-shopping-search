@@ -1,4 +1,4 @@
-from .approved_html import ApprovedHtmlProductCollector, HtmlProductParser
+from .approved_html import ApprovedHtmlProductCollector, HtmlListSiteConfig, HtmlProductListParser, HtmlProductParser
 from .base import BaseCollector, CollectorMetadata
 from .ebay import EbayBrowseCollector
 from .elevenst import ElevenstProductCollector
@@ -10,6 +10,8 @@ __all__ = [
     "ApprovedHtmlProductCollector",
     "EbayBrowseCollector",
     "ElevenstProductCollector",
+    "HtmlListSiteConfig",
+    "HtmlProductListParser",
     "HtmlProductParser",
     "TestFixtureCollector",
 ]
