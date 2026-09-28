@@ -2,6 +2,7 @@ from .approved_html import ApprovedHtmlProductCollector, HtmlListSiteConfig, Htm
 from .base import BaseCollector, CollectorMetadata
 from .ebay import EbayBrowseCollector
 from .elevenst import ElevenstProductCollector
+from .shopping_auto import ShoppingAutoCollector, ShoppingSourceConfig, ShoppingSourceFailure
 from .test_fixture import TestFixtureCollector
 
 __all__ = [
@@ -13,5 +14,8 @@ __all__ = [
     "HtmlListSiteConfig",
     "HtmlProductListParser",
     "HtmlProductParser",
+    "ShoppingAutoCollector",
+    "ShoppingSourceConfig",
+    "ShoppingSourceFailure",
     "TestFixtureCollector",
 ]

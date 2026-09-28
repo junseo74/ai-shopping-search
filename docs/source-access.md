@@ -23,6 +23,106 @@ documentation are not implemented as working collectors.
   to an explicitly approved config entry and checked against robots.txt before
   fetching. No domestic marketplace is preconfigured because public pages or
   robots.txt allowance alone are not treated as permission.
+- `shopping_auto`: Multi-source collector configured by
+  `SHOPPING_SOURCES_CONFIG` or the default
+  `backend/collectors/shopping_sources.yml`. Each source declares
+  `collection_method` (`api` or `approved_html`), seller, listing URLs,
+  selectors when needed, and `permission.approved`. Only approved sources are
+  collected. Nike is kept as an HTML structure reference with
+  `permission.approved = false`, so it is not automatically requested.
+- `backend.tools.naver_shopping_html_analyzer`: Local-only analyzer for
+  browser-saved Naver Shopping HTML files. It reports repeated product-card and
+  field selector candidates, including how many cards each candidate matches,
+  and can write a non-approved YAML draft with `selector_candidates`. It does
+  not fetch Naver Shopping or mark any selector as confirmed. For saved ad
+  product HTML where selectors have been manually verified, it can also extract
+  the confirmed fields and write a local JSON file with
+  `--extract-ad-products --output-json`. For a browser-saved full results page,
+  it can parse product objects already embedded in `__NEXT_DATA__`, label rows
+  whose titles match confirmed ad cards as `product_type = "ad"`, label the
+  remaining rows as `product_type = "organic"`, remove duplicate product names,
+  and write `{ "summary": ..., "products": [...] }` with
+  `--extract-all-products --output-json`. The generated JSON is still a saved
+  HTML artifact, not approval for live collection.
+- `backend.tools.import_saved_naver_products`: Local-only importer for saved
+  extraction JSON such as `naver_real_products.json`. It stores rows as
+  `platform = "naver_shopping"` and `data_source = "saved_html_import"`, records
+  the original saved search URL through `--source-url`, and skips rows whose
+  product URL already exists so rerunning the import does not duplicate the same
+  saved extraction.
+
+Example saved JSON import:
+
+```powershell
+python -m backend.tools.import_saved_naver_products naver_real_products.json `
+  --source-observed-at 2026-09-27T19:53:00+09:00
+```
+
+Example saved full-page extraction and import:
+
+```powershell
+python -m backend.tools.naver_shopping_html_analyzer naver_real.html `
+  --extract-all-products `
+  --output-json naver_all_products.json `
+  --source-url "https://search.shopping.naver.com/search/all?query=YOUR_QUERY"
+
+python -m backend.tools.import_saved_naver_products naver_all_products.json `
+  --source-url "https://search.shopping.naver.com/search/all?query=YOUR_QUERY" `
+  --source-observed-at 2026-09-27T19:53:00+09:00
+```
+
+Example local multi-file HTML merge:
+
+```powershell
+python -m backend.tools.merge_shopping_html naver_real.html saved_html_folder `
+  --output-json merged_products.json
+```
+
+The merge tool reuses the saved-HTML analyzer, performs no network requests,
+deduplicates primarily by product ID or normalized product URL, and writes the
+same top-level JSON shape: `{ "summary": ..., "products": [...] }`.
+
+Example approved/local automatic HTML collection:
+
+```powershell
+python -m backend.tools.auto_shopping_html `
+  --config .\local_auto_html_sources.yml `
+  --query "keyboard" `
+  --max-pages 2 `
+  --delay-seconds 1 `
+  --timeout-seconds 10 `
+  --output-json auto_collected_products.json
+```
+
+The auto HTML collector is for explicitly approved sources only. The config
+must include `permission.approved: true`, a permission note or reference, a
+`search_url_template` containing `{query}` and optionally `{page}`, and the CSS
+selectors needed by `HtmlProductListParser`. It checks `robots.txt` before each
+page request, does not bypass blocks, and reuses the same product URL
+normalization/deduplication rules as the merge tool. No real marketplace source
+is configured by default.
+
+Local end-to-end test server:
+
+```powershell
+python -m backend.tools.local_test_shop_server --host 127.0.0.1 --port 8000
+```
+
+In a second PowerShell terminal:
+
+```powershell
+python -m backend.tools.auto_shopping_html `
+  --config .\local_auto_html_sources.yml `
+  --query "keyboard" `
+  --max-pages 3 `
+  --delay-seconds 0.2 `
+  --timeout-seconds 5 `
+  --output-json local_auto_products.json
+```
+
+Expected local result: 8 product cards across 3 pages, 2 duplicates removed by
+normalized product URL, and 6 final unique products. This uses only
+`localhost:8000`.
 
 ## Plausible official/API paths
 

@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
 class PlatformType(str, Enum):
     SHOPPING_MALL = "shopping_mall"
+    NAVER_SHOPPING = "naver_shopping"
     SECONDHAND = "secondhand"
     GROUP_BUY = "group_buy"
     YOUTUBE_SHOPPING = "youtube_shopping"
@@ -26,6 +27,7 @@ class Product(BaseModel):
     id: Optional[int] = None
     product_name: str = Field(..., min_length=1)
     price: Optional[float] = Field(default=None, ge=0)
+    original_price: Optional[float] = Field(default=None, ge=0)
     shipping_fee: Optional[float] = Field(default=None, ge=0)
     currency: str = Field(default="KRW", min_length=3, max_length=3)
     category: Optional[str] = None

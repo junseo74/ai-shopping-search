@@ -1,0 +1,47 @@
+sources:
+  - name: fixture_html_shop
+    collection_method: approved_html
+    seller: Fixture Seller
+    list_urls:
+      - https://example.com/search?q={query}
+    permission:
+      approved: true
+      note: Local unit test fixture only.
+    selectors:
+      product_card: ".product-card"
+      product_name: "[data-fixture-field='name']"
+      price: "[data-fixture-field='price']"
+      product_url: "[data-fixture-field='url']"
+      image_url: ".product-card__hero-image"
+    attributes:
+      product_url: "href"
+      image_url: "src"
+
+  - name: fixture_failing_shop
+    collection_method: approved_html
+    seller: Failing Seller
+    list_urls:
+      - https://failing.example.com/search?q={query}
+    permission:
+      approved: true
+      note: Local unit test fixture only.
+    selectors:
+      product_card: ".product-card"
+      product_name: "[data-fixture-field='name']"
+      price: "[data-fixture-field='price']"
+      product_url: "[data-fixture-field='url']"
+    attributes:
+      product_url: "href"
+
+  - name: nike_structure_reference
+    collection_method: approved_html
+    seller: Nike
+    list_urls:
+      - https://www.nike.com/kr/w/shoes
+    permission:
+      approved: false
+      note: HTML structure reference only. Automated collection is not approved.
+    selectors:
+      image_url: ".product-card__hero-image"
+    attributes:
+      image_url: "src"

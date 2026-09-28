@@ -1,0 +1,24 @@
+sources:
+  - name: naver_shopping_structure_reference
+    collection_method: approved_html
+    seller: Naver Shopping
+    list_urls:
+      - https://search.shopping.naver.com/search/all?query={query}
+    permission:
+      approved: false
+      note: HTML structure reference only. Automated collection and reuse are not approved.
+    selectors: {}
+    attributes: {}
+
+  - name: nike_structure_reference
+    collection_method: approved_html
+    seller: Nike
+    list_urls:
+      - https://www.nike.com/kr/w/shoes
+    permission:
+      approved: false
+      note: HTML structure reference only. Automated collection is not approved.
+    selectors:
+      image_url: ".product-card__hero-image"
+    attributes:
+      image_url: "src"

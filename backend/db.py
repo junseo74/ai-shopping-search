@@ -59,6 +59,7 @@ class ProductRepository:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     product_name TEXT NOT NULL,
                     price REAL,
+                    original_price REAL,
                     shipping_fee REAL,
                     currency TEXT NOT NULL,
                     category TEXT,
@@ -94,7 +95,9 @@ class ProductRepository:
             conn.execute("CREATE INDEX IF NOT EXISTS idx_products_name ON products(product_name)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_products_source ON products(data_source)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_products_platform ON products(platform)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_products_url ON products(product_url)")
             self._ensure_column(conn, "products", "detail_description", "TEXT")
+            self._ensure_column(conn, "products", "original_price", "REAL")
             self._ensure_column(conn, "products", "source_url", "TEXT")
             self._ensure_column(conn, "products", "source_license", "TEXT")
             self._ensure_column(conn, "products", "source_observed_at", "TEXT")
@@ -102,6 +105,7 @@ class ProductRepository:
             conn.execute("CREATE INDEX IF NOT EXISTS idx_products_name ON products(product_name)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_products_source ON products(data_source)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_products_platform ON products(platform)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_products_url ON products(product_url)")
 
     def _ensure_column(self, conn: sqlite3.Connection, table: str, column: str, column_type: str) -> None:
         columns = {row["name"] for row in conn.execute(f"PRAGMA table_info({table})").fetchall()}
@@ -120,6 +124,7 @@ class ProductRepository:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 product_name TEXT NOT NULL,
                 price REAL,
+                original_price REAL,
                 shipping_fee REAL,
                 currency TEXT NOT NULL,
                 category TEXT,
@@ -141,13 +146,13 @@ class ProductRepository:
         conn.execute(
             """
             INSERT INTO products_migrated (
-                id, product_name, price, shipping_fee, currency, category, seller,
+                id, product_name, price, original_price, shipping_fee, currency, category, seller,
                 platform, product_url, image_url, condition, region,
                 detail_description, source_url, source_license, source_observed_at,
                 collected_at, data_source
             )
             SELECT
-                id, product_name, price, shipping_fee, currency, category, seller,
+                id, product_name, price, original_price, shipping_fee, currency, category, seller,
                 platform, product_url, image_url, condition, region,
                 detail_description, source_url, source_license, source_observed_at,
                 collected_at, data_source
@@ -164,15 +169,16 @@ class ProductRepository:
                 cursor = conn.execute(
                     """
                     INSERT INTO products (
-                        product_name, price, shipping_fee, currency, category, seller,
+                        product_name, price, original_price, shipping_fee, currency, category, seller,
                         platform, product_url, image_url, condition, region,
                         detail_description, source_url, source_license, source_observed_at,
                         collected_at, data_source
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
                         product.product_name,
                         product.price,
+                        product.original_price,
                         product.shipping_fee,
                         product.currency,
                         product.category,
@@ -192,6 +198,50 @@ class ProductRepository:
                 )
                 saved.append(product.model_copy(update={"id": cursor.lastrowid}))
         return saved
+
+    def add_products_skip_duplicate_urls(self, products: Iterable[Product]) -> list[Product]:
+        saved: list[Product] = []
+        with self.connection() as conn:
+            for product in products:
+                product_url = str(product.product_url) if product.product_url else None
+                if product_url and self._product_url_exists(conn, product_url):
+                    continue
+                cursor = conn.execute(
+                    """
+                    INSERT INTO products (
+                        product_name, price, original_price, shipping_fee, currency, category, seller,
+                        platform, product_url, image_url, condition, region,
+                        detail_description, source_url, source_license, source_observed_at,
+                        collected_at, data_source
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        product.product_name,
+                        product.price,
+                        product.original_price,
+                        product.shipping_fee,
+                        product.currency,
+                        product.category,
+                        product.seller,
+                        product.platform,
+                        product_url,
+                        str(product.image_url) if product.image_url else None,
+                        product.condition,
+                        product.region,
+                        product.detail_description,
+                        str(product.source_url) if product.source_url else None,
+                        product.source_license,
+                        _to_iso(product.source_observed_at) if product.source_observed_at else None,
+                        _to_iso(product.collected_at),
+                        product.data_source,
+                    ),
+                )
+                saved.append(product.model_copy(update={"id": cursor.lastrowid}))
+        return saved
+
+    def _product_url_exists(self, conn: sqlite3.Connection, product_url: str) -> bool:
+        row = conn.execute("SELECT 1 FROM products WHERE product_url = ? LIMIT 1", (product_url,)).fetchone()
+        return row is not None
 
     def list_products(
         self,
@@ -282,6 +332,7 @@ class ProductRepository:
             id=row["id"],
             product_name=row["product_name"],
             price=row["price"],
+            original_price=row["original_price"],
             shipping_fee=row["shipping_fee"],
             currency=row["currency"],
             category=row["category"],

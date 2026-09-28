@@ -1,0 +1,17 @@
+sources:
+  - name: local_test_shop
+    search_url_template: "http://127.0.0.1:8000/search?q={query}&page={page}"
+    permission:
+      approved: true
+      note: "Local test server in backend.tools.local_test_shop_server only. No external shopping site."
+    selectors:
+      product_card: ".product-card"
+      product_name: ".product-link"
+      price: ".price"
+      shipping_fee: ".shipping"
+      seller: ".seller"
+      product_url: ".product-link"
+      image_url: ".image"
+    attributes:
+      product_url: "href"
+      image_url: "src"

@@ -18,12 +18,14 @@ except ImportError:
 FIELD_ALIASES = {
     "product_name": ["product_name", "name", "title", "\uc0c1\ud488\uba85", "\ubb3c\ud488\uc2dd\ubcc4\uba85", "\uc138\ubd80\ud488\uba85"],
     "price": ["price", "product_price", "sale_price", "\uac00\uaca9", "\ud310\ub9e4\uac00", "\ub0a9\ud488\ub2e8\uac00", "\uacc4\uc57d\ub2e8\uac00"],
+    "original_price": ["original_price", "list_price", "regular_price", "normal_price", "\uc815\uc0c1\uac00", "\ud560\uc778 \uc804 \uac00\uaca9"],
     "shipping_fee": ["shipping_fee", "delivery_fee", "\ubc30\uc1a1\ube44"],
     "seller": ["seller", "vendor", "provider", "\ud310\ub9e4\ucc98", "\ud310\ub9e4\uc790", "\uc5c5\uccb4", "\uacf5\uae09\uc5c5\uccb4"],
     "detail_description": ["detail_description", "description", "desc", "\uc124\uba85", "\uc0c1\ud488\uc124\uba85", "\uc138\ubd80\ud488\uba85(\uba85\uce6d)"],
     "product_url": ["product_url", "url", "link", "\uc0c1\ud488URL", "\uc0c1\ud488 URL"],
     "image_url": ["image_url", "image", "\uc0c1\ud488\uc774\ubbf8\uc9c0", "\uc774\ubbf8\uc9c0URL"],
     "category": ["category", "\uce74\ud14c\uace0\ub9ac", "\ubb3c\ud488\ubd84\ub958\uba85"],
+    "source_url": ["source_url", "source", "original_search_url", "\uc6d0\ubcf8URL", "\uc6d0\ubcf8 URL"],
 }
 
 
@@ -35,6 +37,7 @@ class ProductFileImporter:
         source_url: Optional[str] = None,
         source_license: Optional[str] = None,
         source_observed_at: Optional[datetime] = None,
+        platform: PlatformType | str = PlatformType.SHOPPING_MALL,
         limit: Optional[int] = None,
     ) -> list[Product]:
         rows = self._read_rows(file_path)
@@ -46,6 +49,7 @@ class ProductFileImporter:
                 source_url=source_url,
                 source_license=source_license,
                 source_observed_at=source_observed_at,
+                platform=platform,
             )
             if product:
                 products.append(product)
@@ -93,6 +97,7 @@ class ProductFileImporter:
         source_url: Optional[str],
         source_license: Optional[str],
         source_observed_at: Optional[datetime],
+        platform: PlatformType | str,
     ) -> Optional[Product]:
         name = self._get(row, "product_name")
         if not name:
@@ -100,17 +105,18 @@ class ProductFileImporter:
         return Product(
             product_name=name,
             price=self._to_float(self._get(row, "price")),
+            original_price=self._to_float(self._get(row, "original_price")),
             shipping_fee=self._to_float(self._get(row, "shipping_fee")),
             currency="KRW",
             category=self._get(row, "category"),
             seller=self._get(row, "seller"),
-            platform=PlatformType.SHOPPING_MALL,
+            platform=platform,
             product_url=self._get(row, "product_url"),
             image_url=self._get(row, "image_url"),
             condition=ProductCondition.UNKNOWN,
             region=None,
             detail_description=self._get(row, "detail_description"),
-            source_url=source_url,
+            source_url=source_url or self._get(row, "source_url"),
             source_license=source_license,
             source_observed_at=source_observed_at,
             collected_at=datetime.now(timezone.utc),

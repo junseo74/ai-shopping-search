@@ -1,0 +1,213 @@
+sources:
+- name: naver_shopping_structure_reference
+  collection_method: approved_html
+  seller: Naver Shopping
+  list_urls:
+  - https://search.shopping.naver.com/search/all?query={query}
+  permission:
+    approved: false
+    note: Saved HTML analysis only. Automated collection and reuse are not approved.
+  selectors: {}
+  attributes: {}
+  selector_candidates:
+    product_card:
+    - selector: li
+      match_count: 97
+      matching_cards: 97
+      sample_values:
+      - 나이키 검정 운동화
+      - 나이키 런닝화
+      - 나이키 운동화 남성
+    - selector: .relatedQueriesBottom_item__k8yfz
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - 나이키 샥스
+      - 나이키 신발
+      - 올블랙 운동화
+    - selector: li.relatedQueriesBottom_item__k8yfz
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - 나이키 샥스
+      - 나이키 신발
+      - 올블랙 운동화
+    - selector: div
+      match_count: 286
+      matching_cards: 286
+      sample_values:
+      - 본문으로 바로가기 NAVER 네이버페이 네이버 가격비교 검색영역 입력 내용 삭제 검색레이어 펼치기 검색 네이버 플러스 쇼핑 검색에서
+        더보기 카테고리 마이쇼핑 장바구니 연관 나이키 검정 운동화 나이키 런닝화 나이키 운
+      - 본문으로 바로가기 NAVER 네이버페이 네이버 가격비교 검색영역 입력 내용 삭제 검색레이어 펼치기 검색 네이버 플러스 쇼핑 검색에서
+        더보기 카테고리 마이쇼핑 장바구니 연관 나이키 검정 운동화 나이키 런닝화 나이키 운
+      - 본문으로 바로가기 NAVER 네이버페이 네이버 가격비교 검색영역 입력 내용 삭제 검색레이어 펼치기 검색 네이버 플러스 쇼핑 검색에서
+        더보기 카테고리 마이쇼핑 장바구니
+    - selector: .relatedQueriesBottom_thumb__wl8_k
+      match_count: 15
+      matching_cards: 15
+      sample_values: []
+    - selector: div.relatedQueriesBottom_thumb__wl8_k
+      match_count: 15
+      matching_cards: 15
+      sample_values: []
+    - selector: .adProduct_item__T7utB
+      match_count: 5
+      matching_cards: 5
+      sample_values:
+      - 찜하기 0 N배송 물류센터 당일배송 - 정품 판매 멀티샵 나이키 이니시에이터 운동화 런닝화 헬스화 워킹화 조깅화 정상가 109,000원
+        광고 할인율 35% 69,900 원 배송비 4,000원 내일배송 9.28.(월)
+      - 찜하기 0 N배송 물류센터 당일배송 - 정품 판매 멀티샵 나이키 레볼루션 운동화 런닝화 헬스화 워킹화 조깅화 발편한 정상가 109,000원
+        광고 할인율 45% 59,900 원 배송비 4,000원 내일배송 9.28.(
+      - 찜하기 0 나이키 다운시프터 14 남여공용 러닝화 로드러닝화 운동화 블랙 화이트 정상가 99,000원 광고 할인율 30% 69,000
+        원 배송비 3,500원 오늘출발 오늘(일요일) 배송 휴무 무료교환반품 패션잡화 남
+    - selector: div.adProduct_item__T7utB
+      match_count: 5
+      matching_cards: 5
+      sample_values:
+      - 찜하기 0 N배송 물류센터 당일배송 - 정품 판매 멀티샵 나이키 이니시에이터 운동화 런닝화 헬스화 워킹화 조깅화 정상가 109,000원
+        광고 할인율 35% 69,900 원 배송비 4,000원 내일배송 9.28.(월)
+      - 찜하기 0 N배송 물류센터 당일배송 - 정품 판매 멀티샵 나이키 레볼루션 운동화 런닝화 헬스화 워킹화 조깅화 발편한 정상가 109,000원
+        광고 할인율 45% 59,900 원 배송비 4,000원 내일배송 9.28.(
+      - 찜하기 0 나이키 다운시프터 14 남여공용 러닝화 로드러닝화 운동화 블랙 화이트 정상가 99,000원 광고 할인율 30% 69,000
+        원 배송비 3,500원 오늘출발 오늘(일요일) 배송 휴무 무료교환반품 패션잡화 남
+    product_name:
+    - selector: a
+      match_count: 46
+      matching_cards: 54
+      sample_values:
+      - 나이키 검정 운동화
+      - 나이키 런닝화
+      - 나이키 운동화 남성
+    - selector: span
+      match_count: 17
+      matching_cards: 41
+      sample_values:
+      - 여성러닝화
+      - 여성워킹화
+      - 남성러닝화
+    - selector: .basicTypeFilter_text_over__TmYt1
+      match_count: 14
+      matching_cards: 23
+      sample_values:
+      - 여성러닝화
+      - 여성워킹화
+      - 남성러닝화
+    - selector: span.basicTypeFilter_text_over__TmYt1
+      match_count: 14
+      matching_cards: 23
+      sample_values:
+      - 여성러닝화
+      - 여성워킹화
+      - 남성러닝화
+    - selector: .relatedQueriesBottom_link__iiX_G
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - 나이키 샥스
+      - 나이키 신발
+      - 올블랙 운동화
+    - selector: .linkAnchor
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - 나이키 샥스
+      - 나이키 신발
+      - 올블랙 운동화
+    - selector: a.relatedQueriesBottom_link__iiX_G
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - 나이키 샥스
+      - 나이키 신발
+      - 올블랙 운동화
+    - selector: .relatedQueriesBottom_info__t2dxc
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - 나이키 샥스
+      - 나이키 신발
+      - 올블랙 운동화
+    price:
+    - selector: span
+      match_count: 19
+      matching_cards: 41
+      sample_values:
+      - 패션잡화 1,605,280
+      - 1,605,280
+      - 출산/육아 120,912
+    - selector: .basicTypeFilter_text_over__TmYt1
+      match_count: 9
+      matching_cards: 23
+      sample_values:
+      - 패션잡화 1,605,280
+      - 출산/육아 120,912
+      - 스포츠/레저 84,729
+    - selector: span.basicTypeFilter_text_over__TmYt1
+      match_count: 9
+      matching_cards: 23
+      sample_values:
+      - 패션잡화 1,605,280
+      - 출산/육아 120,912
+      - 스포츠/레저 84,729
+    - selector: .basicTypeFilter_num__wLOp8
+      match_count: 9
+      matching_cards: 9
+      sample_values:
+      - 1,605,280
+      - 120,912
+      - 84,729
+    - selector: span.basicTypeFilter_num__wLOp8
+      match_count: 9
+      matching_cards: 9
+      sample_values:
+      - 1,605,280
+      - 120,912
+      - 84,729
+    - selector: .subFilter_num__effPz
+      match_count: 1
+      matching_cards: 1
+      sample_values:
+      - 1,815,052
+    - selector: span.subFilter_num__effPz
+      match_count: 1
+      matching_cards: 1
+      sample_values:
+      - 1,815,052
+    seller: []
+    product_url:
+    - selector: a
+      match_count: 30
+      matching_cards: 54
+      sample_values:
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EA%B2%80%EC%A0%95%20%EC%9A%B4%EB%8F%99%ED%99%94&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r1
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EB%9F%B0%EB%8B%9D%ED%99%94&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r1
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94%20%EB%82%A8%EC%84%B1&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r1
+    - selector: .relatedQueriesBottom_link__iiX_G
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%83%A5%EC%8A%A4&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%8B%A0%EB%B0%9C&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+      - /search/all?query=%EC%98%AC%EB%B8%94%EB%9E%99%20%EC%9A%B4%EB%8F%99%ED%99%94&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+    - selector: .linkAnchor
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%83%A5%EC%8A%A4&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%8B%A0%EB%B0%9C&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+      - /search/all?query=%EC%98%AC%EB%B8%94%EB%9E%99%20%EC%9A%B4%EB%8F%99%ED%99%94&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+    - selector: a.relatedQueriesBottom_link__iiX_G
+      match_count: 15
+      matching_cards: 15
+      sample_values:
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%83%A5%EC%8A%A4&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+      - /search/all?query=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%8B%A0%EB%B0%9C&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+      - /search/all?query=%EC%98%AC%EB%B8%94%EB%9E%99%20%EC%9A%B4%EB%8F%99%ED%99%94&prevQuery=%EB%82%98%EC%9D%B4%ED%82%A4%20%EC%9A%B4%EB%8F%99%ED%99%94&queryType=r2
+    image_url:
+    - selector: img
+      match_count: 30
+      matching_cards: 30
+      sample_values:
+      - https://shopping-phinf.pstatic.net/main_5945542/59455428223.20260330101519.jpg?type=f72
+      - https://shopping-phinf.pstatic.net/main_6005259/60052593186.20260515161903.jpg?type=f72
+      - https://shopping-phinf.pstatic.net/main_5945542/59455428224.20260330101423.jpg?type=f72

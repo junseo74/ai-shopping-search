@@ -11,6 +11,7 @@ try:
         BaseCollector,
         EbayBrowseCollector,
         ElevenstProductCollector,
+        ShoppingAutoCollector,
         TestFixtureCollector,
     )
     from .db import ProductRepository
@@ -22,6 +23,7 @@ except ImportError:  # Allows `uvicorn main:app` from the backend directory.
         BaseCollector,
         EbayBrowseCollector,
         ElevenstProductCollector,
+        ShoppingAutoCollector,
         TestFixtureCollector,
     )
     from db import ProductRepository
@@ -30,11 +32,19 @@ except ImportError:  # Allows `uvicorn main:app` from the backend directory.
 
 
 def build_collectors() -> dict[str, BaseCollector]:
+    ebay_collector = EbayBrowseCollector()
+    elevenst_collector = ElevenstProductCollector()
     collectors: list[BaseCollector] = [
         TestFixtureCollector(),
-        EbayBrowseCollector(),
-        ElevenstProductCollector(),
+        ebay_collector,
+        elevenst_collector,
         ApprovedHtmlProductCollector(),
+        ShoppingAutoCollector(
+            api_collectors={
+                "ebay_browse": ebay_collector,
+                "elevenst": elevenst_collector,
+            }
+        ),
     ]
     return {collector.metadata.source_name: collector for collector in collectors}
 
@@ -49,6 +59,9 @@ def is_collector_configured(collector: BaseCollector) -> bool:
     if collector.metadata.source_name == "approved_html":
         html_collector = collector
         return bool(getattr(html_collector, "urls", None))
+    if collector.metadata.source_name == "shopping_auto":
+        shopping_collector = collector
+        return bool(getattr(shopping_collector, "approved_source_count", lambda: 0)())
     return True
 
 
@@ -125,7 +138,7 @@ def create_app(db_path: Optional[str | Path] = None) -> FastAPI:
             for name, collector in collectors.items()
         }
         stored = {source["data_source"]: source for source in repository.list_sources()}
-        return [
+        sources = [
             {
                 **metadata,
                 "product_count": stored.get(name, {}).get("product_count", 0),
@@ -136,6 +149,24 @@ def create_app(db_path: Optional[str | Path] = None) -> FastAPI:
             }
             for name, metadata in registered.items()
         ]
+        sources.extend(
+            {
+                "source_name": name,
+                "platform": "shopping_mall",
+                "requires_api_key": False,
+                "enabled": True,
+                "configured": True,
+                "connected": True,
+                "product_count": source.get("product_count", 0),
+                "last_collected_at": source.get("last_collected_at"),
+                "last_status": source.get("last_status"),
+                "last_response_time_ms": source.get("last_response_time_ms"),
+                "last_error_message": source.get("last_error_message"),
+            }
+            for name, source in stored.items()
+            if name not in registered
+        )
+        return sources
 
     @app.post("/collect/{source_name}", response_model=CollectionRun)
     def collect_products(
@@ -151,8 +182,25 @@ def create_app(db_path: Optional[str | Path] = None) -> FastAPI:
         try:
             products = collector.collect(query=q, limit=limit)
             repository.add_products(products)
-            status = "success"
-            error_message = None
+            failures = getattr(collector, "last_failures", [])
+            for failure in failures:
+                repository.record_collection_run(
+                    CollectionRun(
+                        source_name=failure.source_name,
+                        platform=collector.metadata.platform,
+                        status="failed",
+                        product_count=0,
+                        response_time_ms=failure.response_time_ms,
+                        error_message=failure.error_message,
+                    )
+                )
+            if failures and products:
+                status = "partial_success"
+            elif failures:
+                status = "failed"
+            else:
+                status = "success"
+            error_message = "; ".join(f"{failure.source_name}: {failure.error_message}" for failure in failures) or None
         except Exception as exc:
             products = []
             status = "failed"

@@ -1,6 +1,19 @@
-.env
+# Python
 .venv/
 __pycache__/
 *.py[cod]
-*.db
 .pytest_cache/
+
+# Secrets and databases
+.env
+.env.*
+*.db
+
+# Collected shopping data
+naver_real.html
+joongna_real.html
+naver_all_products.json
+naver_real_products.json
+merged_products.json
+joongna_products.json
+local_auto_products.json
