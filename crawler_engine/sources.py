@@ -5,6 +5,7 @@ from typing import Protocol
 from .models import CrawlRequest, SourceMetadata
 from .sites.danawa import DanawaSource
 from .sites.joongna import JoongnaSource
+from .sites.musinsa import MusinsaSource
 
 
 class CrawlSource(Protocol):
@@ -18,6 +19,7 @@ def available_sources() -> dict[str, CrawlSource]:
     sources: list[CrawlSource] = [
         JoongnaSource(),
         DanawaSource(),
+        MusinsaSource(),
     ]
     return {source.metadata.source: source for source in sources}
 

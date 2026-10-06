@@ -11,6 +11,7 @@ from .extractors import (
     extract_dom_candidates,
     extract_embedded_data_candidates,
     extract_json_ld_candidates,
+    extract_site_specific_candidates,
 )
 from .extractors.dom_candidates import count_links, count_product_like_links
 from .models import CrawlRequest, CrawlResult, CrawledProduct, ProductCandidate, SourceMetadata
@@ -193,6 +194,9 @@ class CrawlerEngine:
         query: str | None = None,
     ) -> list[ProductCandidate]:
         candidates: list[ProductCandidate] = []
+        candidates.extend(extract_site_specific_candidates(html, metadata, limit=limit, query=query))
+        if candidates:
+            return candidates[:limit]
         candidates.extend(extract_json_ld_candidates(html))
         if len(candidates) < limit:
             candidates.extend(extract_embedded_data_candidates(html, limit=limit))
