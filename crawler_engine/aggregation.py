@@ -9,6 +9,10 @@ from .normalize import normalize_price, normalize_text, normalize_url
 
 
 PRICE_LIKE_PATTERN = re.compile(r"^(?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)(?:\s*\uc6d0)?$")
+PRICE_LABEL_PATTERN = re.compile(
+    r"^(?:\ucd9c\uc2dc\uac00|\ud310\ub9e4\uac00|\uac00\uaca9|\uc815\uac00|\ud560\uc778\uac00|\ucd5c\uc800\uac00|\ud61c\ud0dd\uac00)\s*[:\uFF1A]?\s*"
+    r"(?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)(?:\s*\uc6d0)?$"
+)
 MALL_COUNT_PATTERN = re.compile(r"^[0-9]+\s*\ubab0$")
 RANK_PATTERN = re.compile(r"^[0-9]+\s*\uc704$")
 SPEC_LINE_PATTERN = re.compile(
@@ -117,7 +121,7 @@ def aggregate_group(
     query: str | None,
 ) -> ProductCandidate | None:
     texts = _group_texts(group)
-    name = choose_representative_name(texts, query)
+    name = _choose_representative_name_from_group(group, query)
     if not name:
         return None
     price = _choose_price(group)
@@ -146,10 +150,39 @@ def choose_representative_name(texts: list[str], query: str | None = None) -> st
     query_terms = _query_terms(query)
     candidates: list[tuple[float, str]] = []
     for text in texts:
-        for candidate in _name_candidates_from_text(text):
+        for candidate, _synthetic in _name_candidates_from_text_with_origin(text):
             score = _name_score(candidate, query_terms)
             if score > -50:
                 candidates.append((score, candidate))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: item[0], reverse=True)
+    return candidates[0][1][:160]
+
+
+def _choose_representative_name_from_group(group: list[ProductCandidate], query: str | None) -> str | None:
+    query_terms = _query_terms(query)
+    direct_candidates: list[tuple[float, str]] = []
+    inferred_candidates: list[tuple[float, str]] = []
+    for candidate in group:
+        product_name = normalize_text(candidate.product_name)
+        if product_name:
+            for name, _synthetic in _name_candidates_from_text_with_origin(product_name):
+                score = _name_score(name, query_terms)
+                if score > -50:
+                    direct_candidates.append((score, name))
+        for value in (candidate.description, candidate.seller):
+            text = normalize_text(value)
+            if not text:
+                continue
+            for name, synthetic in _name_candidates_from_text_with_origin(text):
+                score = _name_score(name, query_terms)
+                if score <= -50:
+                    continue
+                if synthetic and direct_candidates:
+                    score -= 2
+                inferred_candidates.append((score, name))
+    candidates = [*direct_candidates, *inferred_candidates]
     if not candidates:
         return None
     candidates.sort(key=lambda item: item[0], reverse=True)
@@ -178,18 +211,22 @@ def _group_texts(group: list[ProductCandidate]) -> list[str]:
 
 
 def _name_candidates_from_text(text: str) -> list[str]:
+    return [candidate for candidate, _synthetic in _name_candidates_from_text_with_origin(text)]
+
+
+def _name_candidates_from_text_with_origin(text: str) -> list[tuple[str, bool]]:
     has_structured_parts = "/" in text
     raw_parts = [] if has_structured_parts else [text]
     raw_parts.extend(part.strip() for part in re.split(r"\s*/\s*", text) if part.strip())
     parts = [_clean_name(part) for part in raw_parts]
-    candidates = [part for part in parts if part]
+    candidates = [(part, False) for part in parts if part]
     split_parts = [part for part in (parts if has_structured_parts else parts[1:]) if part]
     for start in range(len(split_parts)):
         for end in range(start + 2, min(len(split_parts), start + 6) + 1):
             joined = " ".join(split_parts[start:end])
             cleaned = _clean_name(joined)
             if cleaned:
-                candidates.append(cleaned)
+                candidates.append((cleaned, True))
     return list(dict.fromkeys(candidates))
 
 
@@ -200,7 +237,7 @@ def _clean_name(value: str) -> str | None:
     lowered = text.lower()
     if lowered in UI_TEXTS:
         return None
-    if _is_price_like(text) or MALL_COUNT_PATTERN.fullmatch(text) or RANK_PATTERN.fullmatch(text):
+    if _is_price_like(text) or PRICE_LABEL_PATTERN.fullmatch(text) or MALL_COUNT_PATTERN.fullmatch(text) or RANK_PATTERN.fullmatch(text):
         return None
     if SPEC_LINE_PATTERN.search(text):
         return None

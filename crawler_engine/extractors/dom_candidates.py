@@ -170,6 +170,7 @@ class ProductItemCardParser(HTMLParser):
         self._current: Optional[dict[str, object]] = None
         self._li_depth = 0
         self._title_depth = 0
+        self._prod_name_depth = 0
         self._title_text: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -183,17 +184,21 @@ class ProductItemCardParser(HTMLParser):
                 self._append_attr_text(self._current, attr_map)
             return
 
+        class_name = attr_map.get("class") or ""
         if tag_name == "li":
             self._li_depth += 1
-        elif self._title_depth > 0 and tag_name not in VOID_TAGS:
+        elif self._prod_name_depth > 0 and tag_name not in VOID_TAGS:
+            self._prod_name_depth += 1
+        elif "prod_name" in class_name and tag_name not in VOID_TAGS:
+            self._prod_name_depth = 1
+        if self._title_depth > 0 and tag_name not in VOID_TAGS:
             self._title_depth += 1
         if tag_name == "a" and attr_map.get("href"):
             hrefs = self._current["hrefs"]
             assert isinstance(hrefs, list)
             hrefs.append(attr_map["href"])
             self._append_attr_text(self._current, attr_map)
-            class_name = attr_map.get("class") or ""
-            if "title" in class_name:
+            if "title" in class_name or self._prod_name_depth > 0:
                 self._title_depth = 1
                 self._title_text = []
         if tag_name == "img":
@@ -232,6 +237,8 @@ class ProductItemCardParser(HTMLParser):
                     assert isinstance(text, list)
                     text.append(title)
                 self._title_text = []
+        if self._prod_name_depth > 0 and tag_name != "li":
+            self._prod_name_depth -= 1
         if tag_name != "li":
             return
         self._li_depth -= 1
@@ -240,6 +247,7 @@ class ProductItemCardParser(HTMLParser):
             self._current = None
             self._li_depth = 0
             self._title_depth = 0
+            self._prod_name_depth = 0
             self._title_text = []
 
     def _append_attr_text(self, block: dict[str, object], attr_map: dict[str, str | None]) -> None:

@@ -1,6 +1,6 @@
 import unittest
 
-from crawler_engine.aggregation import aggregate_candidates, infer_condition, product_identity
+from crawler_engine.aggregation import aggregate_candidates, choose_representative_name, infer_condition, product_identity
 from crawler_engine.engine import CrawlerEngine
 from crawler_engine.models import CrawlRequest, ProductCandidate, SourceMetadata
 from crawler_engine.sites.danawa import DanawaSource
@@ -77,6 +77,37 @@ class AggregationTest(unittest.TestCase):
         aggregated = aggregate_candidates(candidates, metadata, "https://search.danawa.com/dsearch.php", query="\uac24\ub7ed\uc2dc S25")
 
         self.assertEqual(aggregated[0].product_name, "\uc0bc\uc131\uc804\uc790 \uac24\ub7ed\uc2dc S25 \uc6b8\ud2b8\ub77c 256GB, \uc790\uae09\uc81c")
+
+    def test_direct_product_name_beats_long_synthetic_description_name(self):
+        metadata = DanawaSource.metadata
+        direct_name = "\uc0bc\uc131\uc804\uc790 \uac24\ub7ed\uc2dc S25 \uc6b8\ud2b8\ub77c 256GB, \uc790\uae09\uc81c"
+        candidates = [
+            ProductCandidate(
+                product_name=direct_name,
+                price_text="1,473,100\uc6d0",
+                product_url="https://prod.danawa.com/info/?pcode=102126383",
+                description=(
+                    "\uac24\ub7ed\uc2dcS25 \uc6b8\ud2b8\ub77c 256GB, \uc790\uae09\uc81c / "
+                    f"{direct_name} / "
+                    "\ucd9c\uc2dc\uac00: 1,698,400\uc6d0"
+                ),
+            )
+        ]
+
+        aggregated = aggregate_candidates(candidates, metadata, "https://search.danawa.com/dsearch.php", query="\uac24\ub7ed\uc2dc S25")
+
+        self.assertEqual(aggregated[0].product_name, direct_name)
+
+    def test_price_label_text_is_not_a_name_candidate(self):
+        name = choose_representative_name(
+            [
+                "\ucd9c\uc2dc\uac00: 1,698,400\uc6d0",
+                "\ud310\ub9e4\uac00: 100,000\uc6d0",
+                "\uac00\uaca9: 50,000\uc6d0",
+            ]
+        )
+
+        self.assertIsNone(name)
 
     def test_condition_inference_used_evidence(self):
         self.assertEqual(infer_condition(["\ucd5c\uc0c1\uae09,\uc911\uace0"], "new"), "used")
