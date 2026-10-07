@@ -3,10 +3,12 @@ from __future__ import annotations
 from .dom_candidates import extract_dom_candidates
 from .embedded_data import extract_embedded_data_candidates
 from .json_ld import extract_json_ld_candidates
+from .kurly import extract_kurly_candidates
 from .musinsa import extract_musinsa_candidates
 
 
 SITE_SPECIFIC_EXTRACTORS = {
+    "kurly": extract_kurly_candidates,
     "musinsa": extract_musinsa_candidates,
 }
 
@@ -28,6 +30,7 @@ __all__ = [
     "extract_dom_candidates",
     "extract_embedded_data_candidates",
     "extract_json_ld_candidates",
+    "extract_kurly_candidates",
     "extract_musinsa_candidates",
     "extract_site_specific_candidates",
 ]
