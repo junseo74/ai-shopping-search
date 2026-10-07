@@ -5,9 +5,11 @@ from .embedded_data import extract_embedded_data_candidates
 from .json_ld import extract_json_ld_candidates
 from .kurly import extract_kurly_candidates
 from .musinsa import extract_musinsa_candidates
+from .twenty_nine_cm import extract_twenty_nine_cm_candidates
 
 
 SITE_SPECIFIC_EXTRACTORS = {
+    "29cm": extract_twenty_nine_cm_candidates,
     "kurly": extract_kurly_candidates,
     "musinsa": extract_musinsa_candidates,
 }
@@ -33,4 +35,5 @@ __all__ = [
     "extract_kurly_candidates",
     "extract_musinsa_candidates",
     "extract_site_specific_candidates",
+    "extract_twenty_nine_cm_candidates",
 ]

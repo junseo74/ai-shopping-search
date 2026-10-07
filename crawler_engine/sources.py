@@ -7,6 +7,7 @@ from .sites.danawa import DanawaSource
 from .sites.joongna import JoongnaSource
 from .sites.kurly import KurlySource
 from .sites.musinsa import MusinsaSource
+from .sites.twenty_nine_cm import TwentyNineCmSource
 
 
 class CrawlSource(Protocol):
@@ -22,6 +23,7 @@ def available_sources() -> dict[str, CrawlSource]:
         DanawaSource(),
         MusinsaSource(),
         KurlySource(),
+        TwentyNineCmSource(),
     ]
     return {source.metadata.source: source for source in sources}
 
