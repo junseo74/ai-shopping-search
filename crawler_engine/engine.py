@@ -61,7 +61,7 @@ class CrawlerEngine:
         for source in sources:
             url = source.build_search_url(request)
             try:
-                html = self.render_page(url)
+                html = self.fetch_source_content(source, request, url)
                 debug_payload[source.metadata.source] = self.inspect_page(html, source.metadata)
                 access_error = self.detect_access_error(debug_payload[source.metadata.source])
                 if access_error:
@@ -204,6 +204,19 @@ class CrawlerEngine:
             url_hints = metadata.product_url_hints if metadata else ()
             candidates.extend(extract_dom_candidates(html, limit=limit, product_url_hints=url_hints, query=query))
         return candidates[:limit]
+
+    def fetch_source_content(self, source, request: CrawlRequest, url: str) -> str:
+        fetcher = getattr(source, "fetch_search_results", None)
+        if callable(fetcher):
+            html = fetcher(request, timeout_ms=self.timeout_ms)
+            self._last_render_debug = {
+                "requested_url": url,
+                "final_url": url,
+                "title": "",
+                "http_status": 200,
+            }
+            return html
+        return self.render_page(url)
 
     def render_page(self, url: str) -> str:
         try:

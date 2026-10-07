@@ -4,6 +4,7 @@ from typing import Protocol
 
 from .models import CrawlRequest, SourceMetadata
 from .sites.danawa import DanawaSource
+from .sites.elevenst import ElevenStSource
 from .sites.joongna import JoongnaSource
 from .sites.kurly import KurlySource
 from .sites.lotteon import LotteOnSource
@@ -22,6 +23,7 @@ def available_sources() -> dict[str, CrawlSource]:
     sources: list[CrawlSource] = [
         JoongnaSource(),
         DanawaSource(),
+        ElevenStSource(),
         MusinsaSource(),
         KurlySource(),
         TwentyNineCmSource(),
