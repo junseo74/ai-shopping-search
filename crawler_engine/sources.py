@@ -6,6 +6,7 @@ from .models import CrawlRequest, SourceMetadata
 from .sites.danawa import DanawaSource
 from .sites.joongna import JoongnaSource
 from .sites.kurly import KurlySource
+from .sites.lotteon import LotteOnSource
 from .sites.musinsa import MusinsaSource
 from .sites.twenty_nine_cm import TwentyNineCmSource
 
@@ -24,6 +25,7 @@ def available_sources() -> dict[str, CrawlSource]:
         MusinsaSource(),
         KurlySource(),
         TwentyNineCmSource(),
+        LotteOnSource(),
     ]
     return {source.metadata.source: source for source in sources}
 
