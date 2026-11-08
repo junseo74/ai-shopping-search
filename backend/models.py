@@ -38,6 +38,8 @@ class Product(BaseModel):
     condition: ProductCondition = ProductCondition.UNKNOWN
     region: Optional[str] = None
     detail_description: Optional[str] = None
+    ingredients: Optional[str] = None
+    allergens: Optional[list[str]] = None
     source_url: Optional[HttpUrl] = None
     source_license: Optional[str] = None
     source_observed_at: Optional[datetime] = None

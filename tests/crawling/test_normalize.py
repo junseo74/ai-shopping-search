@@ -65,6 +65,33 @@ class NormalizeTest(unittest.TestCase):
         self.assertEqual(danawa.condition, "new")
         self.assertEqual(explicit.condition, "refurbished")
 
+    def test_food_fields_pass_through_when_present(self):
+        product = normalize_candidate(
+            ProductCandidate(
+                product_name="\uc0ac\uacfc \uc8fc\uc2a4",
+                price=3900,
+                ingredients="\uc0ac\uacfc\ub18d\ucd95\uc561 99%, \ube44\ud0c0\ubbfcC",
+                allergens=["\ub300\ub450", "\ubcf5\uc22d\uc544"],
+            ),
+            SourceMetadata(source="kurly", display_name="Kurly", default_condition="new"),
+            "https://www.kurly.com/search?sword=juice",
+        )
+
+        self.assertIsNotNone(product)
+        self.assertEqual(product.ingredients, "\uc0ac\uacfc\ub18d\ucd95\uc561 99%, \ube44\ud0c0\ubbfcC")
+        self.assertEqual(product.allergens, ["\ub300\ub450", "\ubcf5\uc22d\uc544"])
+
+    def test_food_fields_default_to_none(self):
+        product = normalize_candidate(
+            ProductCandidate(product_name="\uc0ac\uacfc", price=1000),
+            SourceMetadata(source="kurly", display_name="Kurly", default_condition="new"),
+            "https://www.kurly.com/search?sword=apple",
+        )
+
+        self.assertIsNotNone(product)
+        self.assertIsNone(product.ingredients)
+        self.assertIsNone(product.allergens)
+
 
 if __name__ == "__main__":
     unittest.main()

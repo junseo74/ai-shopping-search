@@ -1,17 +1,33 @@
 from __future__ import annotations
 
+import json
 import re
 from html import unescape
 from html.parser import HTMLParser
 from typing import Any
 from urllib.parse import urljoin
 
+from ..food_details import (
+    FoodDetail,
+    apply_food_detail,
+    clean_notice_description,
+    html_image_urls,
+    html_to_text,
+    normalize_text,
+    parse_allergens,
+    walk_json,
+)
 from ..models import ProductCandidate
 
 
 BASE_URL = "https://www.kurly.com"
 PRODUCT_HREF_PATTERN = re.compile(r"(?:^|/)goods/([0-9]+)(?:[/?#]|$)")
 PRICE_PATTERN = re.compile(r"([0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)\s*\uc6d0")
+NEXT_DATA_PATTERN = re.compile(
+    r'<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(?P<json>.*?)</script>',
+    re.DOTALL,
+)
+INGREDIENT_TITLE_PATTERN = re.compile(r"^INGREDIENT(?:_|$)")
 
 
 class Node:
@@ -106,6 +122,165 @@ def product_id_from_url(value: str | None) -> str | None:
     return match.group(1) if match else None
 
 
+def enrich_kurly_candidates_with_details(
+    candidates: list[ProductCandidate],
+    fetch_detail_html,
+) -> list[ProductCandidate]:
+    for candidate in candidates:
+        product_url = candidate.product_url
+        if not product_url:
+            continue
+        try:
+            detail_html = fetch_detail_html(product_url)
+            detail = extract_kurly_food_detail(detail_html)
+        except Exception as exc:
+            candidate.raw.setdefault("food_detail", {}).update(
+                {
+                    "source": "kurly",
+                    "error": str(exc),
+                }
+            )
+            continue
+        apply_food_detail(candidate, detail, source="kurly")
+    return candidates
+
+
+def extract_kurly_food_detail(html: str) -> FoodDetail:
+    product = _next_data_product(html)
+    if not isinstance(product, dict):
+        return FoodDetail()
+
+    ingredients = _ingredients_from_content_description(product)
+    if not ingredients:
+        ingredients = _ingredients_from_product_notice(product)
+    allergens = parse_allergens(product.get("allergy"))
+    notice_image_urls = _notice_image_urls(product)
+    detail_image_urls = _detail_image_urls(product)
+
+    return FoodDetail(
+        ingredients=ingredients,
+        allergens=allergens,
+        notice_image_urls=notice_image_urls,
+        detail_image_urls=detail_image_urls,
+        raw={
+            "allergy_text": normalize_text(product.get("allergy")),
+            "product_notice": product.get("productNotice") or [],
+        },
+    )
+
+
+def extract_kurly_detail_fields(html: str) -> dict[str, Any]:
+    detail = extract_kurly_food_detail(html)
+    return {
+        "ingredients": detail.ingredients,
+        "allergens": detail.allergens,
+        "raw": {
+            **detail.raw,
+            "notice_image_urls": detail.notice_image_urls,
+            "detail_image_urls": detail.detail_image_urls,
+            "has_food_notice_images": bool(detail.notice_image_urls or detail.detail_image_urls),
+        },
+    }
+
+
+def _next_data_product(html: str) -> dict[str, Any] | None:
+    match = NEXT_DATA_PATTERN.search(html)
+    if not match:
+        return None
+    payload = json.loads(unescape(match.group("json")))
+    product = (
+        payload.get("props", {})
+        .get("pageProps", {})
+        .get("product")
+    )
+    return product if isinstance(product, dict) else None
+
+
+def _ingredients_from_content_description(product: dict[str, Any]) -> str | None:
+    description = (
+        product.get("productDetail", {})
+        .get("contentDescription", {})
+        .get("description", {})
+        .get("description")
+    )
+    if not isinstance(description, str):
+        return None
+    text_values: list[str] = []
+    try:
+        parsed = json.loads(description)
+    except json.JSONDecodeError:
+        parsed = None
+    if isinstance(parsed, dict):
+        for node in walk_json(parsed):
+            if not isinstance(node, dict):
+                continue
+            title_type = normalize_text(node.get("titleType"))
+            if title_type and INGREDIENT_TITLE_PATTERN.search(title_type):
+                text = _text_from_json_module(node.get("main"))
+                if text and text not in text_values:
+                    text_values.append(text)
+    return normalize_text(" / ".join(text_values))
+
+
+def _ingredients_from_product_notice(product: dict[str, Any]) -> str | None:
+    for group in product.get("productNotice") or []:
+        if not isinstance(group, dict):
+            continue
+        for notice in group.get("notices") or []:
+            if not isinstance(notice, dict):
+                continue
+            title = normalize_text(notice.get("title")) or ""
+            if "\uc6d0\uc7ac\ub8cc\uba85" not in title:
+                continue
+            description = clean_notice_description(notice.get("description"))
+            if description:
+                return description
+    return None
+
+
+def _notice_image_urls(product: dict[str, Any]) -> list[str]:
+    urls: list[str] = []
+    for node in walk_json(product.get("productDetail", {}).get("contentDescription", {})):
+        if not isinstance(node, dict):
+            continue
+        notice_images = node.get("noticeImages")
+        if not isinstance(notice_images, list):
+            continue
+        for item in notice_images:
+            if not isinstance(item, dict):
+                continue
+            image = item.get("image")
+            if isinstance(image, dict):
+                url = normalize_text(image.get("path"))
+                if url and url not in urls:
+                    urls.append(url)
+    return urls
+
+
+def _detail_image_urls(product: dict[str, Any]) -> list[str]:
+    description = (
+        product.get("productDetail", {})
+        .get("contentDescription", {})
+        .get("description", {})
+        .get("description")
+    )
+    if not isinstance(description, str):
+        return []
+    return html_image_urls(description)
+
+
+def _text_from_json_module(value: Any) -> str | None:
+    if isinstance(value, dict):
+        data = value.get("data")
+        if isinstance(data, str):
+            return html_to_text(data)
+        if isinstance(data, dict):
+            return _text_from_json_module(data)
+    if isinstance(value, str):
+        return html_to_text(value)
+    return None
+
+
 def _candidate_from_anchor(anchor: Node, product_id: str, href: str | None) -> ProductCandidate:
     product_url = urljoin(BASE_URL, unescape(href or ""))
     price_parts = _price_parts(anchor)
@@ -158,13 +333,6 @@ def descendants(node: Node):
     for child in node.children:
         yield child
         yield from descendants(child)
-
-
-def normalize_text(value: object) -> str | None:
-    if value is None:
-        return None
-    text = re.sub(r"\s+", " ", str(value)).strip()
-    return text or None
 
 
 def node_text(node: Node) -> str | None:

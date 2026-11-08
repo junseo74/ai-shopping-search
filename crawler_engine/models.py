@@ -56,6 +56,8 @@ class ProductCandidate:
     product_url: Optional[str] = None
     image_url: Optional[str] = None
     description: Optional[str] = None
+    ingredients: Optional[str] = None
+    allergens: Optional[list[str]] = None
     confidence: float = 0
     raw: dict[str, Any] = field(default_factory=dict)
 
@@ -72,6 +74,8 @@ class CrawledProduct:
     product_url: Optional[str]
     image_url: Optional[str]
     description: Optional[str]
+    ingredients: Optional[str] = None
+    allergens: Optional[list[str]] = None
     collected_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> dict[str, Any]:

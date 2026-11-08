@@ -91,4 +91,6 @@ def normalize_candidate(
         product_url=normalize_url(candidate.product_url, base_url),
         image_url=normalize_url(candidate.image_url, base_url),
         description=normalize_text(candidate.description),
+        ingredients=normalize_text(candidate.ingredients),
+        allergens=list(candidate.allergens) if candidate.allergens is not None else None,
     )

@@ -1,7 +1,13 @@
+import json
 import unittest
 
-from crawler_engine.extractors.kurly import extract_kurly_candidates, product_id_from_url
-from crawler_engine.models import CrawlRequest
+from crawler_engine.extractors.kurly import (
+    enrich_kurly_candidates_with_details,
+    extract_kurly_candidates,
+    extract_kurly_detail_fields,
+    product_id_from_url,
+)
+from crawler_engine.models import CrawlRequest, ProductCandidate
 from crawler_engine.sources import available_sources, select_sources
 
 
@@ -32,6 +38,69 @@ def _card(
       {extra}
     </a>
     """
+
+
+def _next_data(product):
+    payload = {"props": {"pageProps": {"product": product}}}
+    return f'<script id="__NEXT_DATA__" type="application/json">{json.dumps(payload)}</script>'
+
+
+def _detail_product(**updates):
+    product = {
+        "allergy": "",
+        "productNotice": [
+            {
+                "notices": [
+                    {
+                        "title": "\uc6d0\uc7ac\ub8cc\uba85 \ubc0f \ud568\ub7c9",
+                        "description": "\uc0c1\ud488\uc124\uba85 \ubc0f \uc0c1\ud488\uc774\ubbf8\uc9c0 \ucc38\uc870",
+                        "type": "PN05",
+                    }
+                ]
+            }
+        ],
+        "productDetail": {
+            "contentDescription": {
+                "description": {
+                    "description": json.dumps(
+                        {
+                            "blocks": [
+                                {
+                                    "type": "CHECK_POINT",
+                                    "modules": [
+                                        {
+                                            "type": "CHECK_POINT_LIST",
+                                            "items": [
+                                                {
+                                                    "type": "CHECK_POINT_ITEM",
+                                                    "titleType": "INGREDIENT_2",
+                                                    "main": {
+                                                        "type": "TEXT",
+                                                        "data": "<ol><li>\uc0ac\uacfc\uc8fc\uc2a4 100%</li></ol>",
+                                                    },
+                                                }
+                                            ],
+                                        }
+                                    ],
+                                }
+                            ]
+                        }
+                    )
+                },
+                "productImages": [
+                    {
+                        "productImage": {
+                            "noticeImages": [
+                                {"image": {"path": "https://product-image.kurly.com/product/image/notice.jpg"}}
+                            ]
+                        }
+                    }
+                ],
+            }
+        },
+    }
+    product.update(updates)
+    return product
 
 
 class KurlySourceTest(unittest.TestCase):
@@ -135,6 +204,69 @@ class KurlyExtractorTest(unittest.TestCase):
         self.assertTrue(all(candidate.source == "kurly" for candidate in candidates))
         self.assertTrue(all(candidate.condition == "new" for candidate in candidates))
         self.assertTrue(all(candidate.currency == "KRW" for candidate in candidates))
+
+    def test_extracts_detail_ingredients_from_next_data_blocks(self):
+        html = _next_data(_detail_product(allergy="\ub300\ub450, \uc6b0\uc720 \ud568\uc720"))
+
+        detail = extract_kurly_detail_fields(html)
+
+        self.assertEqual(detail["ingredients"], "\uc0ac\uacfc\uc8fc\uc2a4 100%")
+        self.assertEqual(detail["allergens"], ["\ub300\ub450", "\uc6b0\uc720"])
+        self.assertEqual(
+            detail["raw"]["notice_image_urls"],
+            ["https://product-image.kurly.com/product/image/notice.jpg"],
+        )
+
+    def test_detail_ingredients_falls_back_to_real_product_notice_description(self):
+        html = _next_data(
+            _detail_product(
+                productDetail={"contentDescription": {"description": {"description": "{}"}}},
+                productNotice=[
+                    {
+                        "notices": [
+                            {
+                                "title": "\uc6d0\uc7ac\ub8cc\uba85 \ubc0f \ud568\ub7c9",
+                                "description": "\uc720\uae30\ub18d \uc0ac\uacfc\uc2dd\ucd08 100%",
+                                "type": "PN05",
+                            }
+                        ]
+                    }
+                ],
+            )
+        )
+
+        detail = extract_kurly_detail_fields(html)
+
+        self.assertEqual(detail["ingredients"], "\uc720\uae30\ub18d \uc0ac\uacfc\uc2dd\ucd08 100%")
+
+    def test_detail_ignores_guidance_notice_and_empty_allergy(self):
+        html = _next_data(
+            _detail_product(
+                productDetail={"contentDescription": {"description": {"description": "{}"}}},
+                allergy="",
+            )
+        )
+
+        detail = extract_kurly_detail_fields(html)
+
+        self.assertIsNone(detail["ingredients"])
+        self.assertIsNone(detail["allergens"])
+
+    def test_detail_enrichment_falls_back_when_detail_request_fails(self):
+        candidate = ProductCandidate(
+            product_name="\uc0ac\uacfc\uc8fc\uc2a4",
+            price=1000,
+            product_url="https://www.kurly.com/goods/1",
+        )
+
+        enriched = enrich_kurly_candidates_with_details(
+            [candidate],
+            lambda url: (_ for _ in ()).throw(RuntimeError("detail failed")),
+        )
+
+        self.assertEqual(enriched[0].product_name, "\uc0ac\uacfc\uc8fc\uc2a4")
+        self.assertIsNone(enriched[0].ingredients)
+        self.assertIn("detail failed", enriched[0].raw["food_detail"]["error"])
 
 
 if __name__ == "__main__":

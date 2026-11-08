@@ -10,11 +10,17 @@ class StaticEngine(CrawlerEngine):
         super().__init__()
         self.html = html
 
+    def fetch_source_content(self, source, request, url: str) -> str:
+        return self.html
+
     def render_page(self, url: str) -> str:
         return self.html
 
 
 class FailingEngine(CrawlerEngine):
+    def fetch_source_content(self, source, request, url: str) -> str:
+        return self.render_page(url)
+
     def render_page(self, url: str) -> str:
         raise RuntimeError("browser failed")
 

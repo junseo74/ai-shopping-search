@@ -3,8 +3,11 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 from typing import Optional
+from urllib.request import Request as UrlRequest
+from urllib.request import urlopen
 
 from .aggregation import aggregate_candidates, product_identity
+from .detail_extractors import enrich_candidates_with_food_details
 from .eligibility import is_eligible_product_candidate
 from .extractors._html import extract_scripts
 from .extractors import (
@@ -83,6 +86,7 @@ class CrawlerEngine:
                     for candidate in candidates
                     if is_eligible_product_candidate(candidate, source.metadata, url)
                 ]
+                candidates = self.enrich_candidates(candidates, source.metadata, limit=request.limit)
                 if isinstance(debug_payload[source.metadata.source], dict):
                     debug_payload[source.metadata.source]["raw_image_candidate_count"] = raw_image_candidate_count
                     debug_payload[source.metadata.source]["image_candidates_with_identity_count"] = sum(
@@ -103,6 +107,12 @@ class CrawlerEngine:
                         1 for candidate in candidates if candidate.image_url
                     )
                     debug_payload[source.metadata.source]["normalized_candidate_count"] = len(candidates)
+                    if any(candidate.raw.get("food_detail") for candidate in candidates[: request.limit]):
+                        debug_payload[source.metadata.source]["detail_enriched_candidate_count"] = sum(
+                            1
+                            for candidate in candidates[: request.limit]
+                            if candidate.ingredients or candidate.allergens or candidate.raw.get("food_detail")
+                        )
                 if self.debug and self.save_debug_html:
                     debug_path = self.output_dir / f"debug_{source.metadata.source}.html"
                     debug_path.parent.mkdir(parents=True, exist_ok=True)
@@ -205,6 +215,19 @@ class CrawlerEngine:
             candidates.extend(extract_dom_candidates(html, limit=limit, product_url_hints=url_hints, query=query))
         return candidates[:limit]
 
+    def enrich_candidates(
+        self,
+        candidates: list[ProductCandidate],
+        metadata: SourceMetadata,
+        limit: int,
+    ) -> list[ProductCandidate]:
+        return enrich_candidates_with_food_details(
+            candidates,
+            metadata.source,
+            self.fetch_detail_page,
+            limit=limit,
+        )
+
     def fetch_source_content(self, source, request: CrawlRequest, url: str) -> str:
         fetcher = getattr(source, "fetch_search_results", None)
         if callable(fetcher):
@@ -217,6 +240,18 @@ class CrawlerEngine:
             }
             return html
         return self.render_page(url)
+
+    def fetch_detail_page(self, url: str) -> str:
+        request = UrlRequest(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0 (compatible; ai-shopping-search/0.1)",
+                "Accept": "text/html,application/xhtml+xml",
+            },
+        )
+        with urlopen(request, timeout=max(1, self.timeout_ms / 1000)) as response:
+            charset = response.headers.get_content_charset() or "utf-8"
+            return response.read().decode(charset, errors="replace")
 
     def render_page(self, url: str) -> str:
         try:
