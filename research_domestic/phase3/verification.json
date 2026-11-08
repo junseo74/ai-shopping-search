@@ -1,0 +1,345 @@
+{
+  "observed_at": "2026-11-08T12:26:31.836Z",
+  "research_date": "2026-11-08",
+  "definitions": {
+    "live_success": "HTTP200 plus at least one normalized genuine product; missing fields are reported, never fabricated",
+    "complete_success": "All seven requested fields are present on the same product response",
+    "operation_ready": "Project currently has credentials/permissions and production license obligations implemented",
+    "storage_license_permits": "Published license permits retention subject to obligations; not a project-specific approval"
+  },
+  "counts": {
+    "new_candidates": 30,
+    "official_paths": 25,
+    "live_verified_providers": 2,
+    "live_verified_endpoints": 3,
+    "complete_seven_field_providers": 1,
+    "operation_ready": 0,
+    "storage_license_permitted_providers": 1,
+    "project_specific_long_term_storage_approvals": 0,
+    "implemented_adapters": 3,
+    "authenticated_api_live_successes": 0
+  },
+  "successful_providers": [
+    "apple",
+    "openfoodfacts"
+  ],
+  "complete_providers": [
+    "apple"
+  ],
+  "endpoints": [
+    {
+      "id": "apple",
+      "provider": "apple",
+      "observed_at": "2026-11-08T12:26:29.626Z",
+      "status": "ok",
+      "http_status": 200,
+      "bytes": 34258,
+      "products_verified": 3,
+      "duplicates": 0,
+      "invalid": 0,
+      "samples": [
+        {
+          "fields": {
+            "name": true,
+            "price": true,
+            "currency": true,
+            "seller": true,
+            "product_url": true,
+            "image_url": true,
+            "product_id": true
+          },
+          "complete_seven_fields": true,
+          "name_sha256": "abee0382677c97d783cec18237d884454ddac719b3a5ba7f5df8d1cf8f447221",
+          "product_id_sha256": "472ece255ab18b200419abd18b8cfe4382df4561c0652bc51f686804afcdbb82",
+          "seller_sha256": "c6b350ea980c6ce7155da083d8bcd28fb4c3a4b1075678f0dd63486af6745cba",
+          "product_url_sha256": "795abc2696784fb1ee47007c96e94351e91eef7d549182885fd4fc2cf3f982dc",
+          "image_url_sha256": "b4e2bd7293ca9f55a252018d086d19a29d24b489d27663155f839a94d1d88c14",
+          "price": 0,
+          "currency": "USD",
+          "price_kind": "app_store_base_price_excludes_in_app_purchases",
+          "price_observed_date": null,
+          "attribution": "Apple App Store Search API; display promotion/badge/link conditions apply"
+        },
+        {
+          "fields": {
+            "name": true,
+            "price": true,
+            "currency": true,
+            "seller": true,
+            "product_url": true,
+            "image_url": true,
+            "product_id": true
+          },
+          "complete_seven_fields": true,
+          "name_sha256": "2e59b7fbd7f189ac4beb33d2c7af30c0afc674fa57a3cfdc2c99c6bde5a9dbe9",
+          "product_id_sha256": "06463733a8e076f7a7687b84287576451dbd9afb9568c9ccc9612b8399c5d9d9",
+          "seller_sha256": "c6b350ea980c6ce7155da083d8bcd28fb4c3a4b1075678f0dd63486af6745cba",
+          "product_url_sha256": "83c922612a0801941f5442aeee70e1b3a098bf50f7e071a800dce09f3a472273",
+          "image_url_sha256": "03c970f0c061a3ee24e36961d748aaa0a013d061d133458aa370c6a28d26b36d",
+          "price": 0,
+          "currency": "USD",
+          "price_kind": "app_store_base_price_excludes_in_app_purchases",
+          "price_observed_date": null,
+          "attribution": "Apple App Store Search API; display promotion/badge/link conditions apply"
+        },
+        {
+          "fields": {
+            "name": true,
+            "price": true,
+            "currency": true,
+            "seller": true,
+            "product_url": true,
+            "image_url": true,
+            "product_id": true
+          },
+          "complete_seven_fields": true,
+          "name_sha256": "276185ab9edcb17397775242a1a2dd66405a24c7682ab64e4779b1fa9cf43071",
+          "product_id_sha256": "ead5f8b05923566b39b9cbbb04268442cce0cebbbecf4d0dc4ddafe385f9731f",
+          "seller_sha256": "f9adcb69bff372ffc2c2c9e326ef97c852f8f6890356bbdb6520f05dc6a3c20a",
+          "product_url_sha256": "354602601345e2bcfa6c203d6b31de67d1071415d7e6ef511ee610004f4a9679",
+          "image_url_sha256": "b050cccf433836d7fa90c01e83f93889ff14a52d02c351518ba07f9a38a771c5",
+          "price": 0,
+          "currency": "USD",
+          "price_kind": "app_store_base_price_excludes_in_app_purchases",
+          "price_observed_date": null,
+          "attribution": "Apple App Store Search API; display promotion/badge/link conditions apply"
+        }
+      ]
+    },
+    {
+      "id": "off",
+      "provider": "openfoodfacts",
+      "observed_at": "2026-11-08T12:26:30.919Z",
+      "status": "ok",
+      "http_status": 200,
+      "bytes": 360,
+      "products_verified": 1,
+      "duplicates": 0,
+      "invalid": 0,
+      "samples": [
+        {
+          "fields": {
+            "name": true,
+            "price": false,
+            "currency": false,
+            "seller": true,
+            "product_url": false,
+            "image_url": true,
+            "product_id": true
+          },
+          "complete_seven_fields": false,
+          "name_sha256": "5399b1e000e797769b63992e46204802144ae5af2ec77e2fa9f7bb78790eb9ff",
+          "product_id_sha256": "558830c7e9f27cde321a31796c1cf43a1e9f52b9e109f165f965ed6ea3000d05",
+          "seller_sha256": "23bab16846805fcb223d810a6d5393c3b98f777399fe3b41943a00fa33cc08fb",
+          "product_url_sha256": null,
+          "image_url_sha256": "bf21eb1a6610e76e79160e551e65b8144a06a128e072106cb705e20e233f4fa4",
+          "price": null,
+          "currency": null,
+          "price_kind": "not_provided",
+          "price_observed_date": null,
+          "attribution": "Open Food Facts — ODbL database / DbCL contents; images CC BY-SA and third-party rights"
+        }
+      ]
+    },
+    {
+      "id": "prices",
+      "provider": "openfoodfacts",
+      "observed_at": "2026-11-08T12:26:31.834Z",
+      "status": "ok",
+      "http_status": 200,
+      "bytes": 9821,
+      "products_verified": 3,
+      "duplicates": 0,
+      "invalid": 0,
+      "samples": [
+        {
+          "fields": {
+            "name": true,
+            "price": true,
+            "currency": true,
+            "seller": true,
+            "product_url": false,
+            "image_url": true,
+            "product_id": true
+          },
+          "complete_seven_fields": false,
+          "name_sha256": "5399b1e000e797769b63992e46204802144ae5af2ec77e2fa9f7bb78790eb9ff",
+          "product_id_sha256": "c838df5335c1eba2532f32090cd555d17c9e218289d99ecaf55525d7b199aa88",
+          "seller_sha256": "10a0a6a606513df9b74007929bdb97071d52918f38c59255296a95349af23f1a",
+          "product_url_sha256": null,
+          "image_url_sha256": "bf21eb1a6610e76e79160e551e65b8144a06a128e072106cb705e20e233f4fa4",
+          "price": 3.21,
+          "currency": "EUR",
+          "price_kind": "historical_crowdsourced_observation_not_current_retail_offer",
+          "price_observed_date": "2024-01-11",
+          "attribution": "Open Prices / Open Food Facts — ODbL; no receipt/owner/location details retained"
+        },
+        {
+          "fields": {
+            "name": true,
+            "price": true,
+            "currency": true,
+            "seller": true,
+            "product_url": false,
+            "image_url": true,
+            "product_id": true
+          },
+          "complete_seven_fields": false,
+          "name_sha256": "5399b1e000e797769b63992e46204802144ae5af2ec77e2fa9f7bb78790eb9ff",
+          "product_id_sha256": "d9cf8835e2a75f03b59e0371aacb3cdf2b71e0a471dc478742987f366cabeccc",
+          "seller_sha256": "1b66fc324de5fef7de0f8a94befe7fe2782274c6eb259f2c8d790a5479ee7b39",
+          "product_url_sha256": null,
+          "image_url_sha256": "bf21eb1a6610e76e79160e551e65b8144a06a128e072106cb705e20e233f4fa4",
+          "price": 2.99,
+          "currency": "EUR",
+          "price_kind": "historical_crowdsourced_observation_not_current_retail_offer",
+          "price_observed_date": "2024-01-29",
+          "attribution": "Open Prices / Open Food Facts — ODbL; no receipt/owner/location details retained"
+        },
+        {
+          "fields": {
+            "name": true,
+            "price": true,
+            "currency": true,
+            "seller": true,
+            "product_url": false,
+            "image_url": true,
+            "product_id": true
+          },
+          "complete_seven_fields": false,
+          "name_sha256": "5399b1e000e797769b63992e46204802144ae5af2ec77e2fa9f7bb78790eb9ff",
+          "product_id_sha256": "7ef4694c838dc3db5176c6531eeb3f9290e229b4ed08f83100c809fbc1ee7b73",
+          "seller_sha256": "23bab16846805fcb223d810a6d5393c3b98f777399fe3b41943a00fa33cc08fb",
+          "product_url_sha256": null,
+          "image_url_sha256": "bf21eb1a6610e76e79160e551e65b8144a06a128e072106cb705e20e233f4fa4",
+          "price": 3.21,
+          "currency": "EUR",
+          "price_kind": "historical_crowdsourced_observation_not_current_retail_offer",
+          "price_observed_date": "2024-02-05",
+          "attribution": "Open Prices / Open Food Facts — ODbL; no receipt/owner/location details retained"
+        }
+      ]
+    }
+  ],
+  "not_called": [
+    {
+      "id": "rakuten_ichiba",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "yahoo_jp",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "amazon",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "etsy",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "bestbuy",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "walmart",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "target",
+      "reason": "not_called_documentation_insufficient"
+    },
+    {
+      "id": "aliexpress",
+      "reason": "not_called_documentation_insufficient"
+    },
+    {
+      "id": "taobao",
+      "reason": "not_called_documentation_insufficient"
+    },
+    {
+      "id": "jd",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "shopee",
+      "reason": "not_called_documentation_insufficient"
+    },
+    {
+      "id": "lazada",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "mercadolibre",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "bol",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "allegro",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "cafe24",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "makeshop",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "awin",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "cj",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "impact",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "stockx",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "webgains",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "tradedoubler",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "admitad",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "icecat",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "isbndb",
+      "reason": "not_called_documentation_insufficient"
+    },
+    {
+      "id": "gs1",
+      "reason": "not_called_credentials_or_permission_missing"
+    },
+    {
+      "id": "datafiniti",
+      "reason": "not_called_credentials_or_permission_missing"
+    }
+  ],
+  "limitations": [
+    "No website UI, database integration, application submission or production rollout",
+    "Two providers; Open Prices is not a third provider",
+    "Initial schema probe returned 10 Prices rows because page_size was ignored; no extra pages requested. size=3 validated subsequently",
+    "Sandbox network failure was resolved using authorized direct network access; no service restriction bypass",
+    "Only hashes/presence/price/currency/date retained; product contents and personal data not persisted"
+  ]
+}

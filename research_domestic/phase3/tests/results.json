@@ -1,0 +1,10 @@
+{
+  "observed_at": "2026-11-08T12:32:27.571Z",
+  "test_kind": "synthetic_and_permission_gate_tests_not_live_service",
+  "node": "v24.20.0",
+  "total": 50,
+  "passed": 50,
+  "failed": 0,
+  "exit_code": 0,
+  "all_passed": true
+}

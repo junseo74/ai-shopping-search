@@ -1,0 +1,40 @@
+{
+  "checked_date": "2026-11-08",
+  "inputs": [
+    "research_domestic/README.md",
+    "research_domestic/candidates.csv",
+    "research_domestic/phase2/README.md",
+    "research_domestic/phase2/research_data.mjs",
+    "docs/source-access.md"
+  ],
+  "local_140_candidate_list_found": false,
+  "note": "rg 파일명 검색 및 docs/ 실제 파일 목록에서 140개 별도 목록을 찾지 못함; 기존30 CSV와 문서 기언급 제공처를 제외. 다른 이름/비공개 목록까지 부재를 보장하지 않음",
+  "old_candidate_rows": 30,
+  "new_rows": 30,
+  "overlap_ids": [],
+  "excluded": [
+    "기존 국내30개(1차 candidates.csv)",
+    "eBay Browse",
+    "Google Merchant API",
+    "Meta/Instagram Shopping",
+    "YouTube Shopping",
+    "당근",
+    "번개장터",
+    "서울 에코마일리지",
+    "조달청 납품/자재 데이터",
+    "LinkPrice(2차 기언급)",
+    "Rakuten Advertising(이번 공식 상품피드 확인했으나 Ichiba와 기업군 중복 방지를 위해30개에서 제외)"
+  ],
+  "checks": {
+    "docs_ebay_detected": true,
+    "phase2_linkprice_detected": true
+  },
+  "family_notes": [
+    "Open Food Facts와 Open Prices는 1개 후보로 합침",
+    "Rakuten Advertising은 Ichiba와 기업군 중복을 피하려고 최종 후보에서 제외; StockX 포함",
+    "affiliate network와 직접 marketplace 사이 상품/판매처 중복은 아직 수량 미측정; 신규 몰 수로 합산 금지"
+  ],
+  "documentation_inventory": [
+    "docs/source-access.md"
+  ]
+}

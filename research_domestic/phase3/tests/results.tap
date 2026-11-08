@@ -1,0 +1,310 @@
+TAP version 13
+# Subtest: Apple preserves valid zero price and actual seller field; all seven fields
+ok 1 - Apple preserves valid zero price and actual seller field; all seven fields
+  ---
+  duration_ms: 7.6343
+  type: 'test'
+  ...
+# Subtest: OFF missing price/currency/product URL stays null
+ok 2 - OFF missing price/currency/product URL stays null
+  ---
+  duration_ms: 0.7812
+  type: 'test'
+  ...
+# Subtest: Open Prices retains dated observation semantics and drops owner/proof/location PII
+ok 3 - Open Prices retains dated observation semantics and drops owner/proof/location PII
+  ---
+  duration_ms: 1.4982
+  type: 'test'
+  ...
+# Subtest: Three response normalizers remove duplicate IDs
+ok 4 - Three response normalizers remove duplicate IDs
+  ---
+  duration_ms: 1.3155
+  type: 'test'
+  ...
+# Subtest: Apple also removes duplicate product URLs
+ok 5 - Apple also removes duplicate product URLs
+  ---
+  duration_ms: 0.723
+  type: 'test'
+  ...
+# Subtest: Dated price observations sharing a barcode are not falsely merged
+ok 6 - Dated price observations sharing a barcode are not falsely merged
+  ---
+  duration_ms: 0.5117
+  type: 'test'
+  ...
+# Subtest: All adapters return genuinely empty results without manufactured products
+ok 7 - All adapters return genuinely empty results without manufactured products
+  ---
+  duration_ms: 0.3915
+  type: 'test'
+  ...
+# Subtest: All adapters enforce three-record cap
+ok 8 - All adapters enforce three-record cap
+  ---
+  duration_ms: 0.7242
+  type: 'test'
+  ...
+# Subtest: Invalid/missing product names and IDs are rejected
+ok 9 - Invalid/missing product names and IDs are rejected
+  ---
+  duration_ms: 0.7457
+  type: 'test'
+  ...
+# Subtest: Invalid prices cannot become zero by coercion
+ok 10 - Invalid prices cannot become zero by coercion
+  ---
+  duration_ms: 0.768
+  type: 'test'
+  ...
+# Subtest: Product URLs reject credentials, encoded secret query keys and lookalike hosts
+ok 11 - Product URLs reject credentials, encoded secret query keys and lookalike hosts
+  ---
+  duration_ms: 0.7713
+  type: 'test'
+  ...
+# Subtest: Evidence contains presence/hash only for names/sellers/URLs and no raw content
+ok 12 - Evidence contains presence/hash only for names/sellers/URLs and no raw content
+  ---
+  duration_ms: 0.7898
+  type: 'test'
+  ...
+# Subtest: Every adapter maps schema mismatch to sanitized schema_error
+ok 13 - Every adapter maps schema mismatch to sanitized schema_error
+  ---
+  duration_ms: 99.2384
+  type: 'test'
+  ...
+# Subtest: Metadata contains 30 distinct offering IDs and only verified live adapters
+ok 14 - Metadata contains 30 distinct offering IDs and only verified live adapters
+  ---
+  duration_ms: 0.9804
+  type: 'test'
+  ...
+# Subtest: Unapproved source rakuten_ichiba stays gated (simulation; no network)
+ok 15 - Unapproved source rakuten_ichiba stays gated (simulation; no network)
+  ---
+  duration_ms: 0.5526
+  type: 'test'
+  ...
+# Subtest: Unapproved source yahoo_jp stays gated (simulation; no network)
+ok 16 - Unapproved source yahoo_jp stays gated (simulation; no network)
+  ---
+  duration_ms: 0.4404
+  type: 'test'
+  ...
+# Subtest: Unapproved source amazon stays gated (simulation; no network)
+ok 17 - Unapproved source amazon stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2578
+  type: 'test'
+  ...
+# Subtest: Unapproved source etsy stays gated (simulation; no network)
+ok 18 - Unapproved source etsy stays gated (simulation; no network)
+  ---
+  duration_ms: 0.313
+  type: 'test'
+  ...
+# Subtest: Unapproved source bestbuy stays gated (simulation; no network)
+ok 19 - Unapproved source bestbuy stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2623
+  type: 'test'
+  ...
+# Subtest: Unapproved source walmart stays gated (simulation; no network)
+ok 20 - Unapproved source walmart stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2374
+  type: 'test'
+  ...
+# Subtest: Unapproved source target stays gated (simulation; no network)
+ok 21 - Unapproved source target stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2361
+  type: 'test'
+  ...
+# Subtest: Unapproved source aliexpress stays gated (simulation; no network)
+ok 22 - Unapproved source aliexpress stays gated (simulation; no network)
+  ---
+  duration_ms: 0.3243
+  type: 'test'
+  ...
+# Subtest: Unapproved source taobao stays gated (simulation; no network)
+ok 23 - Unapproved source taobao stays gated (simulation; no network)
+  ---
+  duration_ms: 0.3377
+  type: 'test'
+  ...
+# Subtest: Unapproved source jd stays gated (simulation; no network)
+ok 24 - Unapproved source jd stays gated (simulation; no network)
+  ---
+  duration_ms: 0.6359
+  type: 'test'
+  ...
+# Subtest: Unapproved source shopee stays gated (simulation; no network)
+ok 25 - Unapproved source shopee stays gated (simulation; no network)
+  ---
+  duration_ms: 0.3289
+  type: 'test'
+  ...
+# Subtest: Unapproved source lazada stays gated (simulation; no network)
+ok 26 - Unapproved source lazada stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2637
+  type: 'test'
+  ...
+# Subtest: Unapproved source mercadolibre stays gated (simulation; no network)
+ok 27 - Unapproved source mercadolibre stays gated (simulation; no network)
+  ---
+  duration_ms: 0.299
+  type: 'test'
+  ...
+# Subtest: Unapproved source bol stays gated (simulation; no network)
+ok 28 - Unapproved source bol stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2492
+  type: 'test'
+  ...
+# Subtest: Unapproved source allegro stays gated (simulation; no network)
+ok 29 - Unapproved source allegro stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2367
+  type: 'test'
+  ...
+# Subtest: Unapproved source cafe24 stays gated (simulation; no network)
+ok 30 - Unapproved source cafe24 stays gated (simulation; no network)
+  ---
+  duration_ms: 0.374
+  type: 'test'
+  ...
+# Subtest: Unapproved source makeshop stays gated (simulation; no network)
+ok 31 - Unapproved source makeshop stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2734
+  type: 'test'
+  ...
+# Subtest: Unapproved source awin stays gated (simulation; no network)
+ok 32 - Unapproved source awin stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2268
+  type: 'test'
+  ...
+# Subtest: Unapproved source cj stays gated (simulation; no network)
+ok 33 - Unapproved source cj stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2725
+  type: 'test'
+  ...
+# Subtest: Unapproved source impact stays gated (simulation; no network)
+ok 34 - Unapproved source impact stays gated (simulation; no network)
+  ---
+  duration_ms: 0.3
+  type: 'test'
+  ...
+# Subtest: Unapproved source stockx stays gated (simulation; no network)
+ok 35 - Unapproved source stockx stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2403
+  type: 'test'
+  ...
+# Subtest: Unapproved source webgains stays gated (simulation; no network)
+ok 36 - Unapproved source webgains stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2386
+  type: 'test'
+  ...
+# Subtest: Unapproved source tradedoubler stays gated (simulation; no network)
+ok 37 - Unapproved source tradedoubler stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2591
+  type: 'test'
+  ...
+# Subtest: Unapproved source admitad stays gated (simulation; no network)
+ok 38 - Unapproved source admitad stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2245
+  type: 'test'
+  ...
+# Subtest: Unapproved source icecat stays gated (simulation; no network)
+ok 39 - Unapproved source icecat stays gated (simulation; no network)
+  ---
+  duration_ms: 0.223
+  type: 'test'
+  ...
+# Subtest: Unapproved source isbndb stays gated (simulation; no network)
+ok 40 - Unapproved source isbndb stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2874
+  type: 'test'
+  ...
+# Subtest: Unapproved source gs1 stays gated (simulation; no network)
+ok 41 - Unapproved source gs1 stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2921
+  type: 'test'
+  ...
+# Subtest: Unapproved source datafiniti stays gated (simulation; no network)
+ok 42 - Unapproved source datafiniti stays gated (simulation; no network)
+  ---
+  duration_ms: 0.2456
+  type: 'test'
+  ...
+# Subtest: Exactly one request; GET/manual redirect/no cookies/no auth
+ok 43 - Exactly one request; GET/manual redirect/no cookies/no auth
+  ---
+  duration_ms: 94.4521
+  type: 'test'
+  ...
+# Subtest: Network failures are sanitized and never retried
+ok 44 - Network failures are sanitized and never retried
+  ---
+  duration_ms: 1.2137
+  type: 'test'
+  ...
+# Subtest: Timeout aborts stalled fetch and returns timeout
+ok 45 - Timeout aborts stalled fetch and returns timeout
+  ---
+  duration_ms: 15.9202
+  type: 'test'
+  ...
+# Subtest: Timeout also aborts stalled body consumption
+ok 46 - Timeout also aborts stalled body consumption
+  ---
+  duration_ms: 30.0118
+  type: 'test'
+  ...
+# Subtest: Redirect/auth/rate-limit/server failures stop without follow-up
+ok 47 - Redirect/auth/rate-limit/server failures stop without follow-up
+  ---
+  duration_ms: 6.3178
+  type: 'test'
+  ...
+# Subtest: Oversize response is rejected and cancelled
+ok 48 - Oversize response is rejected and cancelled
+  ---
+  duration_ms: 1.8997
+  type: 'test'
+  ...
+# Subtest: Malformed JSON is rejected without echoing response
+ok 49 - Malformed JSON is rejected without echoing response
+  ---
+  duration_ms: 2.9339
+  type: 'test'
+  ...
+# Subtest: Arbitrary endpoints rejected before calling fetch
+ok 50 - Arbitrary endpoints rejected before calling fetch
+  ---
+  duration_ms: 5.6063
+  type: 'test'
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 813.5118

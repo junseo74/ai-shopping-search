@@ -1,0 +1,9 @@
+{
+  "observed_at": "2026-11-08T12:33:24.112Z",
+  "files": 25,
+  "jsonFiles": 8,
+  "findings": [],
+  "scope": "phase3 output only; key/JWT/private-key/PII pattern and JSON parsing checks",
+  "manual_review": "Only fixed public URLs, no auth inputs/headers/cookies; hash strings and synthetic fixtures are not live credentials",
+  "limitation": "Pattern checks are not proof of absence of every secret format"
+}

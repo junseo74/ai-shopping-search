@@ -1,0 +1,348 @@
+[
+  {
+    "id": "rakuten_ichiba",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://webservice.rakuten.co.jp/index.php/documentation/ichiba-item-search"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "구형 App ID 단독 인증과 구형 호스트를 신규 연동에 사용하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "yahoo_jp",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developer.yahoo.co.jp/webapi/shopping/v3/itemsearch.html"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "v3 문서 현행 확인. 해외 구매대행 노출 가능 여부 필터도 존재",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "amazon",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/register-for-creators-api",
+      "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/concepts/api-rates",
+      "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "PA-API5 폐기 공지 확인. 정적 장기 상품 DB 권한을 추정하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "etsy",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developers.etsy.com/documentation/"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "Seller App을 시장 전체 검색권으로 간주하지 않음; 화면 스크래핑 금지",
+    "storage_conditions": "공식 API 약관 Section 1 캐싱 정책 적용; 보관 TTL/대량 축적 권한 별도 확인"
+  },
+  {
+    "id": "bestbuy",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developer.bestbuy.com/",
+      "https://bestbuyapis.github.io/api-documentation/",
+      "https://developer.bestbuy.com/legal"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "기술적 연동 후보지만 영구 상품 DB 목표에는 현 약관이 부적합",
+    "storage_conditions": "공식 약관: 표시 응답속도 목적의 임시 캐시만 최대 72시간. 출처·링크 보존"
+  },
+  {
+    "id": "walmart",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developer.walmart.com/us-marketplace/docs/items"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "공용 소비자 전체 카탈로그 검색권 아님; 조회 가능과 외부 DB 재사용은 별개",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "target",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://partners.target.com/"
+    ],
+    "evidence_method": "official_portal_js_shell",
+    "official_path_confirmed": false,
+    "findings": "페이지가 JavaScript 셸뿐. 제휴 존재를 자동 상품 피드 허용으로 간주하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "aliexpress",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://open.aliexpress.com/"
+    ],
+    "evidence_method": "official_document_unavailable",
+    "official_path_confirmed": false,
+    "findings": "공식 문서 접근 실패·공식 도메인 검색 결과 없음; 제3자 SDK로 호출하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "taobao",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://open.taobao.com/"
+    ],
+    "evidence_method": "official_document_unavailable",
+    "official_path_confirmed": false,
+    "findings": "포털 열기 실패·공식 검색 결과 없음. 알려진 tbk 메서드 이름을 허가 근거로 사용하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "jd",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://jos.jd.com/jdunion",
+      "https://jos.jd.com/doc/channel.htm?id=994",
+      "https://union.jd.com/openplatform"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "구 JOS 신규 앱 경로 이동 공지: Union은 전용 union.jd.com/openplatform 사용",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "shopee",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://open.shopee.com/documents/v2/api-reference"
+    ],
+    "evidence_method": "official_index_only_access_denied",
+    "official_path_confirmed": false,
+    "findings": "포털 403 및 문서 색인 셸; 우회하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "lazada",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://open.lazada.com/apps/doc/doc?docId=108146&lang=en_US&nodeId=10556",
+      "https://open.lazada.com/apps/doc/getting_started"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "GetProducts의 all 표현을 시장 전체 상품 허가로 해석하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "mercadolibre",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developers.mercadolibre.com.ar/en_us/items-and-searches"
+    ],
+    "evidence_method": "official_search_index_excerpt",
+    "official_path_confirmed": true,
+    "findings": "문서 직접403이나 공식 검색 색인 본문 확인; 무인증 옛 예제로 호출하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "bol",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://api.bol.com/retailer/public/Retailer-API/index.html"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "demo는 hardcoded 응답이며 실제 상품 성공으로 집계 불가",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "allegro",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developer.allegro.pl/documentation/"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "현행 전체 명세에서 과거 offers/listing 경로를 확인하지 못함; 공개 검색으로 승격 안 함",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "cafe24",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://apidocs.cafe24.com/en/docs/guide/intro"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "국내 쇼핑몰 직접 동의 모델에 적합; 주문/회원 API는 조사 대상에서 제외",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "makeshop",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://openapi.makeshop.co.kr/common/",
+      "https://openapi.makeshop.co.kr/docs"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "플랫폼 전체 검색 아님. 상점 소유자가 허용한 상품 범위·저장기간 계약 필요",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "awin",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://help.awin.com/developers/docs/product-feed-intro"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "광고주가 공급하는 피드와 publisher 수신 경로를 구분",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "cj",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developers.cj.com/"
+    ],
+    "evidence_method": "official_search_index_excerpt",
+    "official_path_confirmed": true,
+    "findings": "JS 셸이나 공식 검색 색인에서 Product Feed API 확인. CJ온스타일과 다른 제공자",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "impact",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://integrations.impact.com/partner-api-reference/reference/catalogs.md"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "전체 브랜드에 자동 접근 가능하다는 의미 아님",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "stockx",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developer.stockx.com/portal/api-reference",
+      "https://developer.stockx.com/portal/getting-started",
+      "https://developer.stockx.com/portal/api-introduction",
+      "https://developer.stockx.com/portal/license-agreement"
+    ],
+    "evidence_method": "official_search_index_excerpt",
+    "official_path_confirmed": true,
+    "findings": "판매자 도구 목적 API. retailPrice 정가와 시장 bid/ask를 구분; 외부 가격비교 DB 권한은 별도 확인",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "webgains",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://knowledgehub.webgains.com/home/product-feeds-for-publishers"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "가격/통화 표현과 판매처는 프로그램 문맥으로 확인해야 함",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "tradedoubler",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://dev.tradedoubler.com/products/publisher/"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "검색과 Unlimited/LastUpdated 구분. 연결 전 토큰 없이 호출 안 함",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "admitad",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://developers.mitgo.com/hc/en-us/articles/34481349447058-Affiliate-programs"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "광고주목록 응답은 상품 응답이 아님; 실제 product feed는 승인 후 검증",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "openfoodfacts",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/",
+      "https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/tutorials/license-be-on-the-legal-side/",
+      "https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/tutorials/product-prices/",
+      "https://github.com/openfoodfacts/open-prices/blob/main/docs/guides/data.md"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "Open Prices는 같은 제공자여서 신규 제공처 1개로만 집계. 영수증/owner/위치 개인정보 보존 안 함",
+    "storage_conditions": "DB ODbL(출처·공개 파생DB share-alike), 개별 내용 DbCL, 이미지 CC BY-SA 및 제3자 권리 주의. 비공개 독점 DB와 무조건 혼합 금지"
+  },
+  {
+    "id": "icecat",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://icecat.com/content-subscription/"
+    ],
+    "evidence_method": "official_search_index_excerpt",
+    "official_path_confirmed": true,
+    "findings": "오픈이라는 이름만으로 무조건 CC0/영구 재배포 가능하다고 간주하지 않음. 소매 가격원으로는 미확인",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "apple",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://performance-partners.apple.com/search-api",
+      "https://performance-partners.apple.com/epf"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "software에서 sellerName 실제 응답 검증; 무료 앱 가격0은 유효. 앱 내 과금액을 뜻하지 않음",
+    "storage_conditions": "Search 공개 문서에서 장기 독립 DB 허용 미확인; 홍보 asset 목적 제한; EPF 약관/이용권 별도 확인"
+  },
+  {
+    "id": "isbndb",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://isbndb.com/apidocs/v2"
+    ],
+    "evidence_method": "official_document_robots_blocked",
+    "official_path_confirmed": false,
+    "findings": "제3자 설명만으로 상품가격/상업 DB 권한을 확정하지 않음",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "gs1",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://www.gs1us.org/tools/gs1-us-data-hub"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "상품동일성 보강용. Create/Manage는 자기 바코드 관리, View/Use와 분리",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  },
+  {
+    "id": "datafiniti",
+    "checked_date": "2026-11-08",
+    "official_urls": [
+      "https://docs.datafiniti.co/docs/api-product-data"
+    ],
+    "evidence_method": "official_document_read",
+    "official_path_confirmed": true,
+    "findings": "공식 데이터 제공 경로이나 underlying 소스권리·최신성·소비자 재노출권을 계약에서 검토",
+    "storage_conditions": "미확인: 외부 검색 DB 영구 적재·재배포는 서면 확인 전 보류"
+  }
+]
