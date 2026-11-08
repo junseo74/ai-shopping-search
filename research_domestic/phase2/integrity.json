@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-11-08T11:58:45.281Z",
+  "protected_baseline_files": 137,
+  "protected_changed_or_missing": [],
+  "first_phase_readme_csv_unchanged": true,
+  "approval_ids_match_first_phase_7": true,
+  "revalidation_ids_match_first_phase_21": true,
+  "comparison_rows": 30,
+  "syntax_checked": 7,
+  "json_validated": 6,
+  "synthetic_fixture_exclusions": 1,
+  "sensitive_pattern_findings": []
+}

@@ -1,0 +1,32 @@
+{
+  "prepared_at": "2026-11-08T11:55:53.196Z",
+  "phase2_revalidated_policy_candidates": 21,
+  "phase2_approval_drafts": 7,
+  "phase2_product_requests": 1,
+  "phase2_verified_sites": 1,
+  "phase2_verified_products": 3,
+  "newly_verified_retailer_count": 0,
+  "cumulative_technical_sites": 2,
+  "cumulative_recent_feed_sites": 1,
+  "live_authenticated_api_success_sites": 0,
+  "commercial_api_permission_confirmed": [
+    "yes24 (conditional; no key/live API success yet)"
+  ],
+  "long_term_catalog_storage_approved_sites": 0,
+  "new_public_machine_feed": [
+    "https://www.aladin.co.kr/rss/new_all/170"
+  ],
+  "new_official_vendor_document_paths": [
+    "https://eapi.ssgadm.com/info/main.ssg",
+    "https://github.com/nsshopping/Affiliate-API"
+  ],
+  "api_prototype_adapters": 5,
+  "rss_prototype_adapters": 1,
+  "api_fixture_tests_passed": 15,
+  "forms_submitted": 0,
+  "paid_signups": 0,
+  "first_phase_inputs": {
+    "readme_sha256": "942c1ba0f1c9725214c2a33bedabb5ff3538f1e65f445287b086fa7c2968e5b8",
+    "candidates_csv_sha256": "ade8b7ca3f5a31aeb85674699b6c0cfeec563434a855afe153685369aefcd1b5"
+  }
+}

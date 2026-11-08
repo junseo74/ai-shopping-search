@@ -1,0 +1,116 @@
+[
+  {
+    "source": "yes24",
+    "observed_at": "2026-11-08T11:50:13.824Z",
+    "status": "needs_credentials",
+    "request_count": 0,
+    "technical_success": false,
+    "commercial_use": "allowed_with_conditions",
+    "long_term_storage": "not_approved",
+    "credential_env": "YES24_API_KEY",
+    "product_count": 0,
+    "sample_checks": [],
+    "raw_response_stored": false,
+    "product_values_stored": "hashes_only_except_price_and_purchase_conditions"
+  },
+  {
+    "source": "aladin",
+    "observed_at": "2026-11-08T11:50:13.839Z",
+    "status": "needs_credentials",
+    "request_count": 0,
+    "technical_success": false,
+    "commercial_use": "unconfirmed",
+    "long_term_storage": "not_approved",
+    "credential_env": "ALADIN_TTB_KEY",
+    "product_count": 0,
+    "sample_checks": [],
+    "raw_response_stored": false,
+    "product_values_stored": "hashes_only_except_price_and_purchase_conditions"
+  },
+  {
+    "source": "elevenst",
+    "observed_at": "2026-11-08T11:50:13.839Z",
+    "status": "needs_credentials",
+    "request_count": 0,
+    "technical_success": false,
+    "commercial_use": "unconfirmed",
+    "long_term_storage": "not_approved",
+    "credential_env": "ELEVENST_API_KEY",
+    "product_count": 0,
+    "sample_checks": [],
+    "raw_response_stored": false,
+    "product_values_stored": "hashes_only_except_price_and_purchase_conditions"
+  },
+  {
+    "source": "domeggook",
+    "observed_at": "2026-11-08T11:50:13.839Z",
+    "status": "needs_credentials",
+    "request_count": 0,
+    "technical_success": false,
+    "commercial_use": "unconfirmed",
+    "long_term_storage": "not_approved",
+    "credential_env": "DOMEGGOOK_API_KEY",
+    "product_count": 0,
+    "sample_checks": [],
+    "raw_response_stored": false,
+    "product_values_stored": "hashes_only_except_price_and_purchase_conditions"
+  },
+  {
+    "source": "domeme",
+    "observed_at": "2026-11-08T11:50:13.840Z",
+    "status": "needs_credentials",
+    "request_count": 0,
+    "technical_success": false,
+    "commercial_use": "unconfirmed",
+    "long_term_storage": "not_approved",
+    "credential_env": "DOMEGGOOK_API_KEY",
+    "product_count": 0,
+    "sample_checks": [],
+    "raw_response_stored": false,
+    "product_values_stored": "hashes_only_except_price_and_purchase_conditions"
+  },
+  {
+    "source": "aladin_rss_170",
+    "observed_at": "2026-11-08T11:50:13.840Z",
+    "status": "verified_in_memory",
+    "request_count": 1,
+    "technical_success": true,
+    "commercial_use": "unconfirmed",
+    "long_term_storage": "not_approved",
+    "http_status": 200,
+    "feed_date": "Sun, 08 Nov 2026 07:03:40 +0900",
+    "freshness": "recent_feed_not_price_guarantee",
+    "product_count": 3,
+    "sample_checks": [
+      {
+        "name_sha256": "ccfa5b491dcb9034f1bc458861b02e06c6ec1807ae7b668f2745a98904fb7553",
+        "price_krw": 24300,
+        "url_sha256": "3281b03e82099b2285ee992215a564cbf145071a573ac2c0f527e3b0da02238b",
+        "price_field": "RSS.description.판매가",
+        "min_order_qty": null,
+        "business_only": null,
+        "three_fields_valid": true
+      },
+      {
+        "name_sha256": "58e0cd873316c2779a356df1f0cb0befd62b4cc5b3ad8088f63120ad78ea0efa",
+        "price_krw": 27000,
+        "url_sha256": "378e2753df8151758d4e9d596f411a982ef1825a6a99dd1ae4c4f8d0d5a01962",
+        "price_field": "RSS.description.판매가",
+        "min_order_qty": null,
+        "business_only": null,
+        "three_fields_valid": true
+      },
+      {
+        "name_sha256": "a7201c8f32ab19b502bfa6a54e7096a59e65988cfb16f2008ee04ce406528a45",
+        "price_krw": 25000,
+        "url_sha256": "89138622f4f680033113912405d6194d8118e1c375bc76aad043181c1cc6240f",
+        "price_field": "RSS.description.판매가",
+        "min_order_qty": null,
+        "business_only": null,
+        "three_fields_valid": true
+      }
+    ],
+    "raw_response_stored": false,
+    "product_values_stored": "hashes_only_except_price_and_purchase_conditions"
+  }
+]

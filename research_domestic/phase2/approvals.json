@@ -1,0 +1,234 @@
+{
+  "prepared_at": "2026-11-08T11:55:53.196Z",
+  "submission_status": "drafts_prepared_not_submitted",
+  "account_creation_performed": false,
+  "paid_subscription_performed": false,
+  "applications": [
+    {
+      "id": "yes24",
+      "difficulty": "낮음(기본 키) / 별도협의(장기 DB)",
+      "application_url": "https://developers.yes24.com/docs/apikey",
+      "evidence_ids": [
+        "yes24_faq"
+      ],
+      "confirmed_inputs": [
+        "예스24 계정 로그인",
+        "API 이용 목적 및 서비스 정보; 계정 정보 자동 연동",
+        "약관 동의"
+      ],
+      "required_documents": "Partner 상향도 사업자등록증 등 증빙서류 없음(공식 FAQ). 기본 키 발급 별도 첨부서류는 공개 문서에 없음.",
+      "unconfirmed": [
+        "제공자 갱신정책의 구체 TTL",
+        "영구 상품 DB·가격 이력 별도 허용 여부"
+      ],
+      "steps": [
+        "사용자가 이용 주체 계정으로 로그인",
+        "실제 서비스 정보 입력 후 약관 검토·직접 신청",
+        "발급 키를 YES24_API_KEY 환경변수로 전달",
+        "최소 1회 검증 후 출처·원상품 링크 UI 검토"
+      ],
+      "prepared_information": [
+        "서비스명/URL 또는 앱 링크",
+        "일일 호출량 및 피크 RPS(상향 시)",
+        "담당자 연락처는 사용자가 비공개 양식에 기입"
+      ],
+      "commercial_use": "allowed_with_conditions",
+      "long_term_storage": "restricted_separate_permission_required"
+    },
+    {
+      "id": "elevenst",
+      "difficulty": "중간(권한 및 로그인 양식 확인 필요)",
+      "application_url": "https://openapi.11st.co.kr/openapi/OpenApiServiceRegister.tmall",
+      "evidence_ids": [],
+      "confirmed_inputs": [
+        "11번가 로그인 필요: 신청 경로 직접 HTTP 200이나 로그인 요구 문서",
+        "ProductSearch 공식 개발가이드와 판매자 API는 구분"
+      ],
+      "required_documents": "검색 API 발급의 필수 첨부서류는 로그인 전 확인 불가. 사업자등록증·판매자 가입이 검색용 키에 필수라고 단정하지 않음.",
+      "unconfirmed": [
+        "현재 검색 API 신규 신청 가능 회원 유형",
+        "키 승인 및 IP 등록 필요 여부(검색 API 기준)",
+        "캐시·저장·재배포 정책"
+      ],
+      "steps": [
+        "사용자가 공식 API 센터 로그인",
+        "서비스 등록·확인에서 ProductSearch 사용 목적과 신규 발급 조건 확인",
+        "담당자/서비스 정보를 실제 양식에 맞춰 기입하고 직접 제출",
+        "검색용 승인 키만 ELEVENST_API_KEY로 전달"
+      ],
+      "prepared_information": [
+        "서비스 URL/이용 목적",
+        "담당자 연락처",
+        "출발지 고정 IP(요구될 경우에만)"
+      ],
+      "commercial_use": "unconfirmed",
+      "long_term_storage": "not_approved"
+    },
+    {
+      "id": "domeggook",
+      "difficulty": "중간(사용 목적 유형 사전문의)",
+      "application_url": "https://mobile.domeggook.com/APIs/gate",
+      "evidence_ids": [
+        "dome_purpose",
+        "dome_start"
+      ],
+      "confirmed_inputs": [
+        "도매꾹·도매매 동일 회원 ID",
+        "API 키 발급·목적별 신청 유형",
+        "키별 연동 정보와 Private 신청 정보 일치 필요"
+      ],
+      "required_documents": "상품등록 API는 사업자 인증 필요. 읽기 전용 가격비교 서비스 신청의 별도 필수 첨부서류는 공개 텍스트만으로 미확정.",
+      "unconfirmed": [
+        "가격비교·추천 서비스가 어떤 이용 유형에 해당하는지",
+        "상품목록 진단과 실제 연동에 요구되는 Private 승인 범위",
+        "외부 검색 노출·도매 가격 보관·재배포 허용"
+      ],
+      "steps": [
+        "사용자가 도매꾹 이용 주체 계정 확인",
+        "기술지원에 가격비교 용도를 설명하고 유형·권한 확인",
+        "공식 gate에서 실제 연동 서비스 정보와 연락처로 키 신청",
+        "요구된 Private 권한만 신청하고 승인 결과 보관",
+        "키와 목적 승인 확인 후 DOMEGGOOK_API_KEY 주입 및 최소 검증"
+      ],
+      "prepared_information": [
+        "자체 프로그램/가격비교 서비스 설명",
+        "정확한 연동 서비스명",
+        "사용자 연락처",
+        "상품 범위·최소주문수량 표시 설계"
+      ],
+      "commercial_use": "unconfirmed",
+      "long_term_storage": "not_approved"
+    },
+    {
+      "id": "domeme",
+      "difficulty": "중간(사용 목적 유형 사전문의)",
+      "application_url": "https://mobile.domeggook.com/APIs/gate",
+      "evidence_ids": [
+        "dome_purpose",
+        "dome_start"
+      ],
+      "confirmed_inputs": [
+        "도매꾹·도매매 동일 회원 ID",
+        "API 키 발급·목적별 신청 유형",
+        "키별 연동 정보와 Private 신청 정보 일치 필요"
+      ],
+      "required_documents": "상품등록 API는 사업자 인증 필요. 읽기 전용 가격비교 서비스 신청의 별도 필수 첨부서류는 공개 텍스트만으로 미확정.",
+      "unconfirmed": [
+        "가격비교·추천 서비스가 어떤 이용 유형에 해당하는지",
+        "상품목록 진단과 실제 연동에 요구되는 Private 승인 범위",
+        "외부 검색 노출·도매 가격 보관·재배포 허용"
+      ],
+      "steps": [
+        "사용자가 도매매 이용 주체 계정 확인",
+        "기술지원에 가격비교 용도를 설명하고 유형·권한 확인",
+        "공식 gate에서 실제 연동 서비스 정보와 연락처로 키 신청",
+        "요구된 Private 권한만 신청하고 승인 결과 보관",
+        "키와 목적 승인 확인 후 DOMEGGOOK_API_KEY 주입 및 최소 검증"
+      ],
+      "prepared_information": [
+        "자체 프로그램/가격비교 서비스 설명",
+        "정확한 연동 서비스명",
+        "사용자 연락처",
+        "상품 범위·최소주문수량 표시 설계"
+      ],
+      "commercial_use": "unconfirmed",
+      "long_term_storage": "not_approved"
+    },
+    {
+      "id": "ownerclan",
+      "difficulty": "중간~높음(계정/용도·URL 계약 확인)",
+      "application_url": "https://ownerclan.com/V2/service/api-center-main.php",
+      "evidence_ids": [
+        "ownerclan_items"
+      ],
+      "confirmed_inputs": [
+        "판매사 계정·JWT 인증 경로",
+        "상품목록 및 변경 이력 명세 공개"
+      ],
+      "required_documents": "판매사 API 신청 필수 첨부서류·심사기간은 비로그인 공개 문서에서 확인하지 못함. 회원가입/정산 서류를 API 필수서류로 전용하지 않음.",
+      "unconfirmed": [
+        "계정별 API 신청 및 비용·승인 조건",
+        "소비자 가격비교 용도 허용",
+        "상품 URL 제공 필드 또는 승인된 URL 규칙"
+      ],
+      "steps": [
+        "사용자가 API센터 로그인 후 판매사 연동 신청 절차 확인",
+        "외부 검색서비스 사용권과 비용 여부 문의",
+        "필요 서류가 안내되면 사용자가 공식 채널에 직접 제출",
+        "read-only 스키마와 실제 상품 URL 제공 범위 확보 후 구현"
+      ],
+      "prepared_information": [
+        "판매사 계정 유형",
+        "사용 목적/상품 범위",
+        "상세가격·최저판매가 정책 표시안",
+        "품절·단종·변경이력 반영 설계"
+      ],
+      "commercial_use": "unconfirmed",
+      "long_term_storage": "not_approved"
+    },
+    {
+      "id": "coupang",
+      "difficulty": "높음(채널 활동·최종 승인)",
+      "application_url": "https://partners.coupang.com/",
+      "evidence_ids": [
+        "coupang_guide",
+        "coupang_revision"
+      ],
+      "confirmed_inputs": [
+        "파트너스 최종 승인 후 API 권한",
+        "2025-10 공식 가이드 검색 발췌는 누적 판매금액 15만원 채널 검토를 안내; 현행 화면 재확인 필요",
+        "2026-09 개정 정책 및 실명인증 확인"
+      ],
+      "required_documents": "활동 채널·광고 게재 증빙을 준비하되 현행 필수 첨부 목록은 로그인 화면에서 확인. 사업자·정산 서류의 API 승인 필수 여부는 미확정.",
+      "unconfirmed": [
+        "현행 최종 승인 기준·신청 양식 전체",
+        "키별 Search 권한·최신 한도",
+        "응답 저장/가공/장기 보관 조건"
+      ],
+      "steps": [
+        "사용자가 본인 명의 계정과 모든 활동 채널을 등록",
+        "현행 약관 검토 및 광고 표시가 있는 실제 활동 화면 준비",
+        "정상 활동 후 공식 최종 승인 심사/필요 보완 진행",
+        "최종 승인 이후 파트너스 API 키를 보안 저장소로 발급·관리",
+        "가격비교 검색·저장 용도를 공식 확인 후 수집기 추가"
+      ],
+      "prepared_information": [
+        "실제 채널 URL",
+        "광고 게시 영역과 표시안",
+        "서비스 사용 목적",
+        "현행 화면에서 요구하는 증빙"
+      ],
+      "commercial_use": "affiliate_promotion_scope_only_pending",
+      "long_term_storage": "not_approved"
+    },
+    {
+      "id": "gsshop",
+      "difficulty": "높음(직접 제휴 협의)",
+      "application_url": "https://partners.gsshop.com/api/apiMain",
+      "evidence_ids": [],
+      "confirmed_inputs": [
+        "제안요청→정책협의→범위확정→구현/테스트→오픈 절차"
+      ],
+      "required_documents": "제휴 API 필수 첨부서류·심사 SLA는 공개 안내에 없음. 상품 판매 입점의 신용평가/정산 서류를 데이터 API 제휴의 필수로 단정하지 않음.",
+      "unconfirmed": [
+        "신규 검색서비스 제휴 접수 가능 여부",
+        "상품 API 제공 범위·검색 방식·단가/과금",
+        "저장·가격 갱신·제3자 노출 권한"
+      ],
+      "steps": [
+        "사용자가 공식 제휴 API 경로에서 제안 접수 방법 확인",
+        "준비된 서비스 개요 및 데이터 요청 범위를 검토해 직접 제출",
+        "제공 범위·가격·저장 정책 협의",
+        "계약·호출권한 부여 후 문서 기반 1회 검증"
+      ],
+      "prepared_information": [
+        "회사/서비스 소개(실제 값은 사용자 입력)",
+        "서비스 URL 또는 검토용 화면",
+        "필요 필드와 예상 요청량",
+        "운영·보안·갱신·삭제 정책 제안"
+      ],
+      "commercial_use": "contract_required",
+      "long_term_storage": "contract_required"
+    }
+  ]
+}

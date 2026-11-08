@@ -1,0 +1,260 @@
+[
+  {
+    "id": "yes24_faq",
+    "url": "https://developers.yes24.com/support/faq",
+    "observed_at": "2026-11-08T11:47:19.646Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 87885,
+    "body_sha256": "82258c8a442aa852177bf49957b9d819e2316fa0da1cb6a5e595de71abd9dce7",
+    "title": "FAQ &#x2014; &#xC608;&#xC2A4;24 Developers",
+    "form_field_names": [],
+    "document_markers": {
+      "login": true,
+      "product_api": true,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "dome_purpose",
+    "url": "https://openapi.domeggook.com/ko/articles/API-신청-가이드-787a96cd",
+    "observed_at": "2026-11-08T11:47:20.226Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 119799,
+    "body_sha256": "582fd5ea026a4876493926cdf5c1c67faab442591e92857b4f814d288d937f42",
+    "title": "API 신청 가이드",
+    "form_field_names": [],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": true
+    }
+  },
+  {
+    "id": "dome_start",
+    "url": "https://docs.channel.io/domeggook_api/ko/articles/OPEN-API-이용-방법-bd7265d8",
+    "observed_at": "2026-11-08T11:47:20.476Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 105228,
+    "body_sha256": "fc29fe022df78ece146333d3bfd6b5c182e271af72f7a473bc1180dd3b7562b2",
+    "title": "OPEN API 이용 방법",
+    "form_field_names": [],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": true
+    }
+  },
+  {
+    "id": "ownerclan_items",
+    "url": "https://www.ownerclan.com/V2/service/api-center-item.php",
+    "observed_at": "2026-11-08T11:47:20.696Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 227704,
+    "body_sha256": "641a788d797972ed773a5eae61543aff57401f7ec24f4126125e937ad72d67bb",
+    "title": "오너클랜",
+    "form_field_names": [
+      "topSearchKeywordInfo",
+      "topSearchKeyword",
+      "topSearchType",
+      "idx"
+    ],
+    "document_markers": {
+      "login": true,
+      "product_api": true,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "elevenst_registration",
+    "url": "https://openapi.11st.co.kr/openapi/OpenApiServiceRegister.tmall",
+    "observed_at": "2026-11-08T11:47:20.975Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 816,
+    "body_sha256": "37f1e211699471074cdcff3a410d64973993d08a168f2cda8b589c40f357e8ed",
+    "title": "고객감동 No.1, 11번가 - 11번가",
+    "form_field_names": [],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "elevenst_usage",
+    "url": "https://openapi.11st.co.kr/openapi/OpenApiGuide.tmall?commonGuideNo=1",
+    "observed_at": "2026-11-08T11:47:21.062Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 27057,
+    "body_sha256": "9301b0677763dd8e59646a967fb07838520f0e2d309bbed1dbd3ed50e3e4449f",
+    "title": "개발가이드 | 11번가 OPEN API",
+    "form_field_names": [
+      "headerSearchValue"
+    ],
+    "document_markers": {
+      "login": true,
+      "product_api": true,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "ssg_docs",
+    "url": "https://eapi.ssgadm.com/info/main.ssg",
+    "observed_at": "2026-11-08T11:47:21.126Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 11934,
+    "body_sha256": "2d446656cada77483544185d7557145e7722eed9e4e960a1ba4500b46e9e2dad",
+    "title": "SSG OPEN API",
+    "form_field_names": [],
+    "document_markers": {
+      "login": false,
+      "product_api": true,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "nsmall_inbound",
+    "url": "https://github.com/nsshopping/Affiliate-API",
+    "observed_at": "2026-11-08T11:47:21.438Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 230102,
+    "body_sha256": "cd33708bafc922031955ac51e57b7d5d514befb7962114f5dd67a4ff1884aa41",
+    "title": "GitHub - nsshopping/Affiliate-API: NS홈쇼핑 제휴 API (INBOUND 용) · GitHub",
+    "form_field_names": [],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "oliveyoung_curator",
+    "url": "https://m.oliveyoung.co.kr/m/mtn/affiliate/guide",
+    "observed_at": "2026-11-08T11:47:22.232Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 403,
+    "bytes": 48931,
+    "body_sha256": "3e7223165d053de758896a09fae9549cf3d2d69355d89c16e8688c2ca8fb36f5",
+    "title": "잠시만 기다려 주세요 - 올리브영",
+    "form_field_names": [],
+    "document_markers": {
+      "login": false,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "danawa_support",
+    "url": "https://help.danawa.com/serviceHelpList.php?cate1=53&cate2=0",
+    "observed_at": "2026-11-08T11:47:22.312Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 54580,
+    "body_sha256": "9c9e29deec17006d01008e4a94720cad9355e3504b095bc855086a5993af8fd5",
+    "title": "기타 : 다나와 고객센터",
+    "form_field_names": [
+      "k1",
+      "module",
+      "act"
+    ],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "enuri_ep",
+    "url": "https://seller.enuri.com/sdul/Sdu_Guide.jsp",
+    "observed_at": "2026-11-08T11:47:22.448Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 51842,
+    "body_sha256": "69a8ceef758bea2bcc4911c91d3343fb4725ac1af92518811195a5d50de6274c",
+    "title": "판매자 광고센터",
+    "form_field_names": [],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "zigzag_store",
+    "url": "https://partnerlounge.kakaostyle.com/store",
+    "observed_at": "2026-11-08T11:47:22.616Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 64966,
+    "body_sha256": "08a9be570c16c527620d8ac03adbbd7f08ede6ddfcfc9b08c52f52f38291cd0e",
+    "title": "쇼핑몰 입점 — 카카오스타일 파트너라운지",
+    "form_field_names": [],
+    "document_markers": {
+      "login": false,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "coupang_revision",
+    "url": "https://influencers.coupang.com/announcements/203",
+    "observed_at": "2026-11-08T11:47:23.180Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 212911,
+    "body_sha256": "e70eae1b9ba1f7664f1112993514815e654579b50d75cac681a7aaa5ffdd340a",
+    "title": "Coupang Influencers",
+    "form_field_names": [],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    }
+  },
+  {
+    "id": "aladin_new_category",
+    "url": "https://www.aladin.co.kr/shop/wbrowse.aspx?CID=170",
+    "observed_at": "2026-11-08T11:47:23.575Z",
+    "purpose": "new_document_or_approval_page_only",
+    "http_status": 200,
+    "bytes": 284249,
+    "body_sha256": "e6c83b16f5376f640826c3618a5c78451786480b3f600f9888adb9d29def37e0",
+    "title": "경제경영 : 알라딘",
+    "form_field_names": [
+      "SearchTarget",
+      "SearchWord",
+      "CategorySearch",
+      "SearchType",
+      "site_cd"
+    ],
+    "document_markers": {
+      "login": true,
+      "product_api": false,
+      "commercial": false,
+      "private_api": false
+    },
+    "published_feeds": [
+      "http://www.aladin.co.kr/rss/new_all/170"
+    ]
+  }
+]
