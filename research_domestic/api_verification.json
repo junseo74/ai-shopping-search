@@ -1,0 +1,47 @@
+[
+  {
+    "id": "yes24",
+    "observed_at": "2026-11-08T11:23:55.537Z",
+    "credential_env": "YES24_API_KEY",
+    "credential_present": false,
+    "request_count": 0,
+    "status": "인증 대기",
+    "reason": "missing_environment_credential"
+  },
+  {
+    "id": "aladin",
+    "observed_at": "2026-11-08T11:23:55.552Z",
+    "credential_env": "ALADIN_TTB_KEY",
+    "credential_present": false,
+    "request_count": 0,
+    "status": "인증 대기",
+    "reason": "missing_environment_credential"
+  },
+  {
+    "id": "elevenst",
+    "observed_at": "2026-11-08T11:23:55.552Z",
+    "credential_env": "ELEVENST_API_KEY",
+    "credential_present": false,
+    "request_count": 0,
+    "status": "인증 대기",
+    "reason": "missing_environment_credential"
+  },
+  {
+    "id": "domeggook",
+    "observed_at": "2026-11-08T11:23:55.552Z",
+    "credential_env": "DOMEGGOOK_API_KEY",
+    "credential_present": false,
+    "request_count": 0,
+    "status": "인증 대기",
+    "reason": "missing_environment_credential"
+  },
+  {
+    "id": "domeme",
+    "observed_at": "2026-11-08T11:23:55.553Z",
+    "credential_env": "DOMEGGOOK_API_KEY",
+    "credential_present": false,
+    "request_count": 0,
+    "status": "인증 대기",
+    "reason": "missing_environment_credential"
+  }
+]

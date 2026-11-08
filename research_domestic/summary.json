@@ -1,0 +1,70 @@
+{
+  "checked_date_kst": "2026-11-08",
+  "candidate_sites": 30,
+  "status_counts": {
+    "접근 불가": 1,
+    "인증 대기": 7,
+    "정책 확인 필요": 21,
+    "성공": 1
+  },
+  "live_three_field_success_sites": 2,
+  "live_recent_feed_sites": 1,
+  "live_api_success_sites": 0,
+  "production_ready_sites": 0,
+  "validated_sample_products": 6,
+  "priority_sites": [
+    {
+      "rank": 1,
+      "id": "aladin",
+      "name": "알라딘"
+    },
+    {
+      "rank": 2,
+      "id": "yes24",
+      "name": "예스24"
+    },
+    {
+      "rank": 3,
+      "id": "elevenst",
+      "name": "11번가"
+    },
+    {
+      "rank": 4,
+      "id": "domeggook",
+      "name": "도매꾹"
+    },
+    {
+      "rank": 5,
+      "id": "domeme",
+      "name": "도매매"
+    },
+    {
+      "rank": 6,
+      "id": "ownerclan",
+      "name": "오너클랜"
+    },
+    {
+      "rank": 7,
+      "id": "coupang",
+      "name": "쿠팡"
+    },
+    {
+      "rank": 8,
+      "id": "gsshop",
+      "name": "GS SHOP"
+    },
+    {
+      "rank": 9,
+      "id": "enuri",
+      "name": "에누리"
+    },
+    {
+      "rank": 10,
+      "id": "danawa",
+      "name": "다나와"
+    }
+  ],
+  "raw_product_responses_stored": false,
+  "product_names_and_urls_stored": "sha256_only",
+  "protected_baseline_files": 137
+}

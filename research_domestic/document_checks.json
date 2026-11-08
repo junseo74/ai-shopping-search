@@ -1,0 +1,534 @@
+[
+  {
+    "id": "naver",
+    "url": "https://developers.naver.com/notice/article/32530",
+    "observed_at": "2026-11-08T11:24:10.474Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=UTF-8;",
+    "bytes": 77560,
+    "body_sha256": "21ca129b390744b34904b6234417e4358c98739fe21fef7d5d679050674b6391",
+    "title": "[중요] Search API, Search Trend, Shopping Insight 서비스 종료 및 NAVER API HUB 이관 안내 - 공지사항",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "coupang",
+    "url": "https://partners.coupang.com/#/affiliate/ws",
+    "observed_at": "2026-11-08T11:24:10.684Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 3284,
+    "body_sha256": "dac35a5059ece78c98b13ced98e928218b8f5bfd258901bbd479d105eb93a883",
+    "title": "Coupang Partners",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "elevenst",
+    "url": "https://openapi.11st.co.kr/openapi/OpenApiServiceIntroduce.tmall",
+    "http_status": 200,
+    "observed_at": "2026-11-08T11:16:51.772Z",
+    "verification": "prior_live_document_discovery",
+    "content_type": "text/html;charset=EUC-KR",
+    "bytes": 22727,
+    "reused": true
+  },
+  {
+    "id": "gmarket",
+    "url": "https://etapi.gmarket.com/",
+    "observed_at": "2026-11-08T11:24:11.218Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39392,
+    "body_sha256": "f7f3a33f1ad59c0a3a0b6d84d7bb7b5c0345cb05bf3c6eb991b8fa61d4ba46ff",
+    "title": "ESM API",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "auction",
+    "url": "https://api.auction.co.kr/Archesystem/mainservice.asmx",
+    "observed_at": "2026-11-08T11:24:11.223Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 117250,
+    "body_sha256": "bb870f40e42e803df0c645afb4aa551b08660ebb335be83f1524dbff94be995d",
+    "title": "MainService 웹 서비스",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "ssg",
+    "url": "https://partners.ssgadm.com/",
+    "observed_at": "2026-11-08T11:24:11.227Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 51134,
+    "body_sha256": "329da634a6bdabc42236d2b2a3643196ff4d93e58bfc3529e3f6729e57482366",
+    "title": "SSG.COM 쓱파트너스",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "lotteon",
+    "url": "https://api.lotteon.com/apiService/?apiNm=GetStarted",
+    "observed_at": "2026-11-08T11:24:11.548Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 3801,
+    "body_sha256": "76e33f67bf3ac3c3afc18ef83611326092993aea0996ea3d2342b538e9d1ba51",
+    "title": "롯데ON API 센터",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "cjonstyle",
+    "url": "https://partners.cjonstyle.com/standardApi",
+    "observed_at": "2026-11-08T11:24:11.551Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 11245,
+    "body_sha256": "4ae91d65511e64ec5ebc79b87a930ba4c2ca5ee2cb26d28878537761b450b86a",
+    "title": "CJ ONSTYLE 파트너 시스템",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "gsshop",
+    "url": "https://partners.gsshop.com/api/apiMain",
+    "observed_at": "2026-11-08T11:24:11.555Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 16651,
+    "body_sha256": "e4832ba5b08dc9309d83ddc6519d91a6e0d58b88860abaec928efb09e0ebda79",
+    "title": "[제휴API] Home",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "hmall",
+    "url": "https://partner.hmall.com/",
+    "observed_at": "2026-11-08T11:24:11.815Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 5682,
+    "body_sha256": "3c061b5648f826d1916937cf9ad160baf50c41735efe2c24dddb673ac7ac3971",
+    "title": "",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "lottehome",
+    "url": "https://partners.lotteimall.com/",
+    "observed_at": "2026-11-08T11:24:11.821Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 5323,
+    "body_sha256": "6b9c2f4dfe608fec82992d85e302d14bba04c03cc48186dc87aae08e1b41134f",
+    "title": "",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "nsmall",
+    "url": "https://www.nsmall.com/",
+    "observed_at": "2026-11-08T11:24:11.826Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 7781,
+    "body_sha256": "6ef559344196a172163d02cd71eab1f27c1dc3d8f271406c988924dcdf6fa83a",
+    "title": "NS홈쇼핑 - 건강한 아이디어",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "hnsmall",
+    "url": "https://www.hnsmall.com/",
+    "observed_at": "2026-11-08T11:24:12.042Z",
+    "verification": "live_document_only",
+    "http_status": 302,
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 0,
+    "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "title": "",
+    "document_access": "redirect_not_followed",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "aladin",
+    "url": "https://www.aladin.co.kr/ttb/wmain.aspx",
+    "observed_at": "2026-11-08T11:24:12.044Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 9644,
+    "body_sha256": "5f33da38674ee3ff2603d7d7f6829907f7b958a484804800da7521960598cdcf",
+    "title": "[알라딘] Thanks To Blogger",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "yes24",
+    "url": "https://developers.yes24.com/api-doc/goods-item-list",
+    "observed_at": "2026-11-08T11:24:12.046Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 62903,
+    "body_sha256": "4d920f7c432477a01b78046e23b5a5817af469ab7e79a2afddf0d4a542c8f1bf",
+    "title": "&#xC0C1;&#xD488; &#xAC80;&#xC0C9; &#x2014; &#xC608;&#xC2A4;24 Developers",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": true,
+      "seller_context": false,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "kyobo",
+    "url": "https://www.kyobobook.co.kr/",
+    "observed_at": "2026-11-08T11:24:12.229Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 249803,
+    "body_sha256": "2cc2a55150004ba3121a06cf3c0fc6af054d25ab251627bb671d147514d8e174",
+    "title": "교보문고 | 대한민국 최고의 도서쇼핑몰",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "domeggook",
+    "url": "https://docs.channel.io/domeggook_api/ko/articles/43780628",
+    "observed_at": "2026-11-08T11:24:12.231Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 362080,
+    "body_sha256": "7a5856b815a8b8e5be8190f9e60d6bf87d371b93af9c90ec2391b617cbc3341f",
+    "title": "상품리스트",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": true,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "domeme",
+    "url": "https://docs.channel.io/domeggook_api/ko/articles/43780628",
+    "observed_at": "2026-11-08T11:24:12.234Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 362080,
+    "body_sha256": "69ecc439396a7c6791fb4393d7096a0e4e1fbe1912e41bbb672be8adbc05b75a",
+    "title": "상품리스트",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": true,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "ownerclan",
+    "url": "https://ownerclan.com/V2/service/api-center-guide.php",
+    "observed_at": "2026-11-08T11:24:12.647Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 218616,
+    "body_sha256": "0cde2a3792ab607c887a460a25e23c54da47d69aad1b14a38605aa838d39902c",
+    "title": "오너클랜",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": true
+    }
+  },
+  {
+    "id": "musinsa",
+    "url": "https://dev-api.corp.musinsa.com/api-docs/public",
+    "observed_at": "2026-11-08T11:24:12.652Z",
+    "verification": "live_document_only",
+    "http_status": 403,
+    "content_type": "text/html",
+    "bytes": 153,
+    "body_sha256": "70bcee132a7d35037255fc9d69ab70e00e6aceeab740a3185e4ef9aa4bc5ab5f",
+    "title": "403 Forbidden",
+    "document_access": "http_error_stop",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "29cm",
+    "url": "https://www.29cm.co.kr/",
+    "observed_at": "2026-11-08T11:24:12.656Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 1138961,
+    "body_sha256": "7c6d9765216983f0b4fd46f70cbac248602eb6ca5539147c522767963651243c",
+    "title": "모든 취향 곁에, 29CM",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "ably",
+    "url": "https://square.a-bly.com/businesspage-brand",
+    "observed_at": "2026-11-08T11:24:13.101Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 495787,
+    "body_sha256": "a2a52332370b548376e6bff3e082b5b4249a6e0b5d4874ed97a72808039e4364",
+    "title": "에이블리 브랜드 소개",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "zigzag",
+    "url": "https://partnerlounge.kakaostyle.com/brand",
+    "observed_at": "2026-11-08T11:24:13.106Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 59163,
+    "body_sha256": "6708f2fc6edfd93779ef3b423ded3e7aa5e8111399398026a5fbf40515a79d28",
+    "title": "브랜드 패션 입점 — 카카오스타일 파트너라운지",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "ohouse",
+    "url": "https://ohou.se/contacts/new?type=request",
+    "observed_at": "2026-11-08T11:24:13.109Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 180356,
+    "body_sha256": "76915febb2afec6fc9f7937c544690d7e083bd3d11aaea9c15ae612f5dda7eba",
+    "title": "제휴&#x2F;광고 문의 | 라이프스타일 슈퍼앱, 오늘의집",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "kurly",
+    "url": "https://www.kurly.com/main",
+    "observed_at": "2026-11-08T11:24:13.898Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 1200814,
+    "body_sha256": "0bd0bd220a3dc7ba53b2d05ec929302d585ea73db9dd5b9f694c90ab0084da89",
+    "title": "컬리 - 마켓컬리/뷰티컬리",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": true,
+      "login": true,
+      "challenge": false
+    }
+  },
+  {
+    "id": "oliveyoung",
+    "url": "https://www.oliveyoung.co.kr/store/main/main.do?oy=0&transSite=true",
+    "observed_at": "2026-11-08T11:24:13.905Z",
+    "verification": "live_document_only",
+    "http_status": 403,
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 49036,
+    "body_sha256": "70a3148b23a15d590ad72f7174b109623652e0e20cb78b4d753fe1e197b9159a",
+    "title": "잠시만 기다려 주세요 - 올리브영",
+    "document_access": "http_error_stop",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "danawa",
+    "url": "https://img.danawa.com/new/open_api/api_guide.html",
+    "observed_at": "2026-11-08T11:24:13.909Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 9263,
+    "body_sha256": "fbc307aa931d3a80dfb211ae6a2245e042bdff01757b474ebff062345c967bc2",
+    "title": "�ູ������ ���� ! �ٳ��� (���ݺ�) - Danawa.com",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "enuri",
+    "url": "https://www.enuri.com/index.html",
+    "observed_at": "2026-11-08T11:24:14.287Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 25432,
+    "body_sha256": "db0559da814652f0c74f7b296caad7ce5359aff8e0592b3defa47380e9b244c5",
+    "title": "써머스플랫폼",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "joongna",
+    "url": "https://web.joongna.com/",
+    "observed_at": "2026-11-08T11:24:14.291Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 434064,
+    "body_sha256": "0012b003bb9cde51525db40a1faee0003be9e56af94b1705569a3a65bf1149c4",
+    "title": "중고나라 - 안심되는 중고거래",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": false,
+      "challenge": false
+    }
+  },
+  {
+    "id": "kakao",
+    "url": "https://shopping-developers.kakao.com/hc/ko/articles/4681097907087-카카오쇼핑-Open-API-안내",
+    "observed_at": "2026-11-08T11:24:14.293Z",
+    "verification": "live_document_only",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 21268,
+    "body_sha256": "9bc5837f44ebae419a00d82d0c74c31667427d09a19b5e5de2536609c7efc585",
+    "title": "카카오쇼핑 Open API 안내 &ndash; Kakao Shopping Open API",
+    "document_access": "http_ok_content_requires_review",
+    "markers": {
+      "product_search": false,
+      "seller_context": false,
+      "login": true,
+      "challenge": false
+    }
+  }
+]

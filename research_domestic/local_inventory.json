@@ -1,0 +1,1663 @@
+{
+  "observed_at": "2026-11-08T11:16:30.454Z",
+  "probes": [
+    {
+      "file": "29cm_probe.py",
+      "sha256": "5cba4b17df447f35ddadac0df079480e4cad50ff4351e6546e06115faa82efb7",
+      "lines": 932,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html import escape",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import quote, urljoin, urlparse",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "product_id_from_href",
+        "parse_tree",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "class_text",
+        "image_url_from_node",
+        "item_image_nodes",
+        "nearest_anchor",
+        "count_links",
+        "count_item_images",
+        "ancestors",
+        "serialize_node",
+        "likely_card_from_image",
+        "print_image_traces",
+        "href_path_prefixes",
+        "print_href_prefixes",
+        "print_image_source_context",
+        "repeated_dom_signals",
+        "field_candidates",
+        "classify_access",
+        "keyword_counts",
+        "parse_json_scripts",
+        "next_data_payload",
+        "extract_window_json_assignments",
+        "walk_json",
+        "key_tree",
+        "normalized_key",
+        "interesting_object_paths",
+        "print_next_data_full_structure",
+        "product_array_score",
+        "find_product_arrays",
+        "pagination_sibling",
+        "first_value",
+        "summarize_products_from_json",
+        "print_script_keyword_stats",
+        "item_image_urls_from_html",
+        "compare_page_two",
+        "print_list",
+        "final_judgement",
+        "main"
+      ],
+      "endpoints": [
+        "https://shop.29cm.co.kr/search",
+        "https://www.29cm.co.kr",
+        "https://www.29cm.co.kr/search",
+        "https://www.29cm.co.kr/store/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "ably_probe.py",
+      "sha256": "20bfcd995be57da7157fa0fef6016814f8dfbdd316ae890cf5057589c8340b41",
+      "lines": 502,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import quote, urljoin",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "product_id_from_href",
+        "repeated_dom_signals",
+        "field_candidates",
+        "classify_access",
+        "keyword_counts",
+        "parse_json_scripts",
+        "extract_window_json_assignments",
+        "walk_json",
+        "product_array_score",
+        "find_product_arrays",
+        "first_value",
+        "summarize_products_from_json",
+        "print_list",
+        "final_judgement",
+        "main"
+      ],
+      "endpoints": [
+        "https://a-bly.com/search",
+        "https://m.a-bly.com",
+        "https://m.a-bly.com/search",
+        "https://www.a-bly.com/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "auction_probe.py",
+      "sha256": "2efe758d285c4e27f0abb2cd0bd6d8f996e712090d592b680523e0cbae80eaae",
+      "lines": 550,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import ssl",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse, urlunparse",
+        "from urllib.request import Request, urlopen"
+      ],
+      "functions": [
+        "fetch",
+        "norm",
+        "parse",
+        "iter_nodes",
+        "descendants",
+        "text_of",
+        "cls",
+        "image_url",
+        "product_links",
+        "product_id",
+        "price_numbers",
+        "node_links",
+        "node_images",
+        "is_product_image",
+        "block_score",
+        "repeated_blocks",
+        "endpoint_strings",
+        "parse_json_payloads",
+        "walk_json",
+        "first_value",
+        "product_arrays",
+        "product_json_score",
+        "product_summary",
+        "dom_candidates",
+        "best_name",
+        "complete_count",
+        "access_state",
+        "page2_url",
+        "inspect_page",
+        "main",
+        "final_judgement"
+      ],
+      "endpoints": [
+        "https://browse.auction.co.kr/search",
+        "https://m.auction.co.kr/n/search",
+        "https://www.auction.co.kr",
+        "https://www.auction.co.kr/n/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "coupang_probe.py",
+      "sha256": "86ada6953b5d5d2eea866b314a7441d42f6eecf680796be8e73fe5df893395a0",
+      "lines": 586,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import quote",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "repeated_dom_signals",
+        "field_candidates",
+        "keyword_counts",
+        "classify_access",
+        "parse_json_scripts",
+        "extract_window_json_assignments",
+        "walk_json",
+        "find_product_arrays",
+        "product_array_score",
+        "pagination_sibling",
+        "representative_products",
+        "first_value",
+        "summarize_json_roots",
+        "print_list",
+        "final_judgement",
+        "main"
+      ],
+      "endpoints": [
+        "https://www.coupang.com/np/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "elevenst_api_probe.py",
+      "sha256": "f2eb8d3082a88fd92cf6290ad67543e4b0aa2c073d2dff7b58ba94e5505885a1",
+      "lines": 345,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import ssl",
+        "import time",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse, urlunparse",
+        "from urllib.request import Request, urlopen"
+      ],
+      "functions": [
+        "fetch_text",
+        "load_bundle_urls",
+        "dedupe",
+        "find_app_bundle",
+        "short_context",
+        "bundle_hosts",
+        "likely_base_urls",
+        "params_found_near_api",
+        "build_api_url",
+        "parse_json",
+        "walk_json",
+        "product_score",
+        "product_arrays",
+        "first_value",
+        "product_summary",
+        "raw_product_values",
+        "test_api",
+        "main"
+      ],
+      "endpoints": [
+        "https://apis.11st.co.kr",
+        "https://apis.11st.co.kr/search/api/tab",
+        "https://assets-search.011st.com/search/bundle/pc/app.bundle",
+        "https://search.11st.co.kr",
+        "https://search.11st.co.kr/pc/total-search",
+        "https://www.11st.co.kr"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": false
+      }
+    },
+    {
+      "file": "elevenst_probe.py",
+      "sha256": "bd5ab8241634309f60b52dea934a9d35b1013e2da26342b8ee6b6cfbea5a5501",
+      "lines": 709,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import ssl",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse, urlunparse",
+        "from urllib.request import Request, urlopen"
+      ],
+      "functions": [
+        "candidate_urls",
+        "fetch",
+        "normalize_text",
+        "parse_html",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "class_text",
+        "structure_score",
+        "product_like_links",
+        "product_id_from_url",
+        "path_prefixes",
+        "image_url",
+        "image_host_patterns",
+        "is_product_image",
+        "node_links",
+        "node_images",
+        "price_numbers",
+        "candidate_block_score",
+        "repeated_blocks",
+        "price_elements",
+        "name_elements",
+        "extract_window_json",
+        "parse_json_payloads",
+        "walk_json",
+        "product_json_score",
+        "product_json_arrays",
+        "first_value",
+        "json_product_summary",
+        "dom_product_candidates",
+        "best_name_from_block",
+        "access_state",
+        "page2_url",
+        "main",
+        "complete_count",
+        "final_judgement"
+      ],
+      "endpoints": [
+        "https://m.11st.co.kr/MW/Search/search.tmall",
+        "https://search.11st.co.kr/Search.tmall",
+        "https://www.11st.co.kr",
+        "https://www.11st.co.kr/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "elevenst_xhr_probe.py",
+      "sha256": "f623ca5da82017022cecd1d45b15b16beb31d4bf4a369f83f8e7524b7ed6c41a",
+      "lines": 444,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import ssl",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse, urlunparse",
+        "from urllib.request import Request, urlopen"
+      ],
+      "functions": [
+        "fetch_text",
+        "load_html",
+        "parse_assets",
+        "dedupe",
+        "is_allowed_bundle_url",
+        "keyword_counts",
+        "endpoint_strings",
+        "contexts_for_terms",
+        "hostname_counts",
+        "likely_search_endpoints",
+        "endpoint_analysis",
+        "is_safe_get_candidate",
+        "build_get_url",
+        "parse_json_response",
+        "walk_json",
+        "product_score",
+        "product_arrays",
+        "first_value",
+        "product_summary",
+        "main"
+      ],
+      "endpoints": [
+        "https://search.11st.co.kr/pc/total-search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": false
+      }
+    },
+    {
+      "file": "gmarket_probe.py",
+      "sha256": "2db4db07d02b264ce2b2cb3024771274066dbd4fbaeb93633cca3982bbc9755d",
+      "lines": 550,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import ssl",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse, urlunparse",
+        "from urllib.request import Request, urlopen"
+      ],
+      "functions": [
+        "fetch",
+        "norm",
+        "parse",
+        "iter_nodes",
+        "descendants",
+        "text_of",
+        "cls",
+        "image_url",
+        "product_links",
+        "product_id",
+        "price_numbers",
+        "node_links",
+        "node_images",
+        "is_product_image",
+        "block_score",
+        "repeated_blocks",
+        "endpoint_strings",
+        "parse_json_payloads",
+        "walk_json",
+        "first_value",
+        "product_arrays",
+        "product_json_score",
+        "product_summary",
+        "dom_candidates",
+        "best_name",
+        "complete_count",
+        "access_state",
+        "page2_url",
+        "inspect_page",
+        "main",
+        "final_judgement"
+      ],
+      "endpoints": [
+        "https://browse.gmarket.co.kr/search",
+        "https://m.gmarket.co.kr/n/search",
+        "https://www.gmarket.co.kr",
+        "https://www.gmarket.co.kr/n/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "joonggonara_api_probe.py",
+      "sha256": "76b48208775aa1f6aca9f127fa327d180e33f1a090c6a57b12d0d863ba51140b",
+      "lines": 529,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import time",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse, urlunparse",
+        "from urllib.request import Request, urlopen"
+      ],
+      "functions": [
+        "candidate_pages",
+        "official_host",
+        "absolutize",
+        "has_runtime_placeholder",
+        "is_url_candidate",
+        "safe_absolutize",
+        "fetch",
+        "parse_assets",
+        "dedupe",
+        "context",
+        "extract_endpoint_candidates",
+        "keyword_counts",
+        "safe_json",
+        "walk_json",
+        "product_arrays",
+        "get_path",
+        "value_by_keys",
+        "to_int",
+        "map_product",
+        "endpoint_url_for_test",
+        "test_api",
+        "print_block",
+        "main",
+        "dedupe_endpoint_rows"
+      ],
+      "endpoints": [
+        "https://web.joongna.com"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": false
+      }
+    },
+    {
+      "file": "joonggonara_network_probe.py",
+      "sha256": "0b5131c962b6198fba52410991dee9d149f4cae88aeb9ed412d35d4816fa05dd",
+      "lines": 364,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import time",
+        "from collections import Counter",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlparse"
+      ],
+      "functions": [
+        "is_official_host",
+        "is_json_response",
+        "url_priority",
+        "safe_json_loads",
+        "walk_json",
+        "product_array_candidates",
+        "value_by_keys",
+        "to_int",
+        "map_product",
+        "summarize_request",
+        "print_json",
+        "main",
+        "dedupe_candidates"
+      ],
+      "endpoints": [
+        "https://web.joongna.com/search/"
+      ],
+      "signals": {
+        "html": false,
+        "browser": true,
+        "network": true,
+        "embedded_json": false
+      }
+    },
+    {
+      "file": "joonggonara_probe.py",
+      "sha256": "fa3732421dc93b34f57e3c542c3b1f0063b2c15d746b397d689dc6e5b14b451d",
+      "lines": 903,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "import time",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urlencode, urljoin, urlparse, urlunparse",
+        "from urllib.request import Request, urlopen",
+        "from crawler_engine.engine import CrawlerEngine"
+      ],
+      "functions": [
+        "candidate_urls",
+        "normalize_text",
+        "unique",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "attr_text",
+        "parse_html",
+        "render_url",
+        "product_id_from_url",
+        "product_like_hrefs",
+        "image_url_from_attrs",
+        "looks_like_product_image",
+        "count_product_images",
+        "count_product_links",
+        "nearest_card_node",
+        "extract_price",
+        "best_text_by_class",
+        "clean_name",
+        "extract_dom_samples",
+        "structure_score",
+        "detect_access_state",
+        "find_next_data",
+        "safe_json_loads",
+        "walk_json",
+        "find_product_arrays",
+        "value_by_keys",
+        "map_json_product",
+        "extract_endpoints",
+        "is_official_joongna_url",
+        "absolutize_endpoint",
+        "fetch_http",
+        "endpoint_with_query",
+        "analyze_api_candidate",
+        "summarize_scripts",
+        "print_json",
+        "main"
+      ],
+      "endpoints": [
+        "https://web.joongna.com"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "kurly_probe.py",
+      "sha256": "e30d783ccd52ac871dad317fa619bcf50961f6f4d030f86d438afb497cdf330e",
+      "lines": 1265,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html import escape, unescape",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import quote, urljoin",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "parse_tree",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "direct_text",
+        "class_text",
+        "class_contains",
+        "attr_text",
+        "goods_id_from_href",
+        "goods_ids_from_hrefs",
+        "absolute_url",
+        "node_goods_links",
+        "node_images",
+        "price_class_count",
+        "count_descendants_by_class",
+        "ancestor_rows",
+        "print_ancestor_rows",
+        "serialize_node",
+        "first_goods_anchor",
+        "first_class_node",
+        "first_product_image",
+        "ancestors",
+        "nearest_common_ancestor",
+        "find_product_cards",
+        "find_card_ancestor",
+        "dedupe_cards",
+        "extract_card",
+        "card_price_parts",
+        "texts_by_class",
+        "card_product_name",
+        "split_candidate_texts",
+        "clean_product_name",
+        "image_url_from_node",
+        "card_image_url",
+        "first_price_text",
+        "first_percent_text",
+        "first_int_text",
+        "first_delivery_text",
+        "card_badges",
+        "is_sold_out",
+        "card_stats",
+        "repeated_dom_signals",
+        "field_candidates",
+        "keyword_counts",
+        "classify_access",
+        "parse_json_scripts",
+        "extract_window_json_assignments",
+        "walk_json",
+        "find_product_arrays",
+        "product_array_score",
+        "pagination_sibling",
+        "representative_products",
+        "first_value",
+        "summarize_json_roots",
+        "print_list",
+        "final_judgement",
+        "main"
+      ],
+      "endpoints": [
+        "https://www.kurly.com",
+        "https://www.kurly.com/goods/search",
+        "https://www.kurly.com/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "lotteon_probe.py",
+      "sha256": "4606d1e7cef36b0291dab5bdbe7acc6e273a53d52e9a7eaa6d007fe9b6b5fa8a",
+      "lines": 516,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urljoin, urlparse",
+        "from crawler_engine.engine import CrawlerEngine"
+      ],
+      "functions": [
+        "parse_tree",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "class_text",
+        "classes",
+        "has_class",
+        "find_cards",
+        "hrefs_in",
+        "images_in",
+        "ancestors",
+        "product_id_from_url",
+        "sitm_no_from_url",
+        "product_url_in_card",
+        "image_url_from_node",
+        "is_product_image_url",
+        "product_image_in_card",
+        "normalize_text",
+        "is_ui_text",
+        "name_nodes_in_card",
+        "product_name_in_card",
+        "price_nodes_in_card",
+        "parse_int",
+        "price_info_in_card",
+        "brand_in_card",
+        "seller_in_card",
+        "rating_review_in_card",
+        "extract_card_product",
+        "access_markers",
+        "page2_url",
+        "render_and_extract_ids",
+        "final_judgement",
+        "main"
+      ],
+      "endpoints": [
+        "https://www.lotteon.com",
+        "https://www.lotteon.com/csearch/search/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": false
+      }
+    },
+    {
+      "file": "musinsa_probe.py",
+      "sha256": "46965f4725856386a7c308d54dabe033d658efb37693e8e0cb6fbbcc49703b68",
+      "lines": 290,
+      "imports": [
+        "from __future__ import annotations",
+        "import re",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from urllib.parse import quote",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "repeated_dom_signals",
+        "field_candidates",
+        "keyword_counts",
+        "access_markers",
+        "print_list",
+        "main"
+      ],
+      "endpoints": [
+        "https://www.musinsa.com/search",
+        "https://www.musinsa.com/search/goods"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "naver_probe.py",
+      "sha256": "fa42179d030bc55be8ebfb98b21da31d7858fc7789260b3485c78e8228b3821b",
+      "lines": 520,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import quote",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "repeated_dom_signals",
+        "field_candidates",
+        "keyword_counts",
+        "access_markers",
+        "parse_json_scripts",
+        "extract_window_json_assignments",
+        "walk_json",
+        "summarize_json_roots",
+        "find_product_arrays",
+        "product_array_score",
+        "pagination_sibling",
+        "representative_products",
+        "first_value",
+        "print_list",
+        "main"
+      ],
+      "endpoints": [
+        "https://search.shopping.naver.com/search/all",
+        "https://shopping.naver.com/search/all"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "ohouse_probe.py",
+      "sha256": "ab2e64642ba4b32d442e729b6dfe3c78dbb9e61e9a958c252cddb9dd7e190ad3",
+      "lines": 944,
+      "imports": [
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html import escape",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import quote, urljoin, urlparse",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "product_id_from_href",
+        "parse_tree",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "class_text",
+        "image_url_from_node",
+        "is_product_image_url",
+        "product_image_nodes",
+        "count_links",
+        "count_product_images",
+        "ancestors",
+        "nearest_anchor",
+        "likely_card_from_image",
+        "serialize_node",
+        "href_path_prefixes",
+        "print_href_prefixes",
+        "print_image_traces",
+        "price_like_nodes",
+        "print_price_traces",
+        "extract_dom_product_candidate",
+        "split_texts",
+        "first_non_noise",
+        "first_brand_like",
+        "first_price",
+        "second_price",
+        "price_values",
+        "first_discount",
+        "repeated_dom_signals",
+        "field_candidates",
+        "classify_access",
+        "keyword_counts",
+        "parse_json_scripts",
+        "extract_window_json_assignments",
+        "walk_json",
+        "product_array_score",
+        "find_product_arrays",
+        "pagination_sibling",
+        "first_value",
+        "summarize_products_from_json",
+        "print_json_array_inventory",
+        "json_product_summary",
+        "print_script_keyword_stats",
+        "endpoint_candidates",
+        "print_list",
+        "final_judgement",
+        "compare_page_two",
+        "main"
+      ],
+      "endpoints": [
+        "https://m.ohou.se/search/index",
+        "https://ohou.se",
+        "https://ohou.se/productions/feed",
+        "https://ohou.se/search",
+        "https://ohou.se/search/index",
+        "https://ohou.se/store",
+        "https://ohou.se/store/search"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "oliveyoung_probe.py",
+      "sha256": "695b12d83ce1b34f422871b23441a15aa9a86e835a77c19a43cc04d4b77b782b",
+      "lines": 890,
+      "imports": [
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html import escape",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import quote, urljoin, urlparse",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "structure_score",
+        "product_like_hrefs",
+        "product_id_from_href",
+        "parse_tree",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "class_text",
+        "image_url_from_node",
+        "is_product_image_url",
+        "product_image_nodes",
+        "count_links",
+        "count_product_images",
+        "ancestors",
+        "nearest_anchor",
+        "likely_card_from_image",
+        "serialize_node",
+        "href_path_prefixes",
+        "print_href_prefixes",
+        "print_image_traces",
+        "extract_dom_product_candidate",
+        "split_texts",
+        "first_non_noise",
+        "first_brand_like",
+        "first_price",
+        "second_price",
+        "price_values",
+        "first_discount",
+        "repeated_dom_signals",
+        "field_candidates",
+        "classify_access",
+        "keyword_counts",
+        "parse_json_scripts",
+        "extract_window_json_assignments",
+        "walk_json",
+        "product_array_score",
+        "find_product_arrays",
+        "pagination_sibling",
+        "first_value",
+        "summarize_products_from_json",
+        "print_json_array_inventory",
+        "json_product_summary",
+        "print_script_keyword_stats",
+        "endpoint_candidates",
+        "print_list",
+        "final_judgement",
+        "compare_page_two",
+        "main"
+      ],
+      "endpoints": [
+        "https://m.oliveyoung.co.kr/m/search/getSearchMain.do",
+        "https://www.oliveyoung.co.kr",
+        "https://www.oliveyoung.co.kr/search",
+        "https://www.oliveyoung.co.kr/store/search/getSearchMain.do"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    },
+    {
+      "file": "ssg_probe.py",
+      "sha256": "3b5639ae0e3fba89a70de8212c4d3ff79bef4dba408beb23ad9eed1190b7ff6d",
+      "lines": 854,
+      "imports": [
+        "from __future__ import annotations",
+        "import json",
+        "import re",
+        "from collections import Counter",
+        "from html import escape",
+        "from html.parser import HTMLParser",
+        "from pathlib import Path",
+        "from typing import Any",
+        "from urllib.parse import parse_qs, quote, urljoin, urlparse",
+        "from crawler_engine.engine import CrawlerEngine",
+        "from crawler_engine.extractors._html import extract_scripts"
+      ],
+      "functions": [
+        "candidate_urls",
+        "uniq",
+        "parse_tree",
+        "iter_nodes",
+        "descendants",
+        "node_text",
+        "class_text",
+        "structure_score",
+        "product_like_hrefs",
+        "product_id_from_href",
+        "image_url_from_node",
+        "is_product_image_url",
+        "product_image_nodes",
+        "count_links",
+        "count_images",
+        "count_product_images",
+        "ancestors",
+        "nearest_anchor",
+        "likely_card_from_image",
+        "split_texts",
+        "first_non_noise",
+        "price_values",
+        "first_price",
+        "second_price",
+        "first_discount",
+        "first_brand_like",
+        "dom_product_candidate",
+        "href_path_prefixes",
+        "print_href_prefixes",
+        "serialize_node",
+        "print_dom_traces",
+        "print_price_traces",
+        "repeated_dom_signals",
+        "extract_json_payloads",
+        "walk_json",
+        "key_score",
+        "find_ssg_objects",
+        "find_product_arrays",
+        "first_value",
+        "json_product_summary",
+        "print_json_inventory",
+        "print_script_stats",
+        "endpoint_candidates",
+        "field_candidates",
+        "classify_access",
+        "keyword_counts",
+        "print_list",
+        "page_two_url",
+        "compare_page_two",
+        "final_judgement",
+        "main"
+      ],
+      "endpoints": [
+        "https://m.ssg.com/search.ssg",
+        "https://www.ssg.com",
+        "https://www.ssg.com/search.ssg"
+      ],
+      "signals": {
+        "html": true,
+        "browser": false,
+        "network": true,
+        "embedded_json": true
+      }
+    }
+  ],
+  "protected_files": [
+    {
+      "path": "29cm_probe.py",
+      "sha256": "5cba4b17df447f35ddadac0df079480e4cad50ff4351e6546e06115faa82efb7"
+    },
+    {
+      "path": "ably_probe.py",
+      "sha256": "20bfcd995be57da7157fa0fef6016814f8dfbdd316ae890cf5057589c8340b41"
+    },
+    {
+      "path": "auction_probe.py",
+      "sha256": "2efe758d285c4e27f0abb2cd0bd6d8f996e712090d592b680523e0cbae80eaae"
+    },
+    {
+      "path": "coupang_probe.py",
+      "sha256": "86ada6953b5d5d2eea866b314a7441d42f6eecf680796be8e73fe5df893395a0"
+    },
+    {
+      "path": "elevenst_api_probe.py",
+      "sha256": "f2eb8d3082a88fd92cf6290ad67543e4b0aa2c073d2dff7b58ba94e5505885a1"
+    },
+    {
+      "path": "elevenst_probe.py",
+      "sha256": "bd5ab8241634309f60b52dea934a9d35b1013e2da26342b8ee6b6cfbea5a5501"
+    },
+    {
+      "path": "elevenst_xhr_probe.py",
+      "sha256": "f623ca5da82017022cecd1d45b15b16beb31d4bf4a369f83f8e7524b7ed6c41a"
+    },
+    {
+      "path": "gmarket_probe.py",
+      "sha256": "2db4db07d02b264ce2b2cb3024771274066dbd4fbaeb93633cca3982bbc9755d"
+    },
+    {
+      "path": "joonggonara_api_probe.py",
+      "sha256": "76b48208775aa1f6aca9f127fa327d180e33f1a090c6a57b12d0d863ba51140b"
+    },
+    {
+      "path": "joonggonara_network_probe.py",
+      "sha256": "0b5131c962b6198fba52410991dee9d149f4cae88aeb9ed412d35d4816fa05dd"
+    },
+    {
+      "path": "joonggonara_probe.py",
+      "sha256": "fa3732421dc93b34f57e3c542c3b1f0063b2c15d746b397d689dc6e5b14b451d"
+    },
+    {
+      "path": "kurly_probe.py",
+      "sha256": "e30d783ccd52ac871dad317fa619bcf50961f6f4d030f86d438afb497cdf330e"
+    },
+    {
+      "path": "lotteon_probe.py",
+      "sha256": "4606d1e7cef36b0291dab5bdbe7acc6e273a53d52e9a7eaa6d007fe9b6b5fa8a"
+    },
+    {
+      "path": "musinsa_probe.py",
+      "sha256": "46965f4725856386a7c308d54dabe033d658efb37693e8e0cb6fbbcc49703b68"
+    },
+    {
+      "path": "naver_probe.py",
+      "sha256": "fa42179d030bc55be8ebfb98b21da31d7858fc7789260b3485c78e8228b3821b"
+    },
+    {
+      "path": "ohouse_probe.py",
+      "sha256": "ab2e64642ba4b32d442e729b6dfe3c78dbb9e61e9a958c252cddb9dd7e190ad3"
+    },
+    {
+      "path": "oliveyoung_probe.py",
+      "sha256": "695b12d83ce1b34f422871b23441a15aa9a86e835a77c19a43cc04d4b77b782b"
+    },
+    {
+      "path": "ssg_probe.py",
+      "sha256": "3b5639ae0e3fba89a70de8212c4d3ff79bef4dba408beb23ad9eed1190b7ff6d"
+    },
+    {
+      "path": "backend/.env.example",
+      "sha256": "77b0fc4c4d75b50409e81471b1419db64f04beafae7cc7c5263ce0e334720fbe"
+    },
+    {
+      "path": "backend/collectors/approved_html.py",
+      "sha256": "7bb62f16de3765aed64d6a181dbfdd19d39fa6401741493cdf552e81b42aa9c4"
+    },
+    {
+      "path": "backend/collectors/approved_html_selectors.yml",
+      "sha256": "c602752c49d0d225f6b9fe8ddffaa1eebbe0e96b78bfdbd18298fb1d1a87b5b2"
+    },
+    {
+      "path": "backend/collectors/base.py",
+      "sha256": "bc8fce3209e770cefb127d76413ccdd76c93061935b491e21e3b002e916886b9"
+    },
+    {
+      "path": "backend/collectors/ebay.py",
+      "sha256": "461402cd84ee34d58f19bc41aa46b211d39b5f3566dcd3b4dbe3fdcfabf8da55"
+    },
+    {
+      "path": "backend/collectors/elevenst.py",
+      "sha256": "aaba37cd132e57390d394886b266115cc5c40f51e7d4bf7309f7c4f338c9aa5a"
+    },
+    {
+      "path": "backend/collectors/shopping_auto.py",
+      "sha256": "b355f2c88bc3c2cf706035bfe4761c1b0591b644c2f14edcf4cc12f11869b942"
+    },
+    {
+      "path": "backend/collectors/shopping_sources.yml",
+      "sha256": "c889eaf44c6140db03d4dc53edc0a20a6b3ac505faa183e81ca5e5262037d708"
+    },
+    {
+      "path": "backend/collectors/test_fixture.py",
+      "sha256": "2a8979e55893fce0edcaa27d58f602120603d1407310b1d109a0e9c1c6aec8af"
+    },
+    {
+      "path": "backend/collectors/__init__.py",
+      "sha256": "ec8ed9d89702ebbbf4831246e97b095d4d0a059083750529362be6b2699e87a9"
+    },
+    {
+      "path": "backend/collectors/__pycache__/approved_html.cpython-311.pyc",
+      "sha256": "44a8c255ab9a37077aa445f9a1bf57b3a4eece72f327eb5610781f59351ddb7c"
+    },
+    {
+      "path": "backend/collectors/__pycache__/base.cpython-311.pyc",
+      "sha256": "b946a63a80ae151e70ab5cd28ceee27fc8cf2a48786ac348d963491d4d16753f"
+    },
+    {
+      "path": "backend/collectors/__pycache__/ebay.cpython-311.pyc",
+      "sha256": "bf74d389ac397b486c9a37d53f8c599c8650a03c668cce5f1de4f4e39abe7c16"
+    },
+    {
+      "path": "backend/collectors/__pycache__/elevenst.cpython-311.pyc",
+      "sha256": "fae9706d3edeab01de21f962bfc1784a6c8d79cfc88312b2fdb7d5d94a6986e6"
+    },
+    {
+      "path": "backend/collectors/__pycache__/shopping_auto.cpython-311.pyc",
+      "sha256": "6944c0ffa6d33cc7e3ee6d35c224f3749b8c1de4fcc90097f889829c23fcc2e3"
+    },
+    {
+      "path": "backend/collectors/__pycache__/test_fixture.cpython-311-pytest-9.1.1.pyc",
+      "sha256": "da19bc19a673ea0ec6b80c5d0111942b4587cfee8d60085312bdf67708153108"
+    },
+    {
+      "path": "backend/collectors/__pycache__/test_fixture.cpython-311.pyc",
+      "sha256": "fc21f419dc7d75afb6f34d8ef9765e4e691118c341efcbd62de71fe49b0e1f7c"
+    },
+    {
+      "path": "backend/collectors/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "5d7fac33241faa965ff86871bdf60bee95f79fce591da387e978d84b318fe0ec"
+    },
+    {
+      "path": "backend/data/products.db",
+      "sha256": "51c0901480b47c0480c268eca8a0fb9f672f9b52b044c316c711fd53c74a479d"
+    },
+    {
+      "path": "backend/data/test_products.json",
+      "sha256": "23174614ffa7ea4e5b86fa742f35409d8fa09c866a7cf6ad42cda3b2f98e0bae"
+    },
+    {
+      "path": "backend/db.py",
+      "sha256": "81f44b86390295415b7ffa881e989e13a4f80e34d89f8240c3ddc53c021dabbd"
+    },
+    {
+      "path": "backend/importers/product_file.py",
+      "sha256": "c285192ae615dd3dcf80b32ac0449fe763a7cf8c5bc75576ce74683f41ad5743"
+    },
+    {
+      "path": "backend/importers/__init__.py",
+      "sha256": "db0fd0ac23b8d5ca54271539510c09f33fd740a7988cef1d1e6627b94a3d5640"
+    },
+    {
+      "path": "backend/importers/__pycache__/product_file.cpython-311.pyc",
+      "sha256": "16578c3bf95e911bd957a1cab7cf96dff8540a85851aa77943bc5f466aafbebc"
+    },
+    {
+      "path": "backend/importers/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "7fafa68deb1fbacdf434c98e7f5932072585c8981530307d36a681b6e7cfb898"
+    },
+    {
+      "path": "backend/main.py",
+      "sha256": "b4120c109542b8a57c39fb66f3198f4209de8cc610aeb9802f9f89339b1cda61"
+    },
+    {
+      "path": "backend/models.py",
+      "sha256": "e7cbb52daf138abae56ef3ac92a160ac7374fcb292c48bc8198c618adf402a21"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "sha256": "1b64b3503f11ca9787b39a81c2bfe7ded731da4b67299bf49d1a5834b5659ba4"
+    },
+    {
+      "path": "backend/tools/auto_shopping_html.py",
+      "sha256": "a11166b2174b131f259e18d6e2c2f86ab4ebf7ec316e3903c4cdf0cae28297ec"
+    },
+    {
+      "path": "backend/tools/import_saved_naver_products.py",
+      "sha256": "2f3df5e526d97362630a3a1650394642a65117087f4b804780b3c90516a6fc84"
+    },
+    {
+      "path": "backend/tools/joongna_html_analyzer.py",
+      "sha256": "3a581db6165ea51a731de0078ba3f89bb1ce04feefd65a23b232fbbdf74b9ee0"
+    },
+    {
+      "path": "backend/tools/local_test_shop_server.py",
+      "sha256": "39fe4aef704021aadad25c4dc0e0f67f8a1f5f188bc864346f7fc90ef2f1e95a"
+    },
+    {
+      "path": "backend/tools/merge_shopping_html.py",
+      "sha256": "88f9022a71c9f8842bbd8caa7bb158f636097f4fd4a7a72d99817f35608e933a"
+    },
+    {
+      "path": "backend/tools/naver_shopping_html_analyzer.py",
+      "sha256": "be588968748d764a19b22790e2f2b483252c0303c1e60a41f6db0b7a17e115d9"
+    },
+    {
+      "path": "backend/tools/__init__.py",
+      "sha256": "10177131bbd5a7677a5c7a0b8b5f09baa9783f6bc9813bb77bb276efadf1fd24"
+    },
+    {
+      "path": "backend/tools/__pycache__/auto_shopping_html.cpython-311.pyc",
+      "sha256": "ef428e6245c3ebf2a81e81ba4b4d8392afbed65258c7cd3326e85d408caa1e03"
+    },
+    {
+      "path": "backend/tools/__pycache__/import_saved_naver_products.cpython-311.pyc",
+      "sha256": "03c647baf5ed2d47a20dcedc16e21fb4811d868ca12a358130cc6b20ff806ee3"
+    },
+    {
+      "path": "backend/tools/__pycache__/joongna_html_analyzer.cpython-311.pyc",
+      "sha256": "5f8bf6f2748c257a91cada8c4d6a56d56a538f8233bd44298c4f9044a208ec07"
+    },
+    {
+      "path": "backend/tools/__pycache__/local_test_shop_server.cpython-311.pyc",
+      "sha256": "3336c3200626339db17ec3e2b890462531c0acdb4191b601638d12cbe03493c3"
+    },
+    {
+      "path": "backend/tools/__pycache__/merge_shopping_html.cpython-311.pyc",
+      "sha256": "2651faefdfdbcdd3d40520c72eca06602b777651488ac5dafd86fa30304a4dac"
+    },
+    {
+      "path": "backend/tools/__pycache__/naver_shopping_html_analyzer.cpython-311.pyc",
+      "sha256": "5be644c7f8ba0dcda54dbfd72f69316f59ce9a7de0985e35c484e56344862e04"
+    },
+    {
+      "path": "backend/tools/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "1dc28fbcd9d05e16e03db699febba2bc0b1d15594f9040b46cfc45442472cf60"
+    },
+    {
+      "path": "backend/__init__.py",
+      "sha256": "ba4b9e3410ecb0eafd710b14219b980977d1589bfda370c018d4fc917028ec27"
+    },
+    {
+      "path": "backend/__pycache__/db.cpython-311.pyc",
+      "sha256": "51841178d53d9abb4a306a782140faaace660d6313e9eb099a9d59d2b5808eb0"
+    },
+    {
+      "path": "backend/__pycache__/main.cpython-311.pyc",
+      "sha256": "e8ff041a90c6e2214d7259ec5eae0a7f867652db8a562dff23a8aeaaa9aa567b"
+    },
+    {
+      "path": "backend/__pycache__/models.cpython-311.pyc",
+      "sha256": "5dfe877bee6efdbb61472a084f26576e351a53f431e84b43fdaa909f93415325"
+    },
+    {
+      "path": "backend/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "8f9ae9b91d489c6f901e87e87b4c73b4f98bc484982a94222ae6a76d450b1902"
+    },
+    {
+      "path": "crawler_engine/aggregation.py",
+      "sha256": "56fbeae9ad10ae6066a3fc4c2e2af8bf3d80fc7fcda2bcc02c228691a273e421"
+    },
+    {
+      "path": "crawler_engine/detail_extractors.py",
+      "sha256": "32b746d7398b52f402e1944ec68b61489ffb632905e2ba7f7df0997440cebde2"
+    },
+    {
+      "path": "crawler_engine/eligibility.py",
+      "sha256": "6dff8d730eb8f5579c42ca80979abd0d6f2bb54ef0be51b332881a31899216b9"
+    },
+    {
+      "path": "crawler_engine/engine.py",
+      "sha256": "6ecafd7814e2aef4be8ab8fcfac832af9a68cf578e7d44d9708cf05bc30c5555"
+    },
+    {
+      "path": "crawler_engine/extractors/dom_candidates.py",
+      "sha256": "9ba092505e4d460a9c2d0cc7bbbfefc81c76f25a7e87ce16b9c21d95de964581"
+    },
+    {
+      "path": "crawler_engine/extractors/elevenst.py",
+      "sha256": "361b103e60fb446a5089421eecf75ea81f4006f65cfd44addb678c7893743b64"
+    },
+    {
+      "path": "crawler_engine/extractors/embedded_data.py",
+      "sha256": "2993f9dc1f3d03ed6e64792db786db58887be1f474d23c6969a885dfa8953b58"
+    },
+    {
+      "path": "crawler_engine/extractors/joongna.py",
+      "sha256": "eb7d306a515b5c9eef8bb5b7b627307a7337d698cbd7c02fc0f11c89b9c6fbf1"
+    },
+    {
+      "path": "crawler_engine/extractors/json_ld.py",
+      "sha256": "07c09c32366271b22d77d772179147a47c22468213c624cbed31e75add5d3ac9"
+    },
+    {
+      "path": "crawler_engine/extractors/kurly.py",
+      "sha256": "fc774c43005704159200f7f4c0bf26a6801d162e4615366c69617107cfe9cc40"
+    },
+    {
+      "path": "crawler_engine/extractors/lotteon.py",
+      "sha256": "a3fa889bb3a85f1d7dc71ab78cafe4d190af6adf09f857bae3515fec13cc5453"
+    },
+    {
+      "path": "crawler_engine/extractors/musinsa.py",
+      "sha256": "c5b8bc59737f030d8332c901300b052b7244f13bd778f2c95311bf7418ca9d15"
+    },
+    {
+      "path": "crawler_engine/extractors/twenty_nine_cm.py",
+      "sha256": "dfa6f059ba9a0038183c2795ec074272fc3aed1821eb08471090bde7954df45d"
+    },
+    {
+      "path": "crawler_engine/extractors/_html.py",
+      "sha256": "36789e3707c70757355933db94c8ef3b6650ff49065fa060ad6f48c34c78b8b2"
+    },
+    {
+      "path": "crawler_engine/extractors/__init__.py",
+      "sha256": "71438bf368d16902839fcbda3ab9db18cc7b4ba19400bc775068dabc0595eb16"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/dom_candidates.cpython-311.pyc",
+      "sha256": "35a366e20f670f68a8addbc0a756b8377fa162841adf0d091e546e93af3bd824"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/elevenst.cpython-311.pyc",
+      "sha256": "b679dcc8d11a038f08644c47802fc27bfb58c452a9d80409ed00a7ee3d0b117a"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/embedded_data.cpython-311.pyc",
+      "sha256": "5d4b5463b82d7db909551cc39bd2b0a62ca1144d2a7d997b25d982bbffaa40e0"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/joongna.cpython-311.pyc",
+      "sha256": "01a70ecfb742f8c6a9a70db1db1df1ef2e83e01e268ea9c372fb9b8a8e3440a6"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/json_ld.cpython-311.pyc",
+      "sha256": "370aecb5f4c48152fa0bd6537f9e51b4f70d62227aec1ff2f54c6d82f72c7c9d"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/kurly.cpython-311.pyc",
+      "sha256": "4eac3ac1fdf461aaf3f06fce28b989710b79b03439b71d1fbe131dfc6283b6bd"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/lotteon.cpython-311.pyc",
+      "sha256": "10e437fdbdb2848177cdb6f45f76a864dca10604d09e66bd8298b4418e89fa62"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/musinsa.cpython-311.pyc",
+      "sha256": "5db1a51e37f7dbfa55b5b48d3b85c9dc0ee66fbbf4fcc2884d146e9aab0540c0"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/twenty_nine_cm.cpython-311.pyc",
+      "sha256": "13f2d30bd8802bf8f21bf8a3e8401a629020ae46f300bb98b426e6864c614ca4"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/_html.cpython-311.pyc",
+      "sha256": "1bb19a718eadc581278c93cc48562ac480713e32353944f011093afea9192b09"
+    },
+    {
+      "path": "crawler_engine/extractors/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "c4035659d1617c1180587cb1584691f3084980e424787ba15bc4920fa7b67928"
+    },
+    {
+      "path": "crawler_engine/food_details.py",
+      "sha256": "17b6aa5b0003cb7336f0d696b85fdbbb0d4f79dcb961b14ccd1d0f53782fd4c6"
+    },
+    {
+      "path": "crawler_engine/models.py",
+      "sha256": "613a0598fef4079d74cc0fb3ea9008f7c9ce72b78fc3499332751b091127e79e"
+    },
+    {
+      "path": "crawler_engine/normalize.py",
+      "sha256": "dc59d8b6174ce73ce5a4784e21edba788aaa8eb0169327834509b5c60155b2ae"
+    },
+    {
+      "path": "crawler_engine/outputs.py",
+      "sha256": "19ad706248ca53900ab0fa9c58ff1200b2f18ba0272a610270abd7f70f84b246"
+    },
+    {
+      "path": "crawler_engine/requirements.txt",
+      "sha256": "b5201c5695677596750e474991803dd57747a78f445fd7fd7ef676d9abbf2a4d"
+    },
+    {
+      "path": "crawler_engine/sites/danawa.py",
+      "sha256": "720ba7d174eacc15ff9e66f428fa7537dfbc992894dfb73df9b03cf529fb9be8"
+    },
+    {
+      "path": "crawler_engine/sites/elevenst.py",
+      "sha256": "579aab857af9e8c3c0084da8b7dc816744877c2f63369ccba22b04fd6ca7183d"
+    },
+    {
+      "path": "crawler_engine/sites/joongna.py",
+      "sha256": "beb23da07b16070d09d60eba4071bf0964daa6bb74cdcbeffc487d361c9ab542"
+    },
+    {
+      "path": "crawler_engine/sites/kurly.py",
+      "sha256": "0f72048f0a0b4c6689e62e765fcd4b827137d81a75b88d7a4bde17427e78d5ce"
+    },
+    {
+      "path": "crawler_engine/sites/lotteon.py",
+      "sha256": "4529c32e29c1e13a44e78c8a718d78b687b84ef6715a3097cdb26afa53ee5c86"
+    },
+    {
+      "path": "crawler_engine/sites/musinsa.py",
+      "sha256": "b4c6e63e2659175c161b9b0676cf37f83ce6cd34546f28bb504eb89e787cd01b"
+    },
+    {
+      "path": "crawler_engine/sites/twenty_nine_cm.py",
+      "sha256": "b31d0b548bc5896f26763b1771f3229d2c29a565a7203ee75118fe672b18011a"
+    },
+    {
+      "path": "crawler_engine/sites/__init__.py",
+      "sha256": "439baf6c242453881eded700cc02d1c83303cdc161f43e2e29801f1253335d14"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/danawa.cpython-311.pyc",
+      "sha256": "14368cef5db2cc41d36f83fd7c6ea110ee23dc60599f3ea6684d3062b7ca252e"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/elevenst.cpython-311.pyc",
+      "sha256": "b6f757ed807a5477c5ae00491e125c0a8ddb4caad4f2bc279e0455ee4bc513d7"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/joongna.cpython-311.pyc",
+      "sha256": "e64f40f2cca357037f2c2b6b0422a321e1b5b20455ca815ed627c227ccc63d49"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/kurly.cpython-311.pyc",
+      "sha256": "6c444a6ff1b2cb9f788b0315252ef55dec5b91bb2cffd497c2cfa9b2469faa35"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/lotteon.cpython-311.pyc",
+      "sha256": "af1b2dafd638aae005ee94b825fbd0c2940da21336f3f4e15cd5c846cdb34c13"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/musinsa.cpython-311.pyc",
+      "sha256": "0a6a2f150f66c583b9ffdecca1a659bd13cadcbe4435806e8106ccb1763f68c6"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/twenty_nine_cm.cpython-311.pyc",
+      "sha256": "3e33b42164d0be80a49551e11708076998df4c2d08de02fd6973e6c98d6e99c9"
+    },
+    {
+      "path": "crawler_engine/sites/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "be9e3037c531ffdf51da701b883cd8ddbf3f74e77906dc127ef442fcc2293e6e"
+    },
+    {
+      "path": "crawler_engine/sources.py",
+      "sha256": "a4502b5caae51693852dea47ddc60ccd6eacca46ffb1cb2eb35a3f3d968a8994"
+    },
+    {
+      "path": "crawler_engine/validators.py",
+      "sha256": "7be94d624685378ce3e2aa580df67d12bb93310e6a38657d9ec8a6adbaf3cd0d"
+    },
+    {
+      "path": "crawler_engine/__init__.py",
+      "sha256": "38d36647677b0fd46b30fbb49e711c3afe85042c0d2231bcfe83d80800184b04"
+    },
+    {
+      "path": "crawler_engine/__pycache__/aggregation.cpython-311.pyc",
+      "sha256": "b9676945bb7c951d73c892d44bfd99f10f797d04c1765a814a7e2489a8498c26"
+    },
+    {
+      "path": "crawler_engine/__pycache__/detail_extractors.cpython-311.pyc",
+      "sha256": "251bfbcfadd74a6f1e19e910ff1df1623293bbc08a3b0fd7b3cb633b242d28f0"
+    },
+    {
+      "path": "crawler_engine/__pycache__/eligibility.cpython-311.pyc",
+      "sha256": "b87f4bee06a6c5b0022e9a00b040fde46a3c3e90ad7470f05cbcd97aba7a79f5"
+    },
+    {
+      "path": "crawler_engine/__pycache__/engine.cpython-311.pyc",
+      "sha256": "1781da1fce929a5e2c59f13defd039e72a63f2a86e7c0b039561cdb33a94bb45"
+    },
+    {
+      "path": "crawler_engine/__pycache__/food_details.cpython-311.pyc",
+      "sha256": "cd21d3de537498df91b54d7dedd6b97ec1fbd4a218e56a17794da5025a88f436"
+    },
+    {
+      "path": "crawler_engine/__pycache__/models.cpython-311.pyc",
+      "sha256": "637df62d5e0aa124ae1be97394755dee84b645e8909982408dc70d25a153726f"
+    },
+    {
+      "path": "crawler_engine/__pycache__/normalize.cpython-311.pyc",
+      "sha256": "5e8e6c32909d7e7d432857df7f1a58403dd9c2b1742e3128eacb81cfa7d04aec"
+    },
+    {
+      "path": "crawler_engine/__pycache__/outputs.cpython-311.pyc",
+      "sha256": "222472d8db40beb9a8144cfa73bb5373603ed670fcefebd19b622d6afbfc9a6b"
+    },
+    {
+      "path": "crawler_engine/__pycache__/sources.cpython-311.pyc",
+      "sha256": "81ac7ceacc9f71763e4c479693eb0f9595a9fd7a3aacd36b32da0be3a34b4aca"
+    },
+    {
+      "path": "crawler_engine/__pycache__/validators.cpython-311.pyc",
+      "sha256": "4e724ed43fd8d03fb3a7aa222a40f0ad8eb7b7158d7333c90ad0016c20a1e940"
+    },
+    {
+      "path": "crawler_engine/__pycache__/__init__.cpython-311.pyc",
+      "sha256": "9f395656bf959642159f7ce656c1157a9bf6f5356f983f1da33fb0c08c6aee7a"
+    },
+    {
+      "path": "docs/source-access.md",
+      "sha256": "791143096228dc80eb20c5fb8c0507eedffc3d8033dfbca2cf2841ccac3986b2"
+    },
+    {
+      "path": ".tmp_kurly_live/1000065953.html",
+      "sha256": "b3dcd9d56b7be85b6b7c6852c4a66f875e4e8b4011a950d9398dd30d0a936ed9"
+    },
+    {
+      "path": ".tmp_kurly_live/1001368190.html",
+      "sha256": "13d37ee57445c679aaefaae9283c3b03c543d0a20c14bf3800cbd0bfeeb7d367"
+    },
+    {
+      "path": ".tmp_kurly_live/5013725.html",
+      "sha256": "c916d3c9a50a03d5ea7b51fce2c85621c489a62622eceda67bf5561e848694d5"
+    },
+    {
+      "path": ".tmp_kurly_probe/1000065953.html",
+      "sha256": "b3dcd9d56b7be85b6b7c6852c4a66f875e4e8b4011a950d9398dd30d0a936ed9"
+    },
+    {
+      "path": ".tmp_kurly_probe/1001368190.html",
+      "sha256": "13d37ee57445c679aaefaae9283c3b03c543d0a20c14bf3800cbd0bfeeb7d367"
+    },
+    {
+      "path": ".tmp_kurly_probe/5013725.html",
+      "sha256": "c916d3c9a50a03d5ea7b51fce2c85621c489a62622eceda67bf5561e848694d5"
+    },
+    {
+      "path": ".tmp_kurly_probe/legacy_5013725_1.jpg",
+      "sha256": "e9c5ed765f12aaa1c2784fb459ca79f1864e02be9b6244d0e2a6a421cd6df212"
+    },
+    {
+      "path": ".tmp_kurly_probe/legacy_5013725_2.jpg",
+      "sha256": "499fa4a593bbd12c8bbf14e8a6993ee0487e0d8c0f26a8e04e7a76885c4bf519"
+    },
+    {
+      "path": ".tmp_kurly_probe/notice_1001368190.jpg",
+      "sha256": "739f8a8b62a4aba5ed43e4383da4d33f2d3d8f829d9fb72664f2a8f2919ee74d"
+    },
+    {
+      "path": ".tmp_kurly_probe/notice_1001368190_2.jpg",
+      "sha256": "682dd14cee89a7dbe22fafb3d6994b9bfff51f3847699af40125605a0b3b4555"
+    }
+  ]
+}

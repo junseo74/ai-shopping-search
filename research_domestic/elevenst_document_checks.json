@@ -1,0 +1,56 @@
+[
+  {
+    "url": "https://openapi.11st.co.kr/openapi/OpenApiServiceIntroduce.tmall",
+    "observed_at": "2026-11-08T11:27:31.383Z",
+    "http_status": 200,
+    "body_sha256": "f5f81f2667862d1630c56bdaf73b6d2c30486400c40e61bc9290a8a7d7b97779",
+    "title": "서비스 소개 | 11번가 OPEN API",
+    "bytes": 19988,
+    "search_documented": false,
+    "search_links": [
+      "/openapi/OpenApiGuide.tmall"
+    ],
+    "search_context": null
+  },
+  {
+    "url": "https://openapi.11st.co.kr/openapi/OpenApiSearch.tmall",
+    "observed_at": "2026-11-08T11:27:31.694Z",
+    "http_status": 404,
+    "body_sha256": "58aca97eb88aabee1dfc6928f5cad5e1d5c0fb1c654c29c624e5436a962c9c9a",
+    "title": "SKT 11st",
+    "bytes": 1449,
+    "search_documented": false,
+    "search_links": [],
+    "search_context": null
+  },
+  {
+    "url": "https://openapi.11st.co.kr/openapi/OpenApiGuide.tmall",
+    "observed_at": "2026-11-08T11:27:31.794Z",
+    "http_status": 200,
+    "body_sha256": "9b499f4f6bd07e066fb0af808f123f48609587a384c1ba01a8379f7f950308e9",
+    "title": "개발가이드 | 11번가 OPEN API",
+    "bytes": 27057,
+    "search_documented": true,
+    "search_links": [
+      "/openapi/OpenApiGuide.tmall",
+      "/openapi/OpenApiGuide.tmall?commonGuideNo=1",
+      "/openapi/OpenApiGuide.tmall?commonGuideNo=2",
+      "/openapi/OpenApiGuide.tmall?commonGuideNo=3",
+      "/openapi/OpenApiGuide.tmall?commonGuideNo=4"
+    ],
+    "search_context": "을 수 있습니다. (ENGLISH GUIDE) --> 상품검색 카테고리 상품정보조회 상품이미지검색 상품검색 상품검색 상품검색 카테고리 상품정보조회 상품이미지검색 1. 상품검색 11번가의 상품검색 결과 API를 제공해 드립니다. 오픈마켓 11번가의 상품검색 결과를 여러분의 웹사이트에 응용해 보세요. 2. URL 기본정보조회 http://openapi.11st.co.kr/openapi/OpenApiService.tmall?key=[key]&apiCode= ProductSearch&keyword =[keyword] 카테"
+  },
+  {
+    "url": "https://openapi.11st.co.kr/openapi/OpenApiFrontMain.tmall",
+    "observed_at": "2026-11-08T11:27:31.884Z",
+    "http_status": 200,
+    "body_sha256": "e71c6d754aaf5132d0bb7e789daea0538f633ce8fa358e26a5a9e0e6c49d98ed",
+    "title": "OPENAPI CENTER - 11번가",
+    "bytes": 15293,
+    "search_documented": false,
+    "search_links": [
+      "/openapi/OpenApiGuide.tmall"
+    ],
+    "search_context": null
+  }
+]

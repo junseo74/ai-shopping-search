@@ -1,0 +1,10 @@
+{
+  "observed_at": "2026-11-08T11:18:47.067Z",
+  "discovery_url": "https://www.aladin.co.kr/shop/wbrowse.aspx?CID=351",
+  "http_status": 200,
+  "bytes": 209905,
+  "body_sha256": "6a39ef1baf47c2d77b4ef0e5bee68064ebce682c74104927ea6268fa3bef22b1",
+  "published_alternate_rss_href": "http://www.aladin.co.kr/rss/new_all/351",
+  "verified_https_feed": "https://www.aladin.co.kr/rss/new_all/351",
+  "yes24_discovery": "document_discovery.json: official bestSeller.aspx publishes _par_/Rss/KBO001.xml"
+}
