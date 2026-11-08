@@ -1,0 +1,360 @@
+{
+  "schema_version": "1.0",
+  "base_commit": "32b2dee58b666afef2d8c1e3276a30448e7ea6b0",
+  "selected_source_files": [
+    {
+      "path": "backend/collectors/__init__.py",
+      "source_sha256": "cd3d031a9e41bcd80169763281c009981130281b2636fb989d55e343f020761d",
+      "action": "selected_copy",
+      "publication_sha256": "cd3d031a9e41bcd80169763281c009981130281b2636fb989d55e343f020761d",
+      "publication_only_modified": false
+    },
+    {
+      "path": "backend/collectors/apple_books.py",
+      "source_sha256": "7893b9ac14140c7200337e29ea8719a383fde5c8a4008aff5e7b434f7c4621b1",
+      "action": "selected_copy",
+      "publication_sha256": "7893b9ac14140c7200337e29ea8719a383fde5c8a4008aff5e7b434f7c4621b1",
+      "publication_only_modified": false
+    },
+    {
+      "path": "backend/collectors/official_catalogs.py",
+      "source_sha256": "59c3878d6ddb70d7accf7ae35b58d400fc7a845e550bf33be7de26ff15a92812",
+      "action": "selected_copy",
+      "publication_sha256": "59c3878d6ddb70d7accf7ae35b58d400fc7a845e550bf33be7de26ff15a92812",
+      "publication_only_modified": false
+    },
+    {
+      "path": "backend/collectors/yes24.py",
+      "source_sha256": "d4e8c9e9566e8cafe780bbb2f61846e866326e8b8d392a614693a6372191e24f",
+      "action": "selected_copy",
+      "publication_sha256": "d4e8c9e9566e8cafe780bbb2f61846e866326e8b8d392a614693a6372191e24f",
+      "publication_only_modified": false
+    },
+    {
+      "path": "backend/main.py",
+      "source_sha256": "69c774b054237533237811bec9da3dc9dcb731e9b7e0cbc73ab225a25577a794",
+      "action": "selected_copy",
+      "publication_sha256": "69c774b054237533237811bec9da3dc9dcb731e9b7e0cbc73ab225a25577a794",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/__init__.py",
+      "source_sha256": "a0ceea4252064f8c2b2c07e3cbebc64113a1e7243c1da102f05fd2f904337801",
+      "action": "selected_copy",
+      "publication_sha256": "a0ceea4252064f8c2b2c07e3cbebc64113a1e7243c1da102f05fd2f904337801",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/__main__.py",
+      "source_sha256": "e414ca5b82aa0932b4d6b44e8da3910353a76fc6712ff370c2463874c7a756ee",
+      "action": "selected_copy",
+      "publication_sha256": "e414ca5b82aa0932b4d6b44e8da3910353a76fc6712ff370c2463874c7a756ee",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/adapters.py",
+      "source_sha256": "6bdceddd8a7e3418caa1fce667c02f042bde479deb02659eeb69e62bb0558c8e",
+      "action": "selected_copy",
+      "publication_sha256": "6bdceddd8a7e3418caa1fce667c02f042bde479deb02659eeb69e62bb0558c8e",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/contracts.py",
+      "source_sha256": "0d27e339d36cee68a10a6be11ee1a34c77b2a4a65f486cbac2d55487a1307b2a",
+      "action": "selected_copy",
+      "publication_sha256": "0d27e339d36cee68a10a6be11ee1a34c77b2a4a65f486cbac2d55487a1307b2a",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/registry.py",
+      "source_sha256": "a37f918325c4609c8325bf8f1525f32ca4dbb644ad2e4ab08df3c0ed2835330a",
+      "action": "selected_copy",
+      "publication_sha256": "a37f918325c4609c8325bf8f1525f32ca4dbb644ad2e4ab08df3c0ed2835330a",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/runner.py",
+      "source_sha256": "c5fcce98e3e8e4ddd3ffc18dca98fb7af43d8aebdadcc3e16f9c59144f51993a",
+      "action": "selected_copy",
+      "publication_sha256": "c5fcce98e3e8e4ddd3ffc18dca98fb7af43d8aebdadcc3e16f9c59144f51993a",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/storage.py",
+      "source_sha256": "5c79e60a60fa01b2cfe51c71107e65feae1a691dee54bd4562fd41b4d99679e8",
+      "action": "selected_copy",
+      "publication_sha256": "5c79e60a60fa01b2cfe51c71107e65feae1a691dee54bd4562fd41b4d99679e8",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/transport.py",
+      "source_sha256": "f37ce44d1819cadfbf25a7c23fe5fa1ad1718592c13fa117fe4c3c9697e2770d",
+      "action": "selected_copy",
+      "publication_sha256": "f37ce44d1819cadfbf25a7c23fe5fa1ad1718592c13fa117fe4c3c9697e2770d",
+      "publication_only_modified": false
+    },
+    {
+      "path": "collection_engine/source_policies.json",
+      "source_sha256": "5101899ee2a779d20ab1f70ae458d83a18142172bedcb3ba5e28193c44f8fb32",
+      "action": "selected_copy",
+      "publication_sha256": "5101899ee2a779d20ab1f70ae458d83a18142172bedcb3ba5e28193c44f8fb32",
+      "publication_only_modified": false
+    },
+    {
+      "path": "tests/test_live_api_collectors.py",
+      "source_sha256": "5e57ec71ba87e2cbf64dc83eb2763ca14bc7006ff5ebadbc6a13bcb1b2d6d2b9",
+      "action": "selected_copy",
+      "publication_sha256": "5e57ec71ba87e2cbf64dc83eb2763ca14bc7006ff5ebadbc6a13bcb1b2d6d2b9",
+      "publication_only_modified": false
+    },
+    {
+      "path": "tests/test_collection_engine.py",
+      "source_sha256": "2c8a9aa472dd22569fc0e163adbb0641284bbd4092e6e38f27f099c348cad414",
+      "action": "selected_copy",
+      "publication_sha256": "c529e8f0eb11428be290ee676b26d503976cbca7075423ee1c31e95e6b6521ef",
+      "publication_only_modified": true
+    },
+    {
+      "path": "tests/test_official_catalogs.py",
+      "source_sha256": "0e1c6a1cd79787883b0b755189238d9c45d10806239b8a877b01eeb32a4e0e62",
+      "action": "selected_copy",
+      "publication_sha256": "0e1c6a1cd79787883b0b755189238d9c45d10806239b8a877b01eeb32a4e0e62",
+      "publication_only_modified": false
+    },
+    {
+      "path": "docs/shopping_mall_100_candidates.csv",
+      "source_sha256": "e8696692ec5330e593bca4c0cc22580fb43e4f5bbbf1cc24104469d076434354",
+      "action": "selected_copy",
+      "publication_sha256": "e8696692ec5330e593bca4c0cc22580fb43e4f5bbbf1cc24104469d076434354",
+      "publication_only_modified": false
+    },
+    {
+      "path": "docs/shopping_mall_100_candidates.md",
+      "source_sha256": "21a8364231daa0db8e0eb10e96499fbbdfb51a335ad2703c29851b3131518e74",
+      "action": "selected_copy",
+      "publication_sha256": "eba87c09279397e1edb8d23c4368b697202b3d0c19390374ebe91ebb86235c64",
+      "publication_only_modified": true
+    },
+    {
+      "path": "docs/api_access_tracker.md",
+      "source_sha256": "8a5e72621c17dae93eec2a548790342d2b4284a6349abcffd47b675e67c1171d",
+      "action": "selected_copy",
+      "publication_sha256": "bdc4928c48a98823100506d8f605fdee5aebc101bfc377320c1011eba989f1b7",
+      "publication_only_modified": true
+    },
+    {
+      "path": "docs/crawler_architecture.md",
+      "source_sha256": "1c124bdc8a4efd3e9ad02f6ea6a014b47b86b164295df0d6286caf64dd481b4a",
+      "action": "selected_copy",
+      "publication_sha256": "ce75163696c2c27b0dfb6971eac948784d58d2726143198c89be66ead2110f66",
+      "publication_only_modified": true
+    },
+    {
+      "path": "docs/db_integration_contract.md",
+      "source_sha256": "bc54f648e24a3da222e1b43ca83cc5e8780e8e1afa09095bc51768994fcf09da",
+      "action": "selected_copy",
+      "publication_sha256": "362fb2f194fd93afbe5815020a98c0087e065a6b6d27b0a80593756b88b9de27",
+      "publication_only_modified": true
+    },
+    {
+      "path": "samples/check_live_crawler_changes.py",
+      "source_sha256": "e80239ddea1271fd72a2f175814550e486e5d40625a466cf5e17a921395f604d",
+      "action": "selected_copy",
+      "publication_sha256": "aa5acdeb2d3a1d9e64105e3607401b9a08ba158bd0f6569d7004dbe33c17e0ba",
+      "publication_only_modified": true
+    },
+    {
+      "path": "samples/benchmark_collection_engine.py",
+      "source_sha256": "69f7cc44479296205991daeb94873eae20f67c545dae9d7e218f0c07c2da849c",
+      "action": "selected_copy",
+      "publication_sha256": "1252c1d512d423f6a7885f5896739742a7fb8aa94495ac1cfa0b6abb5ac08a74",
+      "publication_only_modified": true
+    },
+    {
+      "path": "samples/verify_common_engine.py",
+      "source_sha256": "a412e9645cce6f43554a88c1f79052966b52497b02843105251bbbce801a8b81",
+      "action": "selected_copy",
+      "publication_sha256": "22205770ab5f56296287bd1ba5f6e122a99ea3db93bc89b0aa76967ed33d225c",
+      "publication_only_modified": true
+    }
+  ],
+  "copied_source_file_count": 25,
+  "existing_public_files_checked": 94,
+  "private_originals_copied": false,
+  "real_product_records_copied": false,
+  "research_domestic_modified": false,
+  "publication_only_edits": [
+    "tests/test_collection_engine.py",
+    "docs/shopping_mall_100_candidates.md",
+    "docs/api_access_tracker.md",
+    "docs/crawler_architecture.md",
+    "docs/db_integration_contract.md",
+    "samples/check_live_crawler_changes.py",
+    "samples/benchmark_collection_engine.py",
+    "samples/verify_common_engine.py",
+    ".gitignore",
+    "docs/development_summary.md",
+    "docs/live_crawler_progress.md",
+    "docs/publication_manifest.json",
+    "docs/publication_report.md",
+    "docs/publication_test_results.json",
+    "docs/publication_checks.json"
+  ],
+  "excluded_categories": [
+    "actual API response JSON/JSONL",
+    "external original HTML and text snapshots",
+    "cookie and session records",
+    "live outbox/checkpoint/state",
+    "environment files and credentials",
+    "private verification reports and raw logs"
+  ],
+  "excluded_source_examples": [
+    ".env",
+    "samples/db_design_samples.json",
+    "samples/ebay_db_design_samples.json",
+    "samples/verified_products.json",
+    "samples/live_crawlers/verification.json",
+    "samples/live_verification/ebay_production_response.json",
+    "samples/raw/**",
+    "samples/render_checks.json",
+    "samples/engine_validation/**",
+    "samples/audit_engine_artifacts.py",
+    "samples/live_crawlers/tests.log"
+  ],
+  "exclusion_notes": {
+    "actual_data": "Redistribution/persistence not confirmed; originals retained in development folder",
+    "external_snapshots": "May include third-party key/cookie/session values and copyrighted material",
+    "private_audit_helper": "Requires omitted private artifacts; not copied",
+    "existing_test_fixtures": "Baseline synthetic products and authored test HTML retained for regression tests"
+  },
+  "git_worktree_changes": [
+    {
+      "status": "M",
+      "path": ".gitignore"
+    },
+    {
+      "status": "M",
+      "path": "backend/collectors/__init__.py"
+    },
+    {
+      "status": "M",
+      "path": "backend/main.py"
+    },
+    {
+      "status": "??",
+      "path": "backend/collectors/apple_books.py"
+    },
+    {
+      "status": "??",
+      "path": "backend/collectors/official_catalogs.py"
+    },
+    {
+      "status": "??",
+      "path": "backend/collectors/yes24.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/__init__.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/__main__.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/adapters.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/contracts.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/registry.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/runner.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/source_policies.json"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/storage.py"
+    },
+    {
+      "status": "??",
+      "path": "collection_engine/transport.py"
+    },
+    {
+      "status": "??",
+      "path": "docs/api_access_tracker.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/crawler_architecture.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/db_integration_contract.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/development_summary.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/live_crawler_progress.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/publication_checks.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/publication_manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/publication_report.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/publication_test_results.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/shopping_mall_100_candidates.csv"
+    },
+    {
+      "status": "??",
+      "path": "docs/shopping_mall_100_candidates.md"
+    },
+    {
+      "status": "??",
+      "path": "samples/benchmark_collection_engine.py"
+    },
+    {
+      "status": "??",
+      "path": "samples/check_live_crawler_changes.py"
+    },
+    {
+      "status": "??",
+      "path": "samples/verify_common_engine.py"
+    },
+    {
+      "status": "??",
+      "path": "tests/test_collection_engine.py"
+    },
+    {
+      "status": "??",
+      "path": "tests/test_live_api_collectors.py"
+    },
+    {
+      "status": "??",
+      "path": "tests/test_official_catalogs.py"
+    }
+  ]
+}

@@ -8,6 +8,8 @@ from fastapi import FastAPI, HTTPException, Query
 try:
     from .collectors import (
         ApprovedHtmlProductCollector,
+        AppleBooksLookupCollector,
+        Yes24ProductCollector,
         BaseCollector,
         EbayBrowseCollector,
         ElevenstProductCollector,
@@ -20,6 +22,8 @@ try:
 except ImportError:  # Allows `uvicorn main:app` from the backend directory.
     from collectors import (
         ApprovedHtmlProductCollector,
+        AppleBooksLookupCollector,
+        Yes24ProductCollector,
         BaseCollector,
         EbayBrowseCollector,
         ElevenstProductCollector,
@@ -38,6 +42,8 @@ def build_collectors() -> dict[str, BaseCollector]:
         TestFixtureCollector(),
         ebay_collector,
         elevenst_collector,
+        AppleBooksLookupCollector(),
+        Yes24ProductCollector(),
         ApprovedHtmlProductCollector(),
         ShoppingAutoCollector(
             api_collectors={
@@ -50,6 +56,8 @@ def build_collectors() -> dict[str, BaseCollector]:
 
 
 def is_collector_configured(collector: BaseCollector) -> bool:
+    if collector.metadata.source_name == "yes24_api":
+        return bool(getattr(collector, "api_key", None))
     if collector.metadata.source_name == "ebay_browse":
         ebay_collector = collector
         return bool(getattr(ebay_collector, "client_id", None) and getattr(ebay_collector, "client_secret", None))

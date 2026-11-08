@@ -1,0 +1,22 @@
+{
+  "test_count": 228,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "unexpected_successes": 0,
+  "passed": 228,
+  "successful": true,
+  "module_origins": {
+    "backend": "backend/__init__.py",
+    "collection_engine": "collection_engine/__init__.py",
+    "crawler_engine": "crawler_engine/__init__.py"
+  },
+  "external_network_disabled": true,
+  "exit_code": 0,
+  "production_credentials_removed": true,
+  "dotenv_disabled": true,
+  "default_db_isolated": true,
+  "default_db_hash_unchanged": true,
+  "detailed_log_publication_excluded": true,
+  "tests_are_not_live_evidence": true
+}

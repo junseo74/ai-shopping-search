@@ -17,3 +17,14 @@ naver_real_products.json
 merged_products.json
 joongna_products.json
 local_auto_products.json
+# Publication: generated/live artifacts remain local
+/samples/**
+!/samples/check_live_crawler_changes.py
+!/samples/benchmark_collection_engine.py
+!/samples/verify_common_engine.py
+/.validation_runtime/
+/collection_output/
+/crawler_output/
+*.jsonl
+*.sqlite
+*.sqlite3
