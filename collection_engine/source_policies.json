@@ -1,0 +1,22 @@
+{
+  "reviewed_on": "2026-11-08",
+  "note": "Retention seconds are conservative local validation-cache bounds, not provider licenses. No bulk permission is granted here.",
+  "sources": [
+    {"source":"ebay_browse","method":"official_api","lookup_allowed":true,"terms_url":"https://developer.ebay.com/join/api-license-agreement","credential_env":["EBAY_CLIENT_ID","EBAY_CLIENT_SECRET"]},
+    {"source":"apple_books_lookup","method":"official_isbn_lookup","lookup_allowed":true,"terms_url":"https://performance-partners.apple.com/search-api","omitted_fields":["seller","region","detail_description","image_url"]},
+    {"source":"yes24_api","method":"official_api","lookup_allowed":true,"terms_url":"https://developers.yes24.com/support/terms","credential_env":["YES24_API_KEY"]},
+    {"source":"yahoo_shopping","method":"official_api","lookup_allowed":false,"terms_url":"https://developer.yahoo.co.jp/guideline/","credential_env":["YAHOO_CLIENT_ID"]},
+    {"source":"rakuten_ichiba","method":"official_api","lookup_allowed":false,"terms_url":"https://webservice.rakuten.co.jp/guide/","credential_env":["RAKUTEN_APPLICATION_ID","RAKUTEN_ACCESS_KEY"]},
+    {"source":"bestbuy_products","method":"official_api","lookup_allowed":false,"terms_url":"https://developer.bestbuy.com/legal","credential_env":["BESTBUY_API_KEY"],"retention_seconds":3600},
+    {"source":"elevenst","method":"official_api_https_unconfirmed","lookup_allowed":false,"terms_url":"https://openapi.11st.co.kr/openapi/OpenApiFrontMain.tmall","credential_env":["ELEVENST_API_KEY"]},
+    {"source":"danawa","method":"legacy_html_or_connector","terms_url":"https://mcp.ai.cowave.kr/docs"},
+    {"source":"musinsa","method":"legacy_html","terms_url":"https://www.musinsa.com/"},
+    {"source":"kurly","method":"legacy_html","terms_url":"https://www.kurly.com/"},
+    {"source":"29cm","method":"legacy_html","terms_url":"https://www.29cm.co.kr/terms/agreement"},
+    {"source":"lotteon","method":"seller_api_or_legacy_html","terms_url":"https://api.lotteon.com/apiGuide"},
+    {"source":"joongna","method":"undocumented_internal_api_not_authorized","terms_url":"https://web.joongna.com/"},
+    {"source":"approved_html","method":"explicit_html_permission_required","terms_url":"https://www.rfc-editor.org/rfc/rfc9309"},
+    {"source":"shopping_auto","method":"per_source_approval_required","terms_url":"https://www.rfc-editor.org/rfc/rfc9309"},
+    {"source":"test_fixture","method":"local_synthetic","lookup_allowed":false,"synthetic":true,"terms_url":"local://tests"}
+  ]
+}
