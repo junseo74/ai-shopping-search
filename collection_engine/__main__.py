@@ -2,6 +2,7 @@
 import argparse
 from datetime import datetime, timezone
 import json
+import sys
 from pathlib import Path
 
 from .contracts import CollectionError
@@ -10,8 +11,13 @@ from .runner import CollectionRunner
 from .storage import FileState, JsonlSink, atomic_json, digest
 
 
-def main():
+def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if not argv or argv[0] == "diagnose":
+        from .diagnostics import main as diagnose_main
+        return diagnose_main(argv[1:] if argv else [])
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--live", action="store_true", help="Explicitly allow a bounded live API check")
     parser.add_argument("--source", required=True)
     parser.add_argument("--query", required=True)
     parser.add_argument("--job-id", required=True, help="Reuse exactly to resume; use a new ID for a refresh")
@@ -19,7 +25,11 @@ def main():
     parser.add_argument("--max-items", type=int, default=3)
     parser.add_argument("--page-size", type=int, default=3)
     parser.add_argument("--max-pages", type=int, default=1)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+    if not args.live:
+        parser.error("Live collection requires --live; use 'python -m collection_engine diagnose' for offline readiness")
+    if not 1 <= args.max_items or not 1 <= args.page_size <= 1000 or args.max_pages < 1:
+        parser.error("Use positive item/page limits and page-size at most 1000")
     policy = policies().get(args.source)
     if policy is None:
         parser.error("Unknown source")

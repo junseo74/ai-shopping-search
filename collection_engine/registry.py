@@ -27,6 +27,16 @@ def build_adapter(source, saved_html=None):
         if source not in ("danawa", "musinsa", "kurly", "29cm", "lotteon", "joongna", "elevenst"):
             raise CollectionError("saved_html_source_not_supported")
         return LegacySavedHtmlAdapter(source, saved_html)
+    if source == "elevenst":
+        # Policy edits or credentials alone must not send keys over the legacy
+        # HTTP endpoint. Enable only after an official secure route is verified.
+        raise CollectionError("secure_endpoint_unverified")
+    if source in ("apple_books_lookup", "yes24_api"):
+        from backend.collectors.apple_books import AppleBooksLookupCollector
+        from backend.collectors.yes24 import Yes24ProductCollector
+        from .transport import HttpTransport
+        factory = AppleBooksLookupCollector if source == "apple_books_lookup" else Yes24ProductCollector
+        return BackendCollectorAdapter(factory(transport=HttpTransport()))
     if source == "ebay_browse":
         from .adapters import EbayPagedAdapter
         return EbayPagedAdapter()
@@ -35,11 +45,8 @@ def build_adapter(source, saved_html=None):
         factory = {"yahoo_shopping": YahooShoppingCollector, "rakuten_ichiba": RakutenIchibaCollector,
                    "bestbuy_products": BestBuyProductsCollector}[source]
         return PagedCollectorAdapter(factory())
-    from backend.collectors import (AppleBooksLookupCollector, Yes24ProductCollector, ElevenstProductCollector,
-                                    ApprovedHtmlProductCollector, ShoppingAutoCollector, TestFixtureCollector)
-    factory = {"apple_books_lookup": AppleBooksLookupCollector,
-               "yes24_api": Yes24ProductCollector, "elevenst": ElevenstProductCollector,
-               "approved_html": ApprovedHtmlProductCollector, "shopping_auto": ShoppingAutoCollector,
+    from backend.collectors import ApprovedHtmlProductCollector, ShoppingAutoCollector, TestFixtureCollector
+    factory = {"approved_html": ApprovedHtmlProductCollector, "shopping_auto": ShoppingAutoCollector,
                "test_fixture": TestFixtureCollector}.get(source)
     if factory:
         return BackendCollectorAdapter(factory())
@@ -48,7 +55,12 @@ def build_adapter(source, saved_html=None):
     raise CollectionError("approved_input_or_adapter_required")
 
 
-def credential_presence(policy):
-    from dotenv import load_dotenv
-    load_dotenv()
-    return {key: bool(os.getenv(key)) for key in policy.credential_env}
+def credential_presence(policy, environ=None):
+    """Return flags only; never expose values or load another worktree's .env."""
+    if environ is None:
+        from dotenv import dotenv_values
+        configured = dotenv_values(Path(__file__).resolve().parents[1] / ".env")
+        configured.update(os.environ)
+    else:
+        configured = environ
+    return {key: bool(str(configured.get(key) or "").strip()) for key in policy.credential_env}

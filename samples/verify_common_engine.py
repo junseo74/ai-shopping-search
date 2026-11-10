@@ -1,5 +1,6 @@
-"""Two approved live checks plus offline readiness; no DB import or insertion."""
+"""Offline readiness by default; explicit --live runs two bounded checks."""
 from datetime import datetime, timezone
+import argparse
 from decimal import Decimal
 import hashlib
 import json
@@ -16,7 +17,13 @@ from collection_engine.runner import CollectionRunner
 from collection_engine.storage import FileState, JsonlSink, atomic_json
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--live", action="store_true", help="Explicitly allow one eBay and one Apple product lookup")
+    args = parser.parse_args(argv)
+    if not args.live:
+        from collection_engine.diagnostics import main as diagnose_main
+        return diagnose_main([])
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     directory = ROOT / "samples/engine_validation" / stamp
     directory.mkdir(parents=True)

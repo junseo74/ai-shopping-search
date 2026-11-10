@@ -11,6 +11,9 @@ from urllib.parse import urlsplit
 import requests
 
 from .base import BaseCollector, CollectorMetadata
+from collection_engine.contracts import CollectionError
+from collection_engine.responses import object_value, rows_value, provider_id
+from collection_engine.quality import price_number, currency_code
 try:
     from ..models import PlatformType, Product
 except ImportError:
@@ -76,7 +79,8 @@ def robots_allows(text: str, url: str, user_agent: str = USER_AGENT) -> bool:
 class AppleBooksLookupCollector(BaseCollector):
     metadata = CollectorMetadata("apple_books_lookup", PlatformType.SHOPPING_MALL)
 
-    def __init__(self):
+    def __init__(self, transport=None):
+        self.transport = transport
         self.last_response = None
         self.last_audit = None
         self._last_request_at = 0.0
@@ -92,35 +96,62 @@ class AppleBooksLookupCollector(BaseCollector):
     def collect(self, query=None, limit=3):
         self.last_response = None
         self.last_audit = None
-        if not isinstance(limit, int) or not 1 <= limit <= 3:
+        if type(limit) is not int or not 1 <= limit <= 3:
             raise ValueError("Apple Books verification supports 1 to 3 products only.")
         isbn = re.sub(r"[- ]", "", query or "")
         if not re.fullmatch(r"(?:[0-9]{13}|[0-9]{9}[0-9Xx])", isbn):
             raise ValueError("Use an ISBN-10 or ISBN-13; text search is unsupported.")
         params = {"isbn": isbn, "country": "us", "entity": "ebook", "limit": limit}
         request_url = requests.Request("GET", LOOKUP_URL, params=params).prepare().url
-        robots = self._get(ROBOTS_URL)
-        if robots.status_code != 200 or "user-agent:" not in robots.text.lower():
-            raise RuntimeError(f"Apple robots policy unavailable: HTTP {robots.status_code}; lookup not requested.")
-        allowed = robots_allows(robots.text, request_url)
+        if self.transport is not None:
+            robots_text = self.transport.get_text(ROBOTS_URL, headers={"User-Agent": USER_AGENT})
+            robots_status = 200
+        else:
+            robots = self._get(ROBOTS_URL)
+            try:
+                robots_text, robots_status = robots.text, robots.status_code
+            finally:
+                robots.close()
+        if robots_status != 200 or "user-agent:" not in robots_text.lower():
+            if self.transport is not None:
+                raise CollectionError("robots_policy_unavailable")
+            raise RuntimeError(f"Apple robots policy unavailable: HTTP {robots_status}; lookup not requested.")
+        allowed = robots_allows(robots_text, request_url)
         self.last_audit = {"robots_url": ROBOTS_URL, "robots_status": 200,
                            "user_agent": USER_AGENT, "request_url": request_url,
-                           "robots_allowed": allowed, "robots_text": robots.text}
+                           "robots_allowed": allowed, "robots_text": robots_text}
         if not allowed:
+            if self.transport is not None:
+                raise CollectionError("robots_disallowed")
             raise RuntimeError("Apple robots.txt disallows the exact lookup URL; request stopped.")
-        response = self._get(LOOKUP_URL, params=params)
-        self.last_audit["http_status"] = response.status_code
-        if response.status_code != 200:
-            raise RuntimeError(f"Apple lookup HTTP {response.status_code}; no retry or redirect.")
-        body = response.json()
+        if self.transport is not None:
+            body = self.transport.get_json(LOOKUP_URL, params=params, headers={"User-Agent": USER_AGENT})
+            self.last_audit["http_status"] = 200
+        else:
+            response = self._get(LOOKUP_URL, params=params)
+            try:
+                self.last_audit["http_status"] = response.status_code
+                if response.status_code != 200:
+                    raise RuntimeError(f"Apple lookup HTTP {response.status_code}; no retry or redirect.")
+                try:
+                    body = response.json()
+                except ValueError:
+                    raise CollectionError("parsing_error") from None
+            finally:
+                response.close()
+        body = object_value(body)
+        rows = rows_value(body.get("results"), 200)
         self.last_response = body
         products, seen = [], set()
         observed = datetime.now(timezone.utc)
-        for item in body.get("results", []):
-            if item.get("kind") != "ebook" or item.get("trackId") in seen:
+        for item in rows:
+            if item.get("kind") != "ebook":
+                continue
+            identity = provider_id(item.get("trackId"))
+            if identity in seen:
                 continue
             product = self.to_product(item, observed)
-            seen.add(item["trackId"])
+            seen.add(identity)
             products.append(product)
             if len(products) == limit:
                 break
@@ -133,8 +164,8 @@ class AppleBooksLookupCollector(BaseCollector):
             raise ValueError("Apple Books result lacks an official HTTPS product URL.")
         if not item.get("trackName") or item.get("price") is None or not item.get("currency"):
             raise ValueError("Apple Books result lacks name, price or currency.")
-        return Product(product_name=item["trackName"], price=item["price"],
-                       currency=item["currency"], seller=None,
+        return Product(product_name=item["trackName"], price=price_number(item["price"]),
+                       currency=currency_code(item["currency"]), seller=None,
                        platform=PlatformType.SHOPPING_MALL, product_url=url,
                        category=", ".join(item.get("genres", [])) or None,
                        image_url=item.get("artworkUrl100"), condition="unknown",

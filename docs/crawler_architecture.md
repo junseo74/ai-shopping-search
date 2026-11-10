@@ -68,8 +68,15 @@ HTTP는 단일 transport 인스턴스에서 순차 실행하며 기본 최소 3.
 ## 실행
 
 ```powershell
-python -m collection_engine --source apple_books_lookup --query 9780316069359 --job-id apple-validation-001 --max-items 1 --page-size 1 --output samples/engine_runs/apple-validation-001
-python -m collection_engine --source ebay_browse --query keyboard --job-id ebay-validation-001 --max-items 1 --page-size 1 --output samples/engine_runs/ebay-validation-001
+python -m collection_engine --live --source apple_books_lookup --query 9780316069359 --job-id apple-validation-001 --max-items 1 --page-size 1 --output samples/engine_runs/apple-validation-001
+python -m collection_engine --live --source ebay_browse --query keyboard --job-id ebay-validation-001 --max-items 1 --page-size 1 --output samples/engine_runs/ebay-validation-001
 ```
 
 같은 명령은 완료된 job을 다시 요청하지 않는다. 새 검증·갱신에는 새 job_id를 사용한다. 출력 루트를 재사용해야 기존 버전 인덱스와 비교할 수 있다. 기존 backend의 자동 DB 저장 endpoint를 호출하는 명령은 아니다.
+
+
+## 2026-11-11 안정화 후 실행 안내
+
+기본 `python -m collection_engine` 또는 `python -m collection_engine diagnose`는 네트워크 없이 등록 소스와 인증정보 존재 여부를 진단한다. 실제 상품 조회는 명시적인 `--live`가 필요하다. `samples/verify_common_engine.py`도 기본 진단이며 실조회에는 `--live`를 요구한다. 조회 정책과 검증 3건 상한은 그대로 유지한다.
+
+이번 변경의 테스트 결과, 공식 API 확인 범위, 재개와 저장 파일 무결성 검증, 미해결 항목은 [수집 엔진 감사 보고서](collection_engine_audit.md)를 따른다. 이전 실조회 기록과 이번 오프라인 검증 결과는 구분한다.
