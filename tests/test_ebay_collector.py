@@ -73,6 +73,7 @@ class EbayOAuthTest(unittest.TestCase):
         response = requests.Response()
         response.status_code = status
         response._content = json.dumps(payload).encode("utf-8")
+        response._content_consumed = True  # In-memory response; no unread raw socket.
         return response
 
     def test_uses_client_credentials_grant_without_manual_token(self):

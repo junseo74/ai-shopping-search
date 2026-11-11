@@ -40,7 +40,7 @@ class EbayBrowseCollector(BaseCollector):
         requires_api_key=True,
     )
 
-    def __init__(self) -> None:
+    def __init__(self, token_transport=None) -> None:
         if load_dotenv:
             load_dotenv()
         self.client_id = os.getenv("EBAY_CLIENT_ID")
@@ -49,6 +49,7 @@ class EbayBrowseCollector(BaseCollector):
         self._access_token: str | None = None
         self._token_expires_at = 0.0
         self._token_lock = threading.Lock()
+        self.token_transport = token_transport
 
     def collect(self, query: str | None = None, limit: int = 50) -> list[Product]:
         if not query:
@@ -105,34 +106,53 @@ class EbayBrowseCollector(BaseCollector):
             self._token_expires_at = 0.0
             return self._mint_access_token()
 
+    @property
+    def token_expires_at(self):
+        """Compatibility view of the collector-owned early renewal deadline."""
+        return self._token_expires_at or None
+
+    @token_expires_at.setter
+    def token_expires_at(self, value):
+        # Preserve the desktop collector's writable expiry compatibility surface.
+        if value is not None and (isinstance(value, bool) or not isinstance(value, (int, float))
+                                  or not math.isfinite(value) or value < 0):
+            raise ValueError("Invalid eBay OAuth expiry deadline.")
+        with self._token_lock:
+            self._token_expires_at = value if value is not None else 0.0
+
     def _mint_access_token(self) -> str:
-        # Called under _token_lock. Application tokens are renewed via the same grant,
-        # not a User Access Token refresh_token flow. Nothing is persisted to disk.
+        # Called under _token_lock. Both paths validate/cache the same application
+        # token; the engine path retains common transport throttling and retries.
         credentials = f"{self.client_id}:{self.client_secret}".encode("utf-8")
         encoded = base64.b64encode(credentials).decode("ascii")
+        options = {
+            "headers": {"Authorization": f"Basic {encoded}",
+                        "Content-Type": "application/x-www-form-urlencoded"},
+            "data": {"grant_type": "client_credentials", "scope": EBAY_SCOPE},
+        }
         requested_at = time.monotonic()
-        try:
-            response = requests.post(
-                EBAY_TOKEN_URL,
-                headers={
-                    "Authorization": f"Basic {encoded}",
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                data={"grant_type": "client_credentials", "scope": EBAY_SCOPE},
-                timeout=15,
-                allow_redirects=False,
-            )
-        except requests.RequestException:
-            raise RuntimeError("eBay OAuth token request failed.") from None
-        if response.status_code != 200:
-            raise EbayOAuthError(
-                f"eBay OAuth token request failed (HTTP {response.status_code}).",
-                response.status_code,
-            ) from None
-        try:
-            payload = response.json()
-        except ValueError:
-            raise RuntimeError("eBay OAuth returned invalid JSON.") from None
+        if self.token_transport is not None:
+            # CollectionError from the shared transport is already sanitized;
+            # preserve its category/status/retry_after for diagnostics and resume.
+            payload = self.token_transport.post_json(EBAY_TOKEN_URL, **options)
+        else:
+            try:
+                response = requests.post(
+                    EBAY_TOKEN_URL, timeout=15, allow_redirects=False, **options)
+            except requests.RequestException:
+                raise RuntimeError("eBay OAuth token request failed.") from None
+            try:
+                if response.status_code != 200:
+                    raise EbayOAuthError(
+                        f"eBay OAuth token request failed (HTTP {response.status_code}).",
+                        response.status_code,
+                    ) from None
+                try:
+                    payload = response.json()
+                except ValueError:
+                    raise RuntimeError("eBay OAuth returned invalid JSON.") from None
+            finally:
+                response.close()
         if not isinstance(payload, dict):
             raise RuntimeError("eBay OAuth returned an invalid response.")
         access_token = payload.get("access_token")
@@ -147,7 +167,6 @@ class EbayBrowseCollector(BaseCollector):
             raise RuntimeError("eBay OAuth response did not include a valid token lifetime.") from None
         if isinstance(expires_in, bool) or not math.isfinite(lifetime) or lifetime <= 0:
             raise RuntimeError("eBay OAuth response did not include a valid token lifetime.")
-        # Renew on the next use, up to 60 seconds before expiry; scale for short TTLs.
         expires_at = requested_at + lifetime - min(60.0, lifetime * 0.1)
         if time.monotonic() >= expires_at:
             raise RuntimeError("eBay OAuth token expired during acquisition.")
@@ -162,12 +181,12 @@ class EbayBrowseCollector(BaseCollector):
         shipping_fee = self._extract_shipping_fee(item)
 
         return Product(
-            product_name=item.get("title") or "Untitled eBay item",
+            product_name=item.get("title"),
             price=self._to_float(price.get("value")),
             shipping_fee=shipping_fee,
-            currency=price.get("currency") or "USD",
+            currency=price.get("currency"),
             category=self._extract_category(item),
-            seller=seller.get("username") or "eBay seller",
+            seller=seller.get("username"),
             platform=PlatformType.SHOPPING_MALL,
             product_url=item.get("itemWebUrl"),
             image_url=image.get("imageUrl"),
@@ -179,6 +198,9 @@ class EbayBrowseCollector(BaseCollector):
     def _extract_shipping_fee(self, item: dict[str, Any]) -> float | None:
         for option in item.get("shippingOptions", []):
             cost = option.get("shippingCost") or {}
+            currency = (item.get("price") or {}).get("currency")
+            if not currency or cost.get("currency") != currency:
+                continue
             value = self._to_float(cost.get("value"))
             if value is not None:
                 return value
@@ -202,12 +224,12 @@ class EbayBrowseCollector(BaseCollector):
         if not condition:
             return ProductCondition.UNKNOWN
         normalized = condition.lower()
-        if "new" in normalized:
-            return ProductCondition.NEW
-        if "used" in normalized or "pre-owned" in normalized:
-            return ProductCondition.USED
         if "refurbished" in normalized:
             return ProductCondition.REFURBISHED
+        if "used" in normalized or "pre-owned" in normalized or normalized in ("like new", "very good", "good", "acceptable"):
+            return ProductCondition.USED
+        if normalized == "new" or normalized.startswith("new "):
+            return ProductCondition.NEW
         return ProductCondition.UNKNOWN
 
     def _to_float(self, value: Any) -> float | None:

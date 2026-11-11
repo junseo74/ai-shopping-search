@@ -40,6 +40,7 @@ class EbayEngineAuthTest(unittest.TestCase):
         response = requests.Response()
         response.status_code = status
         response._content = json.dumps(body).encode("utf-8")
+        response._content_consumed = True  # In-memory response; no unread raw socket.
         return response
 
     def token(self, value):
@@ -186,3 +187,46 @@ class EbayEngineAuthTest(unittest.TestCase):
             runner.run("phone", "synthetic-job", max_items=2, page_size=1)
             self.assertEqual(self.transport.request_count, count)
             self.assertEqual(len(list(sink.iter_unexpired(utc_now()))), 2)
+
+
+    def test_default_adapter_uses_shared_transport_for_cached_oauth_and_search(self):
+        self.session.post.side_effect = [self.token("synthetic-shared-old"), self.token("synthetic-shared-new")]
+        self.session.get.side_effect = [self.page(1), self.page(2), self.page(3, total=3)]
+        adapter = EbayPagedAdapter(transport=self.transport)
+        self.assertIs(adapter.collector.token_transport, self.transport)
+        adapter.fetch_page("phone", None, 1)
+        adapter.fetch_page("phone", "1", 1)
+        self.assertEqual(self.session.post.call_count, 1)
+        self.clock.return_value = 7240.0
+        adapter.fetch_page("phone", "2", 1)
+        self.assertEqual(self.session.post.call_count, 2)
+        self.assertEqual(self.transport.request_count, 5)
+        self.post.assert_not_called()  # No bypass of the injected common transport.
+
+    def test_aligned_401_retry_retains_strict_validation_and_checkpoint_context(self):
+        self.session.post.side_effect = [self.token("synthetic-shared-old"), self.token("synthetic-shared-new")]
+        malformed = {"total": 5, "itemSummaries": [{"itemId": "4", "title": "Synthetic item",
+                                                    "price": {"value": "10"}}]}
+        self.session.get.side_effect = [self.response({}, 401), self.response(malformed)]
+        adapter = EbayPagedAdapter(transport=self.transport)
+        with self.assertRaises(CollectionError) as error:
+            adapter.fetch_page("phone", "3", 2)
+        self.assertEqual(error.exception.category, "invalid_currency")
+        self.assertEqual(adapter.checkpoint_context, {"marketplace_id": "EBAY_US"})
+        self.assertEqual([call.kwargs["params"] for call in self.session.get.call_args_list],
+                         [{"q": "phone", "limit": 1, "offset": 3}] * 2)
+        self.assertEqual(self.session.post.call_count, 2)
+
+    def test_shared_oauth_transport_failure_retains_retry_after_and_category(self):
+        response = self.response({}, 429)
+        response.headers["Retry-After"] = "120"
+        self.session.post.return_value = response
+        adapter = EbayPagedAdapter(transport=self.transport)
+        with self.assertRaises(CollectionError) as error:
+            adapter.fetch_page("phone", None, 1)
+        self.assertEqual(error.exception.category, "rate_limit")
+        self.assertEqual(error.exception.http_status, 429)
+        self.assertEqual(error.exception.retry_after, 120)
+        self.assertEqual(self.session.post.call_count, 1)
+        self.session.get.assert_not_called()
+        self.assertIsNone(adapter.collector._access_token)
