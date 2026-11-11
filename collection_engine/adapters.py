@@ -50,7 +50,6 @@ class EbayPagedAdapter:
         from .transport import HttpTransport
         self.collector = collector or EbayBrowseCollector()
         self.transport = transport or HttpTransport()
-        self._token = None
         self.last_page_projection = []
 
     def fetch_page(self, query, cursor, limit, since=None):
@@ -62,19 +61,22 @@ class EbayPagedAdapter:
         offset = int(cursor or "0")
         if not query or not 1 <= limit <= 200 or not 0 <= offset < 10000:
             raise ValueError("Invalid eBay bounded page request")
-        if self._token is None:
+        token = self._get_access_token()
+        for attempt in range(2):
             try:
-                self._token = self.collector._get_access_token()
-            except requests.HTTPError as error:
-                status = error.response.status_code if error.response is not None else None
-                category = {401: "authentication_failed", 403: "permission_denied"}.get(status, "oauth_error")
-                raise CollectionError(category, status) from None
-            except Exception:
-                raise CollectionError("oauth_error") from None
-        body = self.transport.get_json(EBAY_SEARCH_URL,
-            headers={"Authorization": "Bearer " + self._token,
-                     "X-EBAY-C-MARKETPLACE-ID": self.collector.marketplace_id},
-            params={"q": query, "limit": limit, "offset": offset})
+                body = self.transport.get_json(EBAY_SEARCH_URL,
+                    headers={"Authorization": "Bearer " + token,
+                             "X-EBAY-C-MARKETPLACE-ID": self.collector.marketplace_id},
+                    params={"q": query, "limit": limit, "offset": offset})
+            except CollectionError as error:
+                if error.http_status != 401:
+                    raise
+                self.collector._invalidate_token(token)
+                if attempt == 0:
+                    token = self._get_access_token()
+                    continue
+                raise
+            break
         rows = body.get("itemSummaries", [])
         if not isinstance(rows, list):
             raise CollectionError("parsing_error")
@@ -89,6 +91,17 @@ class EbayPagedAdapter:
         next_offset = offset + len(rows)
         more = rows and next_offset < min(int(body.get("total", 0)), 10000)
         return Page(offers, str(next_offset) if more else None)
+
+    def _get_access_token(self):
+        # The collector owns expiry and locking; never cache a second stale token here.
+        try:
+            return self.collector._get_access_token()
+        except Exception as error:
+            status = getattr(error, "http_status", None)
+            if isinstance(error, requests.HTTPError) and error.response is not None:
+                status = error.response.status_code
+            category = {401: "authentication_failed", 403: "permission_denied"}.get(status, "oauth_error")
+            raise CollectionError(category, status) from None
 
 
 class LegacySavedHtmlAdapter:

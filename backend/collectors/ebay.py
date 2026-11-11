@@ -1,5 +1,8 @@
 import base64
+import math
 import os
+import threading
+import time
 from typing import Any
 
 import requests
@@ -22,6 +25,14 @@ EBAY_TOKEN_URL = "https://api.ebay.com/identity/v1/oauth2/token"
 EBAY_SEARCH_URL = "https://api.ebay.com/buy/browse/v1/item_summary/search"
 
 
+class EbayOAuthError(RuntimeError):
+    """Sanitized OAuth failure with status for collection-engine classification."""
+
+    def __init__(self, message: str, http_status: int) -> None:
+        super().__init__(message)
+        self.http_status = http_status
+
+
 class EbayBrowseCollector(BaseCollector):
     metadata = CollectorMetadata(
         source_name="ebay_browse",
@@ -35,43 +46,113 @@ class EbayBrowseCollector(BaseCollector):
         self.client_id = os.getenv("EBAY_CLIENT_ID")
         self.client_secret = os.getenv("EBAY_CLIENT_SECRET")
         self.marketplace_id = os.getenv("EBAY_MARKETPLACE_ID", "EBAY_US")
+        self._access_token: str | None = None
+        self._token_expires_at = 0.0
+        self._token_lock = threading.Lock()
 
     def collect(self, query: str | None = None, limit: int = 50) -> list[Product]:
         if not query:
             raise ValueError("eBay Browse API collection requires a query.")
         token = self._get_access_token()
-        response = requests.get(
-            EBAY_SEARCH_URL,
-            headers={
-                "Authorization": f"Bearer {token}",
-                "X-EBAY-C-MARKETPLACE-ID": self.marketplace_id,
-            },
-            params={"q": query, "limit": min(limit, 200)},
-            timeout=15,
-        )
-        response.raise_for_status()
-        payload = response.json()
+        for attempt in range(2):
+            try:
+                response = requests.get(
+                    EBAY_SEARCH_URL,
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "X-EBAY-C-MARKETPLACE-ID": self.marketplace_id,
+                    },
+                    params={"q": query, "limit": min(limit, 200)},
+                    timeout=15,
+                    allow_redirects=False,
+                )
+            except requests.RequestException:
+                # Requests exceptions may contain credentials, URLs or response bodies.
+                raise RuntimeError("eBay Browse API request failed.") from None
+            if response.status_code == 401:
+                self._invalidate_token(token)
+                if attempt == 0:
+                    token = self._get_access_token()
+                    continue
+            if response.status_code != 200:
+                raise RuntimeError(
+                    f"eBay Browse API request failed (HTTP {response.status_code})."
+                ) from None
+            break
+        try:
+            payload = response.json()
+        except ValueError:
+            raise RuntimeError("eBay Browse API returned invalid JSON.") from None
+        if not isinstance(payload, dict):
+            raise RuntimeError("eBay Browse API returned an invalid response.")
         return [self._to_product(item) for item in payload.get("itemSummaries", [])]
+
+    def _invalidate_token(self, rejected_token: str) -> None:
+        with self._token_lock:
+            # Do not evict a newer token another concurrent request already obtained.
+            if self._access_token == rejected_token:
+                self._access_token = None
+                self._token_expires_at = 0.0
 
     def _get_access_token(self) -> str:
         if not self.client_id or not self.client_secret:
             raise RuntimeError("Missing EBAY_CLIENT_ID or EBAY_CLIENT_SECRET in environment.")
 
+        with self._token_lock:
+            if self._access_token and time.monotonic() < self._token_expires_at:
+                return self._access_token
+            self._access_token = None
+            self._token_expires_at = 0.0
+            return self._mint_access_token()
+
+    def _mint_access_token(self) -> str:
+        # Called under _token_lock. Application tokens are renewed via the same grant,
+        # not a User Access Token refresh_token flow. Nothing is persisted to disk.
         credentials = f"{self.client_id}:{self.client_secret}".encode("utf-8")
         encoded = base64.b64encode(credentials).decode("ascii")
-        response = requests.post(
-            EBAY_TOKEN_URL,
-            headers={
-                "Authorization": f"Basic {encoded}",
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            data={"grant_type": "client_credentials", "scope": EBAY_SCOPE},
-            timeout=15,
-        )
-        response.raise_for_status()
-        access_token = response.json().get("access_token")
-        if not access_token:
-            raise RuntimeError("eBay OAuth response did not include an access token.")
+        requested_at = time.monotonic()
+        try:
+            response = requests.post(
+                EBAY_TOKEN_URL,
+                headers={
+                    "Authorization": f"Basic {encoded}",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                data={"grant_type": "client_credentials", "scope": EBAY_SCOPE},
+                timeout=15,
+                allow_redirects=False,
+            )
+        except requests.RequestException:
+            raise RuntimeError("eBay OAuth token request failed.") from None
+        if response.status_code != 200:
+            raise EbayOAuthError(
+                f"eBay OAuth token request failed (HTTP {response.status_code}).",
+                response.status_code,
+            ) from None
+        try:
+            payload = response.json()
+        except ValueError:
+            raise RuntimeError("eBay OAuth returned invalid JSON.") from None
+        if not isinstance(payload, dict):
+            raise RuntimeError("eBay OAuth returned an invalid response.")
+        access_token = payload.get("access_token")
+        if not isinstance(access_token, str) or not access_token or any(
+            not 33 <= ord(char) <= 126 for char in access_token
+        ):
+            raise RuntimeError("eBay OAuth response did not include a valid access token.")
+        expires_in = payload.get("expires_in")
+        try:
+            lifetime = float(expires_in)
+        except (TypeError, ValueError, OverflowError):
+            raise RuntimeError("eBay OAuth response did not include a valid token lifetime.") from None
+        if isinstance(expires_in, bool) or not math.isfinite(lifetime) or lifetime <= 0:
+            raise RuntimeError("eBay OAuth response did not include a valid token lifetime.")
+        # Renew on the next use, up to 60 seconds before expiry; scale for short TTLs.
+        expires_at = requested_at + lifetime - min(60.0, lifetime * 0.1)
+        if time.monotonic() >= expires_at:
+            raise RuntimeError("eBay OAuth token expired during acquisition.")
+        self._access_token = access_token
+        self._token_expires_at = expires_at
         return access_token
 
     def _to_product(self, item: dict[str, Any]) -> Product:

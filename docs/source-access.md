@@ -12,6 +12,8 @@ documentation are not implemented as working collectors.
 - `ebay_browse`: Official eBay Browse API collector. It requires
   `EBAY_CLIENT_ID` and `EBAY_CLIENT_SECRET`. Without those credentials the
   collector fails explicitly and does not return synthetic products.
+  Application access tokens are acquired automatically, cached in memory per
+  collector instance, and renewed before expiry. See [eBay setup](#ebay-authentication-setup).
 - `elevenst`: Official 11st Open API product search collector. It requires
   `ELEVENST_API_KEY`. Without that key the collector fails explicitly and does
   not return synthetic products.
@@ -216,3 +218,80 @@ normalized product URL, and 6 final unique products. This uses only
 The project supports CSV/JSON imports through `/import/products`. Imported
 products store `source_url`, `source_license`, and `source_observed_at` so older
 dataset prices are not confused with current market prices.
+
+## eBay authentication setup
+
+Verified against the [official eBay client credentials grant documentation](https://developer.ebay.com/develop/guides/sell/authorization)
+on 2026-11-11. Obtain the Production keyset from your eBay developer account.
+Set these variables in the process environment or a local, Git-ignored `.env`
+file loaded by `python-dotenv` (existing environment variables take precedence):
+
+```dotenv
+EBAY_CLIENT_ID=<your-production-client-id>
+EBAY_CLIENT_SECRET=<your-production-client-secret>
+EBAY_MARKETPLACE_ID=EBAY_US
+```
+
+Replace the placeholders locally; never commit or log the values. Restart the
+backend after changing credentials. `EBAY_MARKETPLACE_ID` is optional and defaults
+to `EBAY_US`. It selects the marketplace, not the OAuth environment: this
+collector continues to use the Production OAuth and Browse endpoints. A valid
+keyset does not grant additional API/business permissions beyond eBay approval.
+
+No manually generated access token is required. The collector already used the
+Client Credentials Grant before the caching improvement; `EBAY_ACCESS_TOKEN`
+was not read or supported by this implementation. It remains ignored, including
+when Client ID/Secret are missing. Existing Client ID/Secret configurations,
+collector metadata, `collect(query, limit)` signature, Product mapping and API
+routes are unchanged.
+
+On the first collection, the collector sends a form-encoded token request with
+HTTP Basic client authentication and the existing Browse scope. A valid token
+and its monotonic expiry deadline stay in process memory, never in `.env`, the
+database, or logs. On the next use within 60 seconds of expiration (10% of TTL
+for short-lived tokens), it obtains a new application token using the same
+grant. There is no background timer or User Access Token refresh-token flow.
+The token request duration counts against the TTL. Concurrent requests using
+the same collector share a lock to avoid duplicate issuance; processes or
+collector instances have separate caches.
+
+A Browse HTTP 401 invalidates the rejected cached token and allows exactly one
+new token acquisition and one repeated GET. A second 401 stops and discards the
+rejected token. A stale concurrent 401 does not evict a newer token. HTTP 403
+(permissions), 429, redirects, server/network errors, and failed token issuance
+stop without further retry. Requests retain a 15-second timeout and do not
+follow redirects. Invalid token/lifetime/JSON responses are rejected. Errors
+contain only fixed messages and HTTP status codes; original exception text,
+headers, credentials, and response bodies are not returned to API error records.
+
+Offline verification commands from the repository root:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+node --test research_domestic/test_rss.mjs research_domestic/phase2/test_collector.mjs research_domestic/phase3/tests/adapters.test.mjs research_domestic/phase3/tests/transport.test.mjs
+```
+
+The eBay tests mock both HTTP methods and use synthetic credentials and clocks
+for grant parameters, caching/expiry, concurrency, single retry, errors, secret
+redaction, and unchanged product mapping. No live eBay request is performed.
+
+### Unified collection engine integration
+
+EbayPagedAdapter consults the same collector-owned token cache on every page.
+It retains the existing bounded offset pagination, marketplace offer identities,
+page projection, checkpoint/retention logic and injected HttpTransport. A Browse
+401 triggers one token invalidation/reacquisition and one repeated page request;
+a second 401 stops. The generic HttpTransport still does not retry authentication
+errors. Its existing throttling and bounded 429/server/network backoff rules are
+unchanged. Sanitized OAuth HTTP statuses retain the engine's authentication_failed,
+permission_denied and oauth_error categories.
+
+Run the unified checkout tests using its configured Python environment:
+
+```powershell
+python -B -m pytest -q -p no:cacheprovider
+```
+
+The integration tests use synthetic credentials and mocked OAuth/Browse responses,
+including pagination across token expiry, a repeated 401, failed reissuance,
+transport rate limits, and runner checkpoint/resume. No live eBay call is required.

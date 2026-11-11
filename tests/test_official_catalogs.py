@@ -97,7 +97,12 @@ class OfficialCatalogTest(unittest.TestCase):
         adapter = EbayPagedAdapter(original, transport)
         first = adapter.fetch_page("keyboard", None, 1)
         adapter.fetch_page("keyboard", first.next_cursor, 1)
-        original._get_access_token.assert_called_once()
+        # Every page consults the collector cache so expiry can be detected.
+        # Actual token minting is cached and tested with the real collector separately.
+        self.assertEqual(original._get_access_token.call_count, 2)
+        self.assertEqual(original._to_product.call_count, 2)
+        self.assertTrue(all(call.kwargs["headers"]["Authorization"] == "Bearer synthetic-token"
+                            for call in transport.get_json.call_args_list))
         self.assertEqual(first.offers[0].product_id, "v1|123|0")
         self.assertEqual(first.next_cursor, "1")
         self.assertEqual(transport.get_json.call_args.kwargs["params"]["offset"], 1)
